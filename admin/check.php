@@ -1,5 +1,6 @@
 <?php 
-include '../includes/dbConnect.php';?> 
+require '../includes/dbConnect.php';?> 
+<?php require('../includes/loginSession.php');?>
 
 <?php
 $query =  "SELECT * FROM register";

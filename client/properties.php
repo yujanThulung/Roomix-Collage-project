@@ -58,8 +58,8 @@ include '../includes/dbConnect.php';?>
         <h1>Display Latest & Featured Properties</h1>
         <p>Discover top-notch properties with our latest and featured listings. Your dream home or investment awaits</p>
 
-        <div class="property-box">
-            <div class="properties card">
+        <div class="property-box"style="padding: 1rem">
+            <div class="properties card" >
                 <img src="image/room3.jpg" alt="photo" loading="eager">
 
                 <span class="status">Sell</span>
@@ -200,8 +200,8 @@ include '../includes/dbConnect.php';?>
                 </div>
             </div>
         </div>
-        <div class="property-box">
-            <div class="properties card">
+        <div class="property-box"style="padding: 1rem">
+            <div class="properties card" >
                 <img src="image/room3.jpg" alt="photo" loading="eager">
 
                 <span class="status">Sell</span>

@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //For card property detail
 document.querySelectorAll(".card").forEach(function (card) {
     card.addEventListener("click", function () {
-        window.history.back();
+        window.location.href = "p-detail.php";
     });
 });
 

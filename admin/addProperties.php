@@ -2,7 +2,8 @@
 <html lang="en">
 
 <?php 
-include '../includes/dbConnect.php';?> 
+require '../includes/dbConnect.php';?> 
+<?php require('../includes/loginSession.php');?>
 
 <head>
     <meta charset="UTF-8">
@@ -56,9 +57,11 @@ include '../includes/dbConnect.php';?>
                     <a href="notification.html"
                         class="list-group-item list-group-item-action bg-transparent text-white"><i
                             class="fas fa-bell me-2"></i>Notification</a>
-                    <a href="clientSide\index.php"
-                        class="list-group-item list-group-item-action bg-transparent text-white"><i
-                            class="fas fa-right-from-bracket me-2"></i>Log Out</a>
+                    <!-- logout section here  -->
+        <a href="../control/logout.php" name= "submit">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <h3>logout</h3>
+        </a>
                 </div>
             </div>
         </div>

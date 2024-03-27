@@ -2,21 +2,13 @@
 <html lang="en">
 
 <?php 
-include '../includes/dbConnect.php';?> 
+require '../includes/dbConnect.php';?> 
+<?php require('../includes/loginSession.php');?>
 
 <?php 
 $id = $_GET['id'];
 $register_query =  "SELECT * FROM register  WHERE id='$id' "; //to get the data through the id
 $result = mysqli_query($conn, $register_query); //to store the data which is came from id
-
-
-if(mysqli_num_rows($result) > 0){
-  while ($row = mysqli_fetch_array($result)) { 
-    echo $row['fname'];
-  }
-}else{
-  echo "No Data Found";
-}
 ?>
 
 <head>
@@ -32,6 +24,15 @@ if(mysqli_num_rows($result) > 0){
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="form.css">
+  <style>
+    #r-phone{
+      width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    }
+  </style>
 </head>
 
 
@@ -51,7 +52,7 @@ if(mysqli_num_rows($result) > 0){
         </div>
         <div class="profile">
           <div class="info">
-            <p><b>Yujan</b></p>
+            <p><b><?php echo $_SESSION["user"]?></b></p>
             <p>Admin</p>
             <small class="text-muted"></small>
           </div>
@@ -103,7 +104,8 @@ if(mysqli_num_rows($result) > 0){
           <i class="fa-solid fa-plus"></i>
           <h3>Add Properties</h3>
         </a>
-        <a href="logout.html">
+        <!-- logout section here  -->
+        <a href="../control/logout.php" name= "submit">
           <i class="fa-solid fa-right-from-bracket"></i>
           <h3>logout</h3>
         </a>
@@ -125,33 +127,46 @@ if(mysqli_num_rows($result) > 0){
       <h1 class="dashboard-heading">Edit Profile</h1>
         
   <!--Form-->
+
+<?php  
+if(mysqli_num_rows($result) > 0){
+  while ($row = mysqli_fetch_array($result)) { 
+
+    ?>
+
   <div id="form-box">
     <div id="form-container-r">
-      <form action="" class="n-form" id="register">
+      <form action="../includes/user.php" method = "POST" class="n-form" id="register">
+
+      <!--to send the id of edit-->
+      <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
         <a href="javascript:history.back()"><i class="fas fa-times" id="cross"></i></a>
         <h2>Register</h2>
         <div class="input-group">
           <div class="form-label">
             <label for="fname">First Name</label>
-            <input type="text" id="fname" name="fname" placeholder="First Name" required value="">
+            <input type="text" id="fname" name="fname" required value="<?php echo $row['fname'];?>" required>
           </div>
           <div class="form-label">
             <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lname" placeholder="Last Name" required>
+            <input type="text" id="lname" name="lname"value="<?php echo $row['lname'];?>" required>
           </div>
         </div>
         <div class="form-label">
           <label for="email">Email</label>
-          <input type="email" id="r-email" name="email" placeholder="roomix13@gmail.com" required>
+          <input type="email" id="r-email" name="email" value="<?php echo $row['email'];?>" required>
+        </div>
+        <div class="form-label">
+          <label for="phone">Phone</label>
+          <input type="tel" id="r-phone" name="phone" value="<?php echo $row['phone'];?>" required>
         </div>
         <div class="form-label">
           <label for="password">Password</label>
-          <input type="password" id="r-password" name="password" placeholder="Password" required>
+          <input type="password" id="r-password" name="password" value="<?php echo $row['password'];?>" required>
         </div>
-        <div class="form-label">
-          <label for="c-password">Confirm Password</label>
-          <input type="password" id="c-password" name="c-password" placeholder="Confirm Password" required>
-        </div>
+
+
+
         <!-- Move checklist here -->
         <section id="password-checklist" style="display: none;">
           <ul>
@@ -163,7 +178,7 @@ if(mysqli_num_rows($result) > 0){
           </ul>
         </section>
         <div class="form-btn">
-          <button onclick="validateForm()">update</button>
+          <button name="register_update_btn" onclick="validateForm()">Update Data</button>
         </div>
       </form>
     </div>
@@ -177,14 +192,19 @@ if(mysqli_num_rows($result) > 0){
          end main
         ------------------->
 
-
+        <?php
+  }
+}else{
+  echo "No Data Found";
+}
+?>
 
 
   </div>
 
 
 
-  <script src="script.js"defer></script>
+  <script src="../client/script.js"defer></script>
     <?php include('../includes/footer.php');?>
   <script src="form.js"></script>
   <!-- <script>

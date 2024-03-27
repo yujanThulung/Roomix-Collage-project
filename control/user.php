@@ -88,39 +88,12 @@ if(isset($_POST['register_delete_btn'])){
 }
 
 
-
-// //For login 
-// if (isset($_POST['login_btn'])) {
-//     $email_login = $_POST['email'];
-//     $password_login = $_POST['password'];
-
-//     $query_login = "SELECT * FROM register WHERE email='$email_login'";
-//     $query_login_result = mysqli_query($conn, $query_login);
-
-//     if ($row = mysqli_fetch_assoc($query_login_result)) {
-//         if ($row['password'] == $password_login) {
-//             $_SESSION['username'] = $email_login;
-//             header('Location: ../admin/index.php');
-//             exit;
-//         } else {
-//             $_SESSION['invalid'] = 'Email id / Password is Invalid';
-//             header('Location: ../client/login.php');
-//             exit;
-//         }
-//     } else {
-//         $_SESSION['invalid'] = 'Email id / Password is Invalid';
-//         header('Location: ../client/login.php');
-//         exit;
-//     }
-// }
-
-
-
 //FOR LOGIN
 if(isset($_POST['login'])){
     $username = $_POST['email'];
     $password = $_POST['password'];
-
+    $role_as = $_POST['role_as'];
+    
     // Prepare SQL statement
     $query = "SELECT * FROM register WHERE email = ? LIMIT 1";
     $stmt = mysqli_prepare($conn, $query);
@@ -142,7 +115,7 @@ if(isset($_POST['login'])){
             // Passwords match, login successful
             $_SESSION["user"] = $username;
             header("location: ../admin/index.php");
-            exit; // Exit to prevent further execution
+            exit; 
         } else {
             // Passwords don't match
             $_SESSION['status'] = "Incorrect email or password.";

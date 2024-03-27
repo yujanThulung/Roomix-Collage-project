@@ -10,9 +10,16 @@ $database = "roomix";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
 
-// if (!$conn) {
-//     echo "Connection failed" . mysqli_connect_error();
-// } else {
-//     echo "Connected successfully";
+if (!$conn) {
+    header('Location: 404error.php');
+} else {
+     //echo "Connected successfully";
+}
+
+// if(!$_SESSION['username']){
+//     header('Location: ../client/login.php');
 // }
 // ?>
+
+
+

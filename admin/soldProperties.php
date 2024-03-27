@@ -2,7 +2,8 @@
 <html lang="en">
 
 <?php 
-include '../includes/dbConnect.php';?> 
+require '../includes/dbConnect.php';?> 
+<?php require('../includes/loginSession.php');?>
 
 <head>
   <meta charset="UTF-8">
@@ -35,7 +36,7 @@ include '../includes/dbConnect.php';?>
         </div>
         <div class="profile">
           <div class="info">
-            <p><b>Yujan</b></p>
+            <p><b><?php echo $_SESSION["user"]?></b></p>
             <p>Admin</p>
             <small class="text-muted"></small>
           </div>
@@ -86,7 +87,8 @@ include '../includes/dbConnect.php';?>
           <i class="fa-solid fa-plus"></i>
           <h3>Add Properties</h3>
         </a>
-        <a href="logout.html">
+        <!-- logout section here  -->
+        <a href="../control/logout.php" name= "submit">
           <i class="fa-solid fa-right-from-bracket"></i>
           <h3>logout</h3>
         </a>

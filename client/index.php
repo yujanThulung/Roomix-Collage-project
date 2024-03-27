@@ -22,7 +22,7 @@ include '../includes/dbConnect.php';?>
 <?php 
 include '../includes/dbConnect.php';?> 
     <!-- Navigation -->
-    <nav>
+    <nav style="justify-content: center;">
         <a href="#home" class="active"><img src="image/logo.png" alt="logo"></a>
         <div class="navigation">
             <ul>
@@ -105,8 +105,9 @@ include '../includes/dbConnect.php';?>
         <h1>Display Latest & Featured Properties</h1>
         <p>Discover top-notch properties with our latest and featured listings. Your dream home or investment awaits</p>
 
-        <div class="property-box ">
-            <div class="properties card">
+        <div class="property-box " style="padding: 1rem;">
+                <div class="properties card">
+                <a href="p-detail.php">
                 <img src="image/room3.jpg" alt="photo" loading="eager">
 
                 <span class="status">Sell</span>
@@ -140,6 +141,7 @@ include '../includes/dbConnect.php';?>
                         </div>
                     </div>
                 </div>
+            </a>
             </div>
             <div class="properties card">
                 <img src="image/room5.jpg" alt="photo" loading="eager">

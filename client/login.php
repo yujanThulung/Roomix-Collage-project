@@ -16,11 +16,11 @@ include '../includes/dbConnect.php';?>
 
 <body>
     <div id="form-container-l">
-        <form action="" class="n-form" id="logIn"><a href="javascript:history.back()"><i class="fas fa-times" id="cross"></i></a>
+        <form action="../includes/user.php" method ="POST" class="n-form" id="logIn"><a href="javascript:history.back()"><i class="fas fa-times" id="cross"></i></a>
             <h2>Log in</h2>
             <div class="form-label">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="roomix13@gmail.com" required>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
             </div>
             <div class="form-label">
                 <label for="password">Password</label>
@@ -28,12 +28,11 @@ include '../includes/dbConnect.php';?>
             </div>
 
             <div class="form-btn">
-                <button onclick="validateForm()">Login</button>
+                <button type="submit" name="login" >Login</button>
             </div>
 
             <div class="option-field">
                 <a href="registration.php">Create Account</a>
-                <a href="#">Forgot your password?</a>
             </div>
         </form>
 
