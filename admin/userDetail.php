@@ -17,7 +17,8 @@ require '../includes/loginSession.php'; ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
-    <style>
+    <link rel="stylesheet" href="search&pagination.css">
+    <!-- <style>
         .custom-link {
             display: inline-block;
             padding: 5px 2px;
@@ -114,12 +115,12 @@ require '../includes/loginSession.php'; ?>
             color: white;
             pointer-events: none;
         }
-    </style>
+    </style> -->
 </head>
 
 
 
-<body>
+<body style="margin-top:-1.5rem">
 
     <nav>
         <div class="right">
@@ -215,7 +216,7 @@ require '../includes/loginSession.php'; ?>
 
         <?php
         // Define the number of records per page
-        $records_per_page = 6;
+        $records_per_page = 5;
 
         // Determine the current page number
         if (isset($_GET['page']) && is_numeric($_GET['page'])) {
@@ -244,7 +245,7 @@ require '../includes/loginSession.php'; ?>
         $register_query = "SELECT * FROM register";
 
         // Check if search query is provided
-        if (isset($_POST['search']) && !empty($_POST['search'])) {
+        if (isset($_POST['search']) && !empty(trim($_POST['search']))) {
             $search_query = $_POST['search'];
             $register_query .= " WHERE email LIKE '%$search_query%'";
         }
@@ -288,7 +289,7 @@ require '../includes/loginSession.php'; ?>
                                 <a href="editProfile.php?id=<?php echo $reg_row['id']; ?>" class="custom-link edit-icon" style="background-color: #ffcc00;"><i class="fas fa-edit"></i></a>
                             </td>
                             <td class="text-center">
-                                <form action="../includes/user.php" method="POST">
+                                <form action="../control/user.php" method="POST">
                                     <input type="hidden" name="delete_id" value="<?php echo $reg_row['id'] ?>" />
                                     <button type="submit" name="register_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button>
                                 </form>
@@ -340,5 +341,5 @@ require '../includes/loginSession.php'; ?>
 
     <?php include('../includes/footer.php'); ?>
 </body>
-
+<?php mysqli_close($conn);?>
 </html>

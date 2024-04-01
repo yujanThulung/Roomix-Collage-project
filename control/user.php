@@ -77,7 +77,7 @@ if(isset($_POST['register_delete_btn'])){
     if($reg_del_query_run){
         $_SESSION['status']="User Deleted Successfully!";
         $_SESSION['status_code'] ="danger";
-        header("Location: ../admin/userDetail.php");
+        header("Location: ../admin/my.php");
         exit;
     }else{
         $_SESSION['status'] = "Data not Updated!";
@@ -134,6 +134,6 @@ if(isset($_POST['login'])){
 
 
 ?>
-
+<?php mysqli_close($conn);?>
 
 

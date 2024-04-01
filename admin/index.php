@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
-require '../includes/dbConnect.php';?> 
-<?php require('../includes/loginSession.php');?>
-<?php require('../includes/loginSession.php');?>
+<?php
+require '../includes/dbConnect.php'; ?>
+<?php require('../includes/loginSession.php'); ?>
 
 <head>
   <meta charset="UTF-8">
@@ -12,13 +11,14 @@ require '../includes/dbConnect.php';?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RooMix</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-az4eP1yp2CL6GvPUE0HHRj4kSg6p8FfbzjrIBVfoQYO0+nWr4EaXlZfC/0o+bB9r" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body style="margin-top:-1.5rem">
 
   <nav>
     <div class="right">
@@ -33,7 +33,7 @@ require '../includes/dbConnect.php';?>
         </div>
         <div class="profile">
           <div class="info">
-            <p><b><?php echo $_SESSION["user"]?></b></p>
+            <p><b><?php echo $_SESSION["user"] ?></b></p>
             <p>Admin</p>
             <small class="text-muted"></small>
           </div>
@@ -86,7 +86,7 @@ require '../includes/dbConnect.php';?>
         </a>
 
         <!-- logout section here  -->
-        <a href="../control/logout.php" name= "submit">
+        <a href="../control/logout.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
           <h3>logout</h3>
         </a>
@@ -121,14 +121,14 @@ require '../includes/dbConnect.php';?>
 
             <div class="left">
               <h3>User</h3>
-              <?php 
+              <?php
               $count_user = "SELECT * FROM register";
               $result_user = mysqli_query($conn, $count_user);
               $total_user = mysqli_num_rows($result_user);
-              if($total_user){
-                echo'<h1>' .$total_user.'</h1>';
-              }else{
-                echo'<h1>User Not Found!</h1>';
+              if ($total_user) {
+                echo '<h1>' . $total_user . '</h1>';
+              } else {
+                echo '<h1>User Not Found!</h1>';
               }
               ?>
             </div>
@@ -138,75 +138,75 @@ require '../includes/dbConnect.php';?>
 
         <!--------Property start------->
         <div class="property">
-          <span class="material-symbols-sharp">apartment</span>
+        <span class="material-symbols-outlined">location_city</span>
           <div class="middle">
 
             <div class="left">
               <h3>Listed property</h3>
-              <h1>34</h1>
+              <?php
+              $count_property = "SELECT * FROM property";
+              $count_property = mysqli_query($conn, $count_property);
+              $total_property = mysqli_num_rows($count_property); ?>
+              <h1><?php echo $total_property ?></h1>
             </div>
           </div>
         </div>
         <!--------Property end------->
 
-        <!-------Featured start----->
-        <div class="special">
-          <span class="material-symbols-sharp">apartment</span>
+        <!-------Flat start----->
+        <div class="flat">
+          <span class="material-symbols-outlined">apartment</span>
           <div class="middle">
-
             <div class="left">
-              <h3>Featured</h3>
-              <h1>34</h1>
+              <?php
+              $count_property = "SELECT * FROM property WHERE property_type = 'Flat'";
+              $count_property = mysqli_query($conn, $count_property);
+              $total_property = mysqli_num_rows($count_property); ?>
+              <h3>Flat</h3>
+              <h1><?php echo $total_property ?></h1>
             </div>
           </div>
         </div>
+        <!--Flat end-->
+
+        <!-------Room start----->
+        <div class="room">
+          <span class="material-symbols-outlined">bedroom_parent</span>
+          <div class="middle">
+            <div class="left">
+              <?php
+              $count_property = "SELECT * FROM property WHERE property_type = 'Room'";
+              $count_property = mysqli_query($conn, $count_property);
+              $total_property = mysqli_num_rows($count_property); ?>
+              <h3>Room</h3>
+              <h1><?php echo $total_property ?></h1>
+            </div>
+          </div>
+        </div>
+        <!--Room end-->
+
+        <!-------Room start----->
+        <div class="sold">
+          <span class="material-symbols-outlined">in_home_mode</span>
+          <div class="middle">
+            <div class="left">
+              <?php
+              $count_property = "SELECT * FROM property WHERE sold_status = 0";
+              $count_property = mysqli_query($conn, $count_property);
+              $total_property = mysqli_num_rows($count_property); ?>
+              <h3>Sold Out</h3>
+              <h1><?php echo $total_property ?></h1>
+            </div>
+          </div>
+        </div>
+        <!-------Room end----->
       </div>
       <!-------Featured start----->
 
 
       <!-- end insights -->
+</div>
 
-
-      <!-----Table start----->
-      <div class="p-table">
-        <h2>Latest Property</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>S.N.</th>
-              <th>ID</th>
-              <th>Image</th>
-              <th>Type</th>
-              <th>Price</th>
-              <th>Added Date</th>
-              <th>Featured</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>#1234</td>
-              <td>
-                <img src="images/room1.jpg" alt="Product Image">
-              </td>
-              <td>Type A</td>
-              <td>$50.00</td>
-              <td>2024-03-16</td>
-              <td>Yes</td>
-              <td>
-                <div class="action-icons">
-                  <a href="editProperty.php" class="custom-link" style="background-color: #ffcc00;"><i class="fas fa-edit text-white"></i></a>
-                  <a href="propertyShow.php" class="custom-link" style="background-color: rgb(37, 37, 252);"><i class="fas fa-eye text-white"></i></a>
-                </div>
-              </td>
-            </tr>
-            <!-- Additional rows can be added here -->
-          </tbody>
-        </table>
-        <a href="#">Show All</a>
-      </div>
-      <!-----Table end----->
     </main>
     <!------------------
          end main
@@ -219,8 +219,8 @@ require '../includes/dbConnect.php';?>
 
 
 
-  <script src="script.js"defer></script>
-    <?php include('../includes/footer.php');?>
+  <script src="script.js" defer></script>
+  <?php include('../includes/footer.php'); ?>
 </body>
-
+<?php mysqli_close($conn);?>
 </html>

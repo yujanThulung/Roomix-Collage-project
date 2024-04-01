@@ -23,11 +23,11 @@ include '../includes/dbConnect.php';?>
 include '../includes/dbConnect.php';?> 
     <!-- Navigation -->
     <nav style="justify-content: center;">
-        <a href="#home" class="active"><img src="image/logo.png" alt="logo"></a>
+        <a href="index.php" class="active"><img src="image/logo.png" alt="logo"></a>
         <div class="navigation">
             <ul>
-                <li><a href="properties.php" class="">Buy</a></li>
-                <li><a href="#">Sell</a></li>
+                <li><a href="login.php" class="">Buy</a></li>
+                <li><a href="login.php">Sell</a></li>
             </ul>
 
             <ul>

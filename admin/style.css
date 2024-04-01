@@ -263,7 +263,7 @@ main .insights > div:hover{
   box-shadow: none;
 }
 main .insights>div  span{
-   background: coral;
+   background: var(--clr-primary);
     padding: 0.5rem;
      border-radius: 50%;
      color: var(--clr-white);
@@ -271,10 +271,16 @@ main .insights>div  span{
   }
 
 main .insights > div.property span{
-   background: var(--clr-primary);
+   background: coral;
 }
-main .insights > div.special span{
-  background: var(--clr-danger);
+main .insights > div.flat span{
+  background: #ffcc00;
+}
+main .insights > div.room span{
+  background: var(--clr-warnig);
+}
+main .insights > div.sold span{
+  background: #5cb85c;
 }
 
 main .insights > div .middle{
@@ -343,6 +349,7 @@ main .insights .user svg circle{
   stroke-dashoffset: 0;
   stroke-dasharray: 150;
 }
+
 /* main .insights .special svg circle{
   stroke: var(--clr-success);
 }

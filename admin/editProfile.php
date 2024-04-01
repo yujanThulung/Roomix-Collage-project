@@ -36,7 +36,7 @@ $result = mysqli_query($conn, $register_query); //to store the data which is cam
 </head>
 
 
-<body>
+<body style="margin-top:-1.5rem">
 
   <nav>
     <div class="right">
@@ -145,7 +145,7 @@ if(mysqli_num_rows($result) > 0){
         <div class="input-group">
           <div class="form-label">
             <label for="fname">First Name</label>
-            <input type="text" id="fname" name="fname" required value="<?php echo $row['fname'];?>" required>
+            <input type="text" id="fname" name="fname" required value="<?php echo $row['fname'];?>">
           </div>
           <div class="form-label">
             <label for="lname">Last Name</label>
@@ -196,6 +196,7 @@ if(mysqli_num_rows($result) > 0){
   }
 }else{
   echo "No Data Found";
+  exit;
 }
 ?>
 
@@ -214,5 +215,5 @@ if(mysqli_num_rows($result) > 0){
   }
 </script> -->
 </body>
-
+<?php mysqli_close($conn);?>
 </html>

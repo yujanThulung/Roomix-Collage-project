@@ -74,17 +74,16 @@ if(isset($_POST['register_delete_btn'])){
     $reg_del_query = "DELETE FROM register WHERE id ='$delete_id' ";
     $reg_del_query_run =  mysqli_query($conn,$reg_del_query);
 
-    if($reg_del_query_run){
         $_SESSION['status']="User Deleted Successfully!";
         $_SESSION['status_code'] ="danger";
         header("Location: ../admin/userDetail.php");
         exit;
-    }else{
-        $_SESSION['status'] = "Data not Updated!";
-        $_SESSION['status_code'] = "error";
-        header("Location: ../admin/userDetail.php?id=$delete_id");
-        exit;
-    }
+    // }else{
+        // $_SESSION['status'] = "Data not Updated!";
+        // $_SESSION['status_code'] = "error";
+        // header("Location: ../admin/userDetail.php?id=$delete_id");
+        // exit;
+    // }
 }
 
 
