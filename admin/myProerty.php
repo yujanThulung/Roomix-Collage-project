@@ -109,6 +109,8 @@ require '../includes/dbConnect.php'; ?>
       <div class="search-sort">
         <form action="" method="POST">
           <input type="text" id="searchInput" name="search" placeholder="Search by location...">
+        </form>
+        <form action="" method="POST">
           <select id="sortSelect" name="sort_alphabet">
             <option value="">Sort by...</option>
             <option value="room">Room</option>
@@ -117,7 +119,8 @@ require '../includes/dbConnect.php'; ?>
           <button type="submit" id="applyButton">Sort</button>
         </form>
       </div>
-      <?phP
+
+      <?php
       // Retrieve records per page
       $records_per_page = 5;
 
@@ -132,9 +135,10 @@ require '../includes/dbConnect.php'; ?>
       // Calculate offset
       $offset = ($page - 1) * $records_per_page;
 
-      // Initialize sorting order
+      // here  initializing sorting order
       $sort_order = 'DESC';
-      // Initialize search query
+
+      //here  initializing search query
       $search_query = '';
 
       // Check if search query is provided
@@ -142,30 +146,28 @@ require '../includes/dbConnect.php'; ?>
         $search_query = "AND location LIKE '%" . mysqli_real_escape_string($conn, $_POST['search']) . "%'";
       }
 
-      // Construct SQL query
-      $property_query = "SELECT * FROM property WHERE sold_status = 1 $search_query ORDER BY added_date $sort_order LIMIT $offset, $records_per_page";
-
-      // Execute query
-      $query_run = mysqli_query($conn, $property_query);
-
-      //for sort 
-
+      // Construct filtered property query here
+      $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1";
 
       // Check if sorting option is selected
       if (isset($_POST['sort_alphabet'])) {
         $sort_option = $_POST['sort_alphabet'];
 
-        // Reset $property_query
-        $property_query = "SELECT * FROM property WHERE sold_status = 1";
+        // Here we reset $filtered_property_query
+        $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1";
 
-        // to check whether that is room or flat
+        // Add sorting condition
         if ($sort_option == 'room') {
-          $property_query .= " AND property_type = 'room'";
+          $filtered_property_query .= " AND property_type = 'room'";
         } elseif ($sort_option == 'flat') {
-          $property_query .= " AND property_type = 'flat'";
+          $filtered_property_query .= " AND property_type = 'flat'";
         }
       }
 
+      // Constructing  final SQL query here
+      $property_query = $filtered_property_query . " $search_query ORDER BY added_date $sort_order LIMIT $offset, $records_per_page";
+
+      // Execute query
       $query_run = mysqli_query($conn, $property_query);
       ?>
 
@@ -289,7 +291,8 @@ require '../includes/dbConnect.php'; ?>
 
 
   <script src="script.js" defer></script>
-  <?php include('../includes/footer.php');?>
+  <?php include('../includes/footer.php'); ?>
 </body>
-<?php mysqli_close($conn);?>
+<?php mysqli_close($conn); ?>
+
 </html>
