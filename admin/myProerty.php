@@ -247,39 +247,44 @@ require '../includes/dbConnect.php'; ?>
       </div>
       <!-----Table end----->
 
-      <!-- Pagination links -->
-      <div class="pagination">
-        <?php
-        // Calculate total number of records
-        $total_records_query = "SELECT COUNT(*) AS total FROM  property WHERE  sold_status= 0";
-        $total_records_result = mysqli_query($conn, $total_records_query);
-        $total_records = mysqli_fetch_assoc($total_records_result)['total'];
 
-        // Calculate total number of pages
-        $total_pages = ceil($total_records / $records_per_page);
+      <!-- Pagination -->
+<div class="pagination">
+    <?php
+    // Calculate total number of records
+    $total_records_query = "SELECT COUNT(*) AS total FROM  property WHERE  sold_status= 1";
+    $total_records_result = mysqli_query($conn, $total_records_query);
+    $total_records = mysqli_fetch_assoc($total_records_result)['total'];
 
-        // Display "Previous" button
-        if ($page > 1) {
-          echo "<a href='myProerty.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
-        }
+    // Calculate total number of pages
+    $total_pages = ceil($total_records / $records_per_page);
 
-        // Display pagination links
-        for ($i = 1; $i <= $total_pages; $i++) {
-          echo "<a " . ($i == $page ? "class='active'" : "") . " href='myProerty.php?page=$i'>$i</a>";
-        }
+    // Display "Previous" button
+    if ($page > 1) {
+        echo "<a href='myProerty.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
+    }
 
-        // Display "Next" button
-        if ($page < $total_pages) {
-          echo "<a href='myProerty.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
-        }
+    // Display pagination links
+    for ($i = 1; $i <= $total_pages; $i++) {
+        echo "<a " . ($i == $page ? "class='active'" : "") . " href='myProerty.php?page=$i'>$i</a>";
+    }
 
-        // Display "Last" button
-        echo "<a href='myProerty.php?page=$total_pages'>Last &raquo;&raquo;</a>";
-        ?>
-      </div>
+    // Display "Next" button
+    if ($page < $total_pages) {
+        echo "<a href='myProerty.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
+    }
 
-    </main>
-    <!------------------
+    // Display "Last" button
+    echo "<a href='myProerty.php?page=$total_pages'>Last &raquo;&raquo;</a>";
+    ?>
+</div>
+
+</div>
+
+  </div>
+
+  </main>
+  <!------------------
          end main
         ------------------->
 
