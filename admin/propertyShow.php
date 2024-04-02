@@ -27,6 +27,13 @@ if (!$result) {
         .label {
             margin: 0.2rem 0;
         }
+        span {
+            color: #072448;
+        }
+
+        span i {
+            color: #072448;
+        }
     </style>
     <title>propertyShow</title>
 </head>

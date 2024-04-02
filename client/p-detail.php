@@ -1,28 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 0;>
 
-<?php 
-include '../includes/dbConnect.php';?> 
+<?php
+include '../includes/dbConnect.php'; ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RooMix</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../admin/propertyShow.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        html,
+        body {
+            height: 0;
+        }
+    </style>
 </head>
 
-<body>
+<body class="p-0 m-0">
 
     <!-- Navigation -->
-    <nav>
-        <a href="#home" class="active"><img src="image/logo.png" alt="logo"></a>
+    <nav style="justify-content: center;">
+        <a href="index.php" class="active"><img src="image/logo.png" alt="logo"></a>
         <div class="navigation">
             <ul>
-                <li><a href="properties.php" class="">Buy</a></li>
-                <li><a href="#">Sell</a></li>
+                <li><a href="login.php" class="">Buy</a></li>
+                <li><a href="login.php">Sell</a></li>
             </ul>
 
             <ul>
@@ -44,88 +51,86 @@ include '../includes/dbConnect.php';?>
 
 
 
-    <section id="d-property">
-        <div class="f-property">
-            <div class="f-details">
-                <div class="slider-container" id="slider-container">
-                    <i class="fas fa-chevron-left nav-icon prev" onclick="prevSlide()"></i>
-                    <div class="slider-wrapper" id="sliderWrapper">
-                        <div class="slider-item"><img src="image/kitchen.jpg" alt="Slide 1"></div>
-                        <div class="slider-item"><img src="image/room6.jpg" alt="Slide 2"></div>
-                        <div class="slider-item"><img src="image/room7.jpg" alt="Slide 3"></div>
-                    </div>
-                    <i class="fas fa-chevron-right nav-icon next" onclick="nextSlide()"></i>
+    <section style="padding-top: 18vh; padding-bottom:8vh;">
+    <div class="container">
+        <div class="content-wrapper">
+            <div>
+                <h1>ID <p class="id">#23543</p>
+                </h1>
+            </div>
+            <div class="grid">
+                <div>
+                    <p class="label">Location</p>
+                    <p>Kalimati, Ktm</p>
+                </div>
+                <div>
+                    <p class="label">Category</p>
+                    <p>Flat</p>
+                </div>
+                <div>
+                    <p class="label">Kitchen</p>
+                    <p>1</p>
+                </div>
+                <div>
+                    <p class="label">Bed Room</p>
+                    <p>3</p>
+                </div>
+                <div>
+                    <p class="label">Sitting Room</p>
+                    <p>1</p>
+                </div>
+                <div>
+                    <p class="label">Parking</p>
+                    <p>1</p>
+                </div>
+                <div>
+                    <p class="label">Floor</p>
+                    <p>First Floor</p>
+                </div>
+                <div>
+                    <p class="label">Rent Price</p>
+                    <p>Rs.5000/- per month</p>
+                </div>
+                <div>
+                    <p class="label">Price Negotiable</p>
+                    <p>Yes</p>
+                </div>
+                <div>
+                    <p class="label">Posted On</p>
+                    <p>2023/08/08</p>
+                </div>
+                <div>
+                    <p class="label">Expire On</p>
+                    <p>2024/05/09</p>
                 </div>
 
-                <div class="f-facility">
-                        <h2 class="title">Flat For Rent in Kalanki ( Family with 4 members preferred )</h2>
-                        <div class="f-card">
-                            <div class="i-no">
-                                <h6>ID</h6>
-                                <span>#23543</span>
-                            </div>
-                            <div class="location">
-                                <h6>Location</h6>
-                                <span>Kalimati,Ktm</span>
-                            </div>
-                            <div class="category">
-                                <h6>Category</h6>
-                                <span>Flat</span>
-                            </div>
-                            <div class="kitchen">
-                                <h6>Kitchen</h6>
-                                <span>1</span>
-                            </div>
-                            <div class="bedroom">
-                                <h6>Bed Room</h6>
-                                <span>3</span>
-                            </div>
-                            <div class="setting-room">
-                                <h6>Sitting Room</h6>
-                                <span>1</span>
-                            </div>
-                            <div class="floor">
-                                <h6>Parking</h6>
-                                <span>1</span>
-                            </div>
-                            <div class="floor">
-                                <h6>Floor</h6>
-                                <span>First Floor</span>
-                            </div>
-                            <div class="price">
-                                <h6>Rent Price</h6>
-                                <span>Rs.5000/- per month</span>
-                            </div>
-                            <div class="p-negotiation">
-                                <h6>Price Negotiable</h6>
-                                <span>Yes</span>
-                            </div>
-                            <div class="">
-                                <h6>Posted On</h6>
-                                <span>2023/08/08</span>
-                            </div>
-                            <div class="setting-room">
-                                <h6>Expire On</h6>
-                                <span>2024/05/09</span>
-                            </div>
+                <div class="gallery-section">
+                    <h2>Gallery</h2>
+                    <div class="gallery">
+                        <div class="gallery-item">
+                            <img src="images/room1.jpg" alt="Image 1" onclick="showFullScreen('images/room1.jpg')">
                         </div>
+                        <div class="gallery-item">
+                            <img src="images/room2.jpg" alt="Image 2" onclick="showFullScreen('images/room2.jpg')">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/room1.jpg" alt="Image 3" onclick="showFullScreen('images/room1.jpg')">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/room2.jpg" alt="Image 4" onclick="showFullScreen('images/room2.jpg')">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/room1.jpg" alt="Image 4" onclick="showFullScreen('images/room2.jpg')">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="f-msg-l">
-                <form action="">
-                    <h6>Need Help? Enquire Now.</h6>
-                    <label for="f-name">Full Name</label>
-                    <input type="text" required>
-                    <label for="number" >Mobile</label>
-                    <input id="number" name="number" type="tel">
-                    <label for="email">Email</label>
-                    <input type="email">
-                    <label for="message">Massage</label>
-                    <textarea id="e-msg" name="msg" rows="8" cols="51"></textarea>
-                    <button type="submit">Submit</button>
-                </form>
+
+            <div class="button-container">
+                <button onclick="window.history.back()">Back</button>
             </div>
         </div>
+    </div>
     </section>
 
 
@@ -183,10 +188,28 @@ include '../includes/dbConnect.php';?>
 </body>
 
 <script src="script.js" defer></script>
-    <?php include('../includes/footer.php');?>
+<?php include('../includes/footer.php'); ?>
 
 
+<script>
+    function showFullScreen(imageSrc) {
+        const modalContainer = document.createElement('div');
+        modalContainer.classList.add('fullscreen-modal');
 
+        const modalImage = document.createElement('img');
+        modalImage.src = imageSrc;
+        modalImage.alt = 'Full Screen Image';
+        modalImage.classList.add('fullscreen-image');
+
+        modalContainer.appendChild(modalImage);
+
+        modalContainer.addEventListener('click', () => {
+            modalContainer.remove();
+        });
+
+        document.body.appendChild(modalContainer);
+    }
+</script>
 <script>
     let currentIndex = 0;
     const sliderWrapper = document.getElementById('sliderWrapper');

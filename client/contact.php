@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 0;>
 
 <?php 
 include '../includes/dbConnect.php';?> 

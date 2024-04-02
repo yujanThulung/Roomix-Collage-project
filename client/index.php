@@ -1,26 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
-include '../includes/dbConnect.php';?> 
+<?php
+include '../includes/dbConnect.php'; ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RooMix</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <style>
+        span {
+            color: #072448;
+        }
+
+        span i {
+            color: #072448;
+        }
+
+        .custom-btn-color {
+            background-color: #54d2d2;
+            border-radius: 3rem;
+            border: none;
+        }
+
+        .custom-btn-color:hover {
+            background-color: #072448;
+            color: white;
+        }
+
+        .arrow {
+            color: white;
+        }
+
+        .custom-card {
+            border-radius: 2rem;
+        }
+
+        .card {
+            animation: fadeInUp 0.5s ease-out;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<?php 
-include '../includes/dbConnect.php';?> 
+    <?php
+    include '../includes/dbConnect.php'; ?>
     <!-- Navigation -->
     <nav style="justify-content: center;">
         <a href="index.php" class="active"><img src="image/logo.png" alt="logo"></a>
@@ -100,159 +150,40 @@ include '../includes/dbConnect.php';?>
 
 
 
-    <!--New property-->
-    <section id="property">
-        <h1>Display Latest & Featured Properties</h1>
-        <p>Discover top-notch properties with our latest and featured listings. Your dream home or investment awaits</p>
-
-        <div class="property-box " style="padding: 1rem;">
-                <div class="properties card">
-                <a href="p-detail.php">
-                <img src="image/room3.jpg" alt="photo" loading="eager">
-
-                <span class="status">Sell</span>
-                <div class="details">
-                    <div class="detail">
+    <!--Latest  Property start-->
+    <div class="container my-5 mb-3">
+        <div class="text-center">
+            <h1>Display Latest & Featured Properties</h1>
+            <p>Discover top-notch properties with our latest and featured listings. Your dream home or investment awaits</p>
+        </div>
+        <div class="row row-cols-1 row-cols-md-4 mt-2 g-4">
+            <div class="col mb-3">
+                <div class="card h-100 rounded-5 position-relative">
+                    <!-- Card content -->
+                    <img src="image/room1.jpg" class="card-img-top rounded-top-5" alt="image">
+                    <span class="position-absolute top-0 end-0 mt-3 me-3 text-white py-1 px-2 rounded-pill" style="background-color: #072448;">Room</span>
+                    <div class="card-body">
+                        <div style=" display:flex; justify-content: space-between;">
+                            <span style="color: #072448;"><i class="fas fa-map-marker-alt mr-1"></i> Kirtipur</span>
+                            <span style="color: #072448;"><i class="fas fa-money-bill-alt mr-1"></i> Rs.10000</span>
+                        </div>
+                        <h6 class="card-text text-left"><b>Room available for Lorem ipsum dolor sit amet student.</b></h6>
                         <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
+                            <div style=" display:flex; justify-content: space-between;">
+                                <span style="color: #072448;"><i class="fas fa-parking mr-1"></i> 2</span>
+                                <span style="color: #072448;"><i class="fas fa-layer-group mr-1"></i> 3</span>
+                                <span style="color: #072448;"><i class="fas fa-ruler-combined mr-1"></i> 1000 sq.ft</span>
+                            </div>
                         </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            </div>
-            <div class="properties card">
-                <img src="image/room5.jpg" alt="photo" loading="eager">
-
-                <span class="status">Rent</span>
-                <div class="details">
-                    <div class="detail">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="properties card">
-                <img src="image/room8.jpg" alt="photo" loading="eager">
-
-                <span class="status">Sell</span>
-                <div class="details">
-                    <div class="detail">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="properties card">
-                <img src="image/room1.jpg" alt="photo" loading="eager">
-
-                <span class="status">Rent</span>
-                <div class="details">
-                    <div class="detail">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <h6 class="type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
+                        <div class="d-flex justify-content-end mt-2"> <!-- Place button on right side -->
+                            <a href="#" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        </div>
-
-    </section>
+    </div>
+<!--Latest  Property end-->
 
 
 
@@ -294,301 +225,47 @@ include '../includes/dbConnect.php';?>
     </section>
 
 
-    <!--View  Property-->
-    <section id="v-property">
-        <h1>Property Listing</h1>
-        <p>Discover the epitome of luxury living and investment potential with our latest and featured listings. Your
-            dream home or lucrative investment awaits in these top-notch properties.</p>
 
-        <div class="v-property-box">
 
-            <div class="v-properties card">
-                <img src="image/room2.jpg" alt="photo" loading="eager">
-
-                <span class="status">Rent</span>
-                <div class="v-details">
-                    <div class="v-detail">
+    <!--View  Property start-->
+    <div class="container my-5 mb-3">
+        <div class="text-center">
+            <h1>Property Listing</h1>
+            <p>Discover the epitome of luxury living and investment potential with our latest and featured listings. Your dream home or lucrative investment awaits in these top-notch properties.</p>
+        </div>
+        <div class="row row-cols-1 row-cols-md-4 g-4 mt-2">
+            <div class="col mb-3">
+                <div class="card h-100 rounded-5 position-relative">
+                    <!-- Card content -->
+                    <img src="image/room1.jpg" class="card-img-top rounded-top-5" alt="image">
+                    <span class="position-absolute top-0 end-0 mt-3 me-3 text-white py-1 px-2 rounded-pill" style="background-color: #072448;">Room</span>
+                    <div class="card-body">
+                        <div style=" display:flex; justify-content: space-between;">
+                            <span style="color: #072448;"><i class="fas fa-map-marker-alt mr-1"></i> Kirtipur</span>
+                            <span style="color: #072448;"><i class="fas fa-money-bill-alt mr-1"></i> Rs.10000</span>
+                        </div>
+                        <h6 class="card-text text-left"><b>Room available for Lorem ipsum dolor sit amet student.</b></h6>
                         <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
+                            <div style=" display:flex; justify-content: space-between;">
+                                <span style="color: #072448;"><i class="fas fa-parking mr-1"></i> 2</span>
+                                <span style="color: #072448;"><i class="fas fa-layer-group mr-1"></i> 3</span>
+                                <span style="color: #072448;"><i class="fas fa-ruler-combined mr-1"></i> 1000 sq.ft</span>
+                            </div>
                         </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="v-caption">
-                        <h6 class="v-type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="v-facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="v-properties card">
-                <img src="image/kitchen.jpg" alt="photo" loading="eager">
-
-                <span class="status">Sell</span>
-                <div class="v-details">
-                    <div class="v-detail">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="v-caption">
-                        <h6 class="v-type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="v-facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="v-properties card">
-                <img src="image/room4.jpg" alt="photo" loading="eager">
-
-                <span class="status">Rent</span>
-                <div class="v-details">
-                    <div class="v-detail">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="v-caption">
-                        <h6 class="v-type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="v-facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="v-properties card">
-                <img src="image/room7.jpg" alt="photo" loading="eager">
-
-                <span class="status">Sell</span>
-                <div class="v-details">
-                    <div class="v-detail">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="v-caption">
-                        <h6 class="v-type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="v-facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="v-properties card">
-                <img src="image/room8.jpg" alt="photo" loading="eager">
-
-                <span class="status">Rent</span>
-                <div class="v-details">
-                    <div class="v-detail">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Sundhara, Kathmandu</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="v-caption">
-                        <h6 class="v-type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="v-facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="v-properties card">
-                <img src="image/room1.jpg" alt="photo" loading="eager">
-
-                <span class="status">Sell</span>
-                <div class="v-details">
-                    <div class="v-detail">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="v-caption">
-                        <h6 class="v-type">ROOM AVAILABLE (KIRTIPUR, KATHMANDU)</h6>
-                    </div>
-
-                    <div class="v-facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="v-properties card">
-                <img src="image/room6.jpg" alt="photo" loading="eager">
-
-                <span class="status">Rent</span>
-                <div class="v-details">
-                    <div class="v-detail">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="v-caption">
-                        <h6 class="v-type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="v-facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="v-properties card">
-                <img src="image/room5.jpg" alt="photo" loading="eager">
-
-                <span class="status">Rent</span>
-                <div class="v-details">
-                    <div class="v-detail">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span> Kapan, Kathmandu</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span class="price"> Rs. 8,000</span>
-                        </div>
-                    </div>
-                    <div class="v-caption">
-                        <h6 class="v-type">Flat For Rent in Kalanki ( Family with 4 members preferred )</h6>
-                    </div>
-
-                    <div class="v-facility">
-                        <div class="i-bath">
-                            <i class="fas fa-shower"></i>
-                            <span>(1)</span>
-                        </div>
-                        <div class="i-bed">
-                            <i class="fas fa-bed"></i>
-                            <span>(2BHK)</span>
-                        </div>
-                        <div class="i-building">
-                            <i class="fas fa-building"></i>
-                            <span>(100 Sq. ft)</span>
+                        <div class="d-flex justify-content-end mt-2"> <!-- Place button on right side -->
+                            <a href="#" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
+<!--View  Property end-->
 
-        <a href="properties.php"><button class="v-detail-btn"><span>View More Details</span><i
-                    class="fas fa-arrow-right"></i></button>
-        </a>
-    </section>
+
+
+
+
 
 
 
@@ -645,6 +322,7 @@ include '../includes/dbConnect.php';?>
 </body>
 
 <script src="script.js" defer></script>
-    <?php include('../includes/footer.php');?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<?php include('../includes/footer.php'); ?>
 
 </html>
