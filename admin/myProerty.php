@@ -35,7 +35,7 @@ require '../includes/dbConnect.php'; ?>
         <div class="profile">
           <div class="info">
             <p><b><?php echo $_SESSION["user"] ?></b></p>
-            <p>Admin</p>
+            <p><?php echo $_SESSION[ "userType"]?></p>
             <small class="text-muted"></small>
           </div>
           <div class="profile-photo">
@@ -70,6 +70,10 @@ require '../includes/dbConnect.php'; ?>
         <a href="myProerty.php" class="active">
           <i class="fa-solid fa-house-flag"></i>
           <h3>My Properties</h3>
+        </a>
+        <a href="rentRequest.php">
+        <i class="fa-solid fa-arrow-alt-circle-up"></i>
+          <h3>Rent Request</h3>
         </a>
         <a href="soldProperties.php">
           <i class="fa-solid fa-house-circle-check"></i>
@@ -226,10 +230,10 @@ require '../includes/dbConnect.php'; ?>
                     <a href="editProperty.php?id=<?php echo $row['id'] ?>" class="custom-link" style="background-color: #ffcc00;"><i class="fas fa-edit text-white"></i></a>
                     <a href="propertyShow.php?id=<?php echo $row['id'] ?>" class="custom-link" style="background-color: rgb(37, 37, 252);"><i class="fas fa-eye text-white"></i></a>
 
-                    <form action="../control/soldProperty.php" method="POST">
+                    <!-- <form action="../control/soldProperty.php" method="POST">
                       <input type="hidden" name="sold_id" value="<?php echo $row['id'] ?>" />
                       <button type="submit" name="property_sold_btn" class="custom-link delete-icon" style="background-color: #5cb85c;"><i class="fas fa-house-circle-check text-white"></i></button>
-                    </form>
+                    </form> -->
 
                     <form action="../control/deleteProperty.php" method="POST">
                       <input type="hidden" name="delete_id" value="<?php echo $row['id'] ?>" />

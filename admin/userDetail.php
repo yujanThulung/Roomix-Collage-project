@@ -137,7 +137,7 @@ require '../includes/loginSession.php'; ?>
                 <div class="profile">
                     <div class="info">
                         <p><b><?php echo $_SESSION["user"] ?></b></p>
-                        <p>Admin</p>
+                        <p><?php echo $_SESSION["userType"] ?></p>
                         <small class="text-muted"></small>
                     </div>
                     <div class="profile-photo">
@@ -170,6 +170,10 @@ require '../includes/loginSession.php'; ?>
                     <i class="fa-solid fa-house-flag"></i>
                     <h3>My Properties</h3>
                 </a>
+                <a href="rentRequest.php">
+                    <i class="fa-solid fa-arrow-alt-circle-up"></i>
+                    <h3>Rent Request</h3>
+                </a>
                 <a href="soldProperties.php">
                     <i class="fa-solid fa-house-circle-check"></i>
                     <h3>Sold Properties</h3>
@@ -199,147 +203,148 @@ require '../includes/loginSession.php'; ?>
         </aside>
 
 
-         <main>
-        <h1 class="dashboard-heading">User Details</h1>
+        <main>
+            <h1 class="dashboard-heading">User Details</h1>
 
-        <div class="search-sort">
-            <form action="" method="POST">
-                <input type="text" id="searchInput" name="search" placeholder="Search...">
-                <select id="sortSelect" name="sort_alphabet">
-                    <option value="">Sort by...</option>
-                    <option value="asc">A-Z</option>
-                    <option value="desc">Z-A</option>
-                </select>
-                <button type="submit" id="applyButton">Sort</button>
-            </form>
-        </div>
+            <div class="search-sort">
+                <form action="" method="POST">
+                    <input type="text" id="searchInput" name="search" placeholder="Search...">
+                    <select id="sortSelect" name="sort_alphabet">
+                        <option value="">Sort by...</option>
+                        <option value="asc">A-Z</option>
+                        <option value="desc">Z-A</option>
+                    </select>
+                    <button type="submit" id="applyButton">Sort</button>
+                </form>
+            </div>
 
-        <?php
-        // Define the number of records per page
-        $records_per_page = 5;
+            <?php
+            // Define the number of records per page
+            $records_per_page = 5;
 
-        // Determine the current page number
-        if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-            $page = $_GET['page'];
-        } else {
-            $page = 1; // Default to page 1
-        }
-
-        // Calculate the offset for the query based on the current page number
-        $offset = ($page - 1) * $records_per_page;
-
-        // Default sorting order
-        $sort_order = 'ASC';
-
-        // Check if sorting option is selected
-        if (isset($_POST['sort_alphabet'])) {
-            $sort_option = $_POST['sort_alphabet'];
-            if ($sort_option == 'asc') {
-                $sort_order = 'ASC';
-            } elseif ($sort_option == 'desc') {
-                $sort_order = 'DESC';
+            // Determine the current page number
+            if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+                $page = $_GET['page'];
+            } else {
+                $page = 1; // Default to page 1
             }
-        }
 
-        // Build the SQL query
-        $register_query = "SELECT * FROM register";
+            // Calculate the offset for the query based on the current page number
+            $offset = ($page - 1) * $records_per_page;
 
-        // Check if search query is provided
-        if (isset($_POST['search']) && !empty(trim($_POST['search']))) {
-            $search_query = $_POST['search'];
-            $register_query .= " WHERE email LIKE '%$search_query%'";
-        }
+            // Default sorting order
+            $sort_order = 'ASC';
 
-        // Apply sorting and pagination
-        $register_query .= " ORDER BY fname $sort_order LIMIT $offset, $records_per_page";
+            // Check if sorting option is selected
+            if (isset($_POST['sort_alphabet'])) {
+                $sort_option = $_POST['sort_alphabet'];
+                if ($sort_option == 'asc') {
+                    $sort_order = 'ASC';
+                } elseif ($sort_option == 'desc') {
+                    $sort_order = 'DESC';
+                }
+            }
 
-        $register_run = mysqli_query($conn, $register_query);
-        ?>
+            // Build the SQL query
+            $register_query = "SELECT * FROM register";
 
-        <div class="p-table">
-            <table class="custom-table">
-                <thead>
-                    <tr>
-                        <td>S.N</td>
-                        <td>ID</td>
-                        <td>First</td>
-                        <td>Last</td>
-                        <td>Email</td>
-                        <td>Phone Number</td>
-                        <td>User Type</td>
-                        <td class="text-center">EDIT</td>
-                        <td class="text-center">DELETE</td>
-                    </tr>
-                </thead>
+            // Check if search query is provided
+            if (isset($_POST['search']) && !empty(trim($_POST['search']))) {
+                $search_query = $_POST['search'];
+                $register_query .= " WHERE email LIKE '%$search_query%'";
+            }
 
-                <tbody>
-                    <?php
-                    $serial_number = ($page - 1) * $records_per_page + 1; // Calculate serial number for the current page
-                    while ($reg_row = mysqli_fetch_array($register_run)) {
-                    ?>
+            // Apply sorting and pagination
+            $register_query .= " ORDER BY fname $sort_order LIMIT $offset, $records_per_page";
+
+            $register_run = mysqli_query($conn, $register_query);
+            ?>
+
+            <div class="p-table">
+                <table class="custom-table">
+                    <thead>
                         <tr>
-                            <td><?php echo $serial_number++; ?></td>
-                            <td><?php echo $reg_row['id']; ?></td>
-                            <td><?php echo $reg_row['fname']; ?></td>
-                            <td><?php echo $reg_row['lname']; ?></td>
-                            <td><?php echo $reg_row['email']; ?></td>
-                            <td><?php echo $reg_row['phone']; ?></td>
-                            <td>Admin</td>
-                            <td class="text-center">
-                                <a href="editProfile.php?id=<?php echo $reg_row['id']; ?>" class="custom-link edit-icon" style="background-color: #ffcc00;"><i class="fas fa-edit"></i></a>
-                            </td>
-                            <td class="text-center">
-                                <form action="../control/user.php" method="POST">
-                                    <input type="hidden" name="delete_id" value="<?php echo $reg_row['id'] ?>" />
-                                    <button type="submit" name="register_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </td>
+                            <td>S.N</td>
+                            <td>ID</td>
+                            <td>First</td>
+                            <td>Last</td>
+                            <td>Email</td>
+                            <td>Phone Number</td>
+                            <td>User Type</td>
+                            <td class="text-center">EDIT</td>
+                            <td class="text-center">DELETE</td>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
 
-<!-- Pagination links -->
-<div class="pagination">
-    <?php
-    // Calculate total number of records
-    $total_records_query = "SELECT COUNT(*) AS total FROM register";
-    $total_records_result = mysqli_query($conn, $total_records_query);
-    $total_records = mysqli_fetch_assoc($total_records_result)['total'];
+                    <tbody>
+                        <?php
+                        $serial_number = ($page - 1) * $records_per_page + 1; // Calculate serial number for the current page
+                        while ($reg_row = mysqli_fetch_array($register_run)) {
+                        ?>
+                            <tr>
+                                <td><?php echo $serial_number++; ?></td>
+                                <td><?php echo $reg_row['id']; ?></td>
+                                <td><?php echo $reg_row['fname']; ?></td>
+                                <td><?php echo $reg_row['lname']; ?></td>
+                                <td><?php echo $reg_row['email']; ?></td>
+                                <td><?php echo $reg_row['phone']; ?></td>
+                                <td><?php echo $reg_row['userType']; ?></td>
+                                <td class="text-center">
+                                    <a href="editProfile.php?id=<?php echo $reg_row['id']; ?>" class="custom-link edit-icon" style="background-color: #ffcc00;"><i class="fas fa-edit"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <form action="../control/user.php" method="POST">
+                                        <input type="hidden" name="delete_id" value="<?php echo $reg_row['id'] ?>" />
+                                        <button type="submit" name="register_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
 
-    // Calculate total number of pages
-    $total_pages = ceil($total_records / $records_per_page);
+            <!-- Pagination links -->
+            <div class="pagination">
+                <?php
+                // Calculate total number of records
+                $total_records_query = "SELECT COUNT(*) AS total FROM register";
+                $total_records_result = mysqli_query($conn, $total_records_query);
+                $total_records = mysqli_fetch_assoc($total_records_result)['total'];
 
-    // Display "First" button
-    echo "<a href='userDetail.php?page=1'>&laquo;&laquo; First</a>";
+                // Calculate total number of pages
+                $total_pages = ceil($total_records / $records_per_page);
 
-    // Display "Previous" button
-    if ($page > 1) {
-        echo "<a href='userDetail.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
-    }
+                // Display "First" button
+                echo "<a href='userDetail.php?page=1'>&laquo;&laquo; First</a>";
 
-    // Display pagination links
-    for ($i = 1; $i <= $total_pages; $i++) {
-        echo "<a " . ($i == $page ? "class='active'" : "") . " href='userDetail.php?page=$i'>$i</a>";
-    }
+                // Display "Previous" button
+                if ($page > 1) {
+                    echo "<a href='userDetail.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
+                }
 
-    // Display "Next" button
-    if ($page < $total_pages) {
-        echo "<a href='userDetail.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
-    }
+                // Display pagination links
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    echo "<a " . ($i == $page ? "class='active'" : "") . " href='userDetail.php?page=$i'>$i</a>";
+                }
 
-    // Display "Last" button
-    echo "<a href='userDetail.php?page=$total_pages'>Last &raquo;&raquo;</a>";
-    ?>
-</div>
+                // Display "Next" button
+                if ($page < $total_pages) {
+                    echo "<a href='userDetail.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
+                }
+
+                // Display "Last" button
+                echo "<a href='userDetail.php?page=$total_pages'>Last &raquo;&raquo;</a>";
+                ?>
+            </div>
 
 
 
 
-    </main>
+        </main>
 
-    <?php include('../includes/footer.php'); ?>
+        <?php include('../includes/footer.php'); ?>
 </body>
-<?php mysqli_close($conn);?>
+<?php mysqli_close($conn); ?>
+
 </html>

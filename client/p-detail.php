@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" style="height: 0;>
+<html lang="en">
 
 <?php
-include '../includes/dbConnect.php'; ?>
+require '../includes/dbConnect.php'; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -51,86 +51,128 @@ include '../includes/dbConnect.php'; ?>
 
 
 
-    <section style="padding-top: 18vh; padding-bottom:8vh;">
-    <div class="container">
-        <div class="content-wrapper">
-            <div>
-                <h1>ID <p class="id">#23543</p>
-                </h1>
-            </div>
-            <div class="grid">
-                <div>
-                    <p class="label">Location</p>
-                    <p>Kalimati, Ktm</p>
-                </div>
-                <div>
-                    <p class="label">Category</p>
-                    <p>Flat</p>
-                </div>
-                <div>
-                    <p class="label">Kitchen</p>
-                    <p>1</p>
-                </div>
-                <div>
-                    <p class="label">Bed Room</p>
-                    <p>3</p>
-                </div>
-                <div>
-                    <p class="label">Sitting Room</p>
-                    <p>1</p>
-                </div>
-                <div>
-                    <p class="label">Parking</p>
-                    <p>1</p>
-                </div>
-                <div>
-                    <p class="label">Floor</p>
-                    <p>First Floor</p>
-                </div>
-                <div>
-                    <p class="label">Rent Price</p>
-                    <p>Rs.5000/- per month</p>
-                </div>
-                <div>
-                    <p class="label">Price Negotiable</p>
-                    <p>Yes</p>
-                </div>
-                <div>
-                    <p class="label">Posted On</p>
-                    <p>2023/08/08</p>
-                </div>
-                <div>
-                    <p class="label">Expire On</p>
-                    <p>2024/05/09</p>
-                </div>
+    <?php
+    $id = $_GET['id'];
+    if (isset($_GET['id'])) {
+        $showProperty_query = "SELECT * FROM property WHERE id = '$id'";
+        $result = mysqli_query($conn, $showProperty_query);
 
-                <div class="gallery-section">
-                    <h2>Gallery</h2>
-                    <div class="gallery">
-                        <div class="gallery-item">
-                            <img src="images/room1.jpg" alt="Image 1" onclick="showFullScreen('images/room1.jpg')">
+        if (!$result) {
+            echo '<script>alert("data not fetch");</script>';
+        }
+    }
+    ?>
+
+    <section style="padding-top: 18vh; padding-bottom:8vh;">
+
+        <?php
+        // fetching and showing data
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_array($result)) {
+
+        ?>
+                <div class="container">
+                    <div class="content-wrapper">
+                        <div>
+                            <h1>ID <p class="id"># <?php echo $row['id']; ?></p>
+                            </h1>
                         </div>
-                        <div class="gallery-item">
-                            <img src="images/room2.jpg" alt="Image 2" onclick="showFullScreen('images/room2.jpg')">
+                        <div class="grid">
+                            <div>
+                                <p class="label">Location</p>
+                                <p><?php echo $row['location']; ?></p>
+                            </div>
+                            <div>
+                                <p class="label">Category</p>
+                                <p><?php echo $row['property_type']; ?></p>
+                            </div>
+                            <div>
+                                <p class="label">Kitchen</p>
+                                <p><?php echo $row['kitchen']; ?></p>
+                            </div>
+                            <div>
+                                <p class="label">Bed Room</p>
+                                <p><?php echo $row['bedroom']; ?></p>
+                            </div>
+                            <div>
+                                <p class="label">Living Room</p>
+                                <p><?php echo $row['living_room']; ?></p>
+                            </div>
+                            <div>
+                                <p class="label">Parking</p>
+                                <p><?php echo $row['parking']; ?></p>
+                            </div>
+                            <div>
+                                <p class="label">Floor</p>
+                                <p><?php echo $row['floor']; ?> Floor</p>
+                            </div>
+                            <div>
+                                <p class="label">Rent Price</p>
+                                <p>Rs. <?php echo $row['total_price']; ?>/- per month</p>
+                            </div>
+
+                            <div>
+                                <p class="label">Posted On</p>
+                                <p><?php echo $row['added_date']; ?></p>
+                            </div>
+                            <div>
+                                <p class="label">Expire On</p>
+                                <p><?php echo $row['expiry_date']; ?></p>
+                            </div>
+
+
+
+
+
+                            <div class="gallery-section">
+                                <h2>Gallery</h2>
+                                <div class="gallery">
+
+                                    <?php
+                                    // Check if image URLs exist in the database
+                                    if (!empty($row['media'])) {
+                                        // Split the image URLs string into an array (split after comma)
+                                        $image_urls = explode(',', $row['media']);
+
+                                        // Iterate over each image URL and display it
+                                        foreach ($image_urls as $image_url) {
+                                    ?>
+                                            <div class="gallery-item">
+                                                <img src="<?php echo $image_url; ?>" alt="Property Image" onclick="showFullScreen('<?php echo $image_url; ?>')">
+                                            </div>
+                                        <?php
+                                        }
+                                    } else {
+                                        // If no image URL is found, display a placeholder image or text
+                                        ?>
+                                        <span>No Image Available</span>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
                         </div>
-                        <div class="gallery-item">
-                            <img src="images/room1.jpg" alt="Image 3" onclick="showFullScreen('images/room1.jpg')">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="images/room2.jpg" alt="Image 4" onclick="showFullScreen('images/room2.jpg')">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="images/room1.jpg" alt="Image 4" onclick="showFullScreen('images/room2.jpg')">
+
+
+
+                        <div class="button-container">
+                            <a href="../admin/myRequest.php?id=<?php echo $row['id']; ?>">
+                                <button class="btn btn-primary me-4">
+                                    Rent Request
+                                </button>
+                            </a>
+                            <a href="javascript: window.history.back()">
+                                <button class="btn btn-danger me-4">
+                                    Back
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="button-container">
-                <button onclick="window.history.back()">Back</button>
-            </div>
-        </div>
-    </div>
+        <?php
+            }
+        }
+        ?>
     </section>
 
 

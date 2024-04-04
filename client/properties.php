@@ -97,78 +97,169 @@ include '../includes/dbConnect.php'; ?>
     </nav>
 
 
+    <!-- properties -->
+    <section id="properties" style="padding-top:2rem;">
+        <h2><b>Find your dream home!</b></h2>
+    </section>
 
-    <!--Form-->
+
+
+    <?php
+
+    $card_count = 8;
+    $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1 ORDER BY added_date DESC LIMIT $card_count";
+
+    // execute query
+    $query_run = mysqli_query($conn, $filtered_property_query);
+
+    ?>
 
 
     <!--Latest  Property start-->
-    <div class="container my-5 mb-3" style="padding-top: 10rem;">
-        <div class="text-center">
-            <h1>Display Latest & Featured Properties</h1>
+    <div class="container my-5 mb-3">
+        <div class="text-center" style="margin-top: 18vh;">
+            <h1>Display Latest Properties</h1>
             <p>Discover top-notch properties with our latest and featured listings. Your dream home or investment awaits</p>
         </div>
+
         <div class="row row-cols-1 row-cols-md-4 mt-2 g-4">
-            <div class="col mb-3">
-                <div class="card h-100 rounded-5 position-relative">
-                    <!-- Card content -->
-                    <img src="image/room1.jpg" class="card-img-top rounded-top-5" alt="image">
-                    <span class="position-absolute top-0 end-0 mt-3 me-3 text-white py-1 px-2 rounded-pill" style="background-color: #072448;">Room</span>
-                    <div class="card-body">
-                        <div style=" display:flex; justify-content: space-between;">
-                            <span style="color: #072448;"><i class="fas fa-map-marker-alt mr-1"></i> Kirtipur</span>
-                            <span style="color: #072448;"><i class="fas fa-money-bill-alt mr-1"></i> Rs.10000</span>
+
+
+            <?php
+            while ($row = mysqli_fetch_array($query_run)) { ?>
+
+                <!-- card start -->
+                <div class="col mb-3">
+                    <div class="card h-100 rounded-5 position-relative">
+                        <!-- Card content -->
+                        <div class="image-container" style="height: 200px; overflow: hidden;"> <!-- Set a fixed height for the image container -->
+                            <?php
+                            if (!empty($row['media'])) {
+                                $image_urls = explode(',', $row['media']);
+
+                                // To get the first image only
+                                $first_image = trim($image_urls[0]);
+                            }
+                            ?>
+                            <img src="<?php echo $first_image; ?>" class="card-img-top rounded-top-5" style="background-position: center; background-size: cover;" alt="image">
                         </div>
-                        <h6 class="card-text text-left"><b>Room available for Lorem ipsum dolor sit amet student.</b></h6>
-                        <div>
+                        <!-- for image end -->
+
+                        <span class="position-absolute top-0 end-0 mt-3 me-3 text-white py-1 px-2 rounded-pill" style="background-color: #072448;"><?php echo $row['property_type'] ?></span>
+                        <div class="card-body">
                             <div style=" display:flex; justify-content: space-between;">
-                                <span style="color: #072448;"><i class="fas fa-parking mr-1"></i> 2</span>
-                                <span style="color: #072448;"><i class="fas fa-layer-group mr-1"></i> 3</span>
-                                <span style="color: #072448;"><i class="fas fa-ruler-combined mr-1"></i> 1000 sq.ft</span>
+                                <span style="color: #072448;"><i class="fas fa-map-marker-alt mr-1"></i> <?php echo $row['location'] ?></span>
+                                <span style="color: #072448;"><i class="fas fa-money-bill-alt mr-1"></i> Rs.<?php echo $row['total_price'] ?></span>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-end mt-2"> <!-- Place button on right side -->
-                            <a href="#" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
+                            <div class="description" style="max-height: 2.6em; overflow: hidden;">
+                                <h6 class="card-text text-left">
+                                    <b><?php echo $row['property_title'] ?></b>
+                                </h6>
+                            </div>
+                            <div>
+                                <div style=" display:flex; justify-content: space-between;">
+                                    <span style="color: #072448;"><i class="fas fa-parking mr-1"></i> <?php echo $row['parking'] ?></span>
+                                    <span style="color: #072448;"><i class="fas fa-layer-group mr-1"></i> <?php echo $row['floor'] ?> floor</span>
+                                    <span style="color: #072448;"><i class="fas fa-ruler-combined mr-1"></i> <?php echo $row['area'] ?> sq.ft</span>
+                                </div>
+                            </div>
+                            <!-- card end -->
+
+                            <!-- button start-->
+                            <div class="d-flex justify-content-end mt-2 position-relative">
+                                <a href="p-detail.php?id=<?php echo $row['id'] ?>" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
+                            </div>
+                            <!-- button end -->
                         </div>
                     </div>
                 </div>
-            </div>
+
+            <?php
+            }
+            ?>
         </div>
     </div>
     <!--Latest  Property end-->
 
 
 
+
+
+
     <!--View  Property start-->
-    <div class="container my-5 mb-3 pt-5">
-        <div class="text-center">
+    <?php
+
+    $card_count = 12;
+    $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1 ORDER BY added_date ASC LIMIT $card_count";
+
+    // execute query
+    $query_run = mysqli_query($conn, $filtered_property_query);
+
+    ?>
+
+
+    <!--Latest  Property start-->
+    <div class="container my-5 mb-3">
+        <div class="text-center" style="margin-top: 18vh;">
             <h1>Property Listing</h1>
             <p>Discover the epitome of luxury living and investment potential with our latest and featured listings. Your dream home or lucrative investment awaits in these top-notch properties.</p>
         </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4 mt-2">
-            <div class="col mb-3">
-                <div class="card h-100 rounded-5 position-relative">
-                    <!-- Card content -->
-                    <img src="image/room1.jpg" class="card-img-top rounded-top-5" alt="image">
-                    <span class="position-absolute top-0 end-0 mt-3 me-3 text-white py-1 px-2 rounded-pill" style="background-color: #072448;">Room</span>
-                    <div class="card-body">
-                        <div style=" display:flex; justify-content: space-between;">
-                            <span style="color: #072448;"><i class="fas fa-map-marker-alt mr-1"></i> Kirtipur</span>
-                            <span style="color: #072448;"><i class="fas fa-money-bill-alt mr-1"></i> Rs.10000</span>
+
+        <div class="row row-cols-1 row-cols-md-4 mt-2 g-4">
+
+
+            <?php
+            while ($row = mysqli_fetch_array($query_run)) { ?>
+
+                <!-- card start -->
+                <div class="col mb-3">
+                    <div class="card h-100 rounded-5 position-relative">
+                        <!-- Card content -->
+                        <div class="image-container" style="height: 200px; overflow: hidden;"> <!-- Set a fixed height for the image container -->
+                            <?php
+                            if (!empty($row['media'])) {
+                                $image_urls = explode(',', $row['media']);
+
+                                // To get the first image only
+                                $first_image = trim($image_urls[0]);
+                            }
+                            ?>
+                            <img src="<?php echo $first_image; ?>" class="card-img-top rounded-top-5" style="background-position: center; background-size: cover;" alt="image">
                         </div>
-                        <h6 class="card-text text-left"><b>Room available for Lorem ipsum dolor sit amet student.</b></h6>
-                        <div>
+                        <!-- for image end -->
+
+                        <span class="position-absolute top-0 end-0 mt-3 me-3 text-white py-1 px-2 rounded-pill" style="background-color: #072448;"><?php echo $row['property_type'] ?></span>
+                        <div class="card-body">
                             <div style=" display:flex; justify-content: space-between;">
-                                <span style="color: #072448;"><i class="fas fa-parking mr-1"></i> 2</span>
-                                <span style="color: #072448;"><i class="fas fa-layer-group mr-1"></i> 3</span>
-                                <span style="color: #072448;"><i class="fas fa-ruler-combined mr-1"></i> 1000 sq.ft</span>
+                                <span style="color: #072448;"><i class="fas fa-map-marker-alt mr-1"></i> <?php echo $row['location'] ?></span>
+                                <span style="color: #072448;"><i class="fas fa-money-bill-alt mr-1"></i> Rs.<?php echo $row['total_price'] ?></span>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-end mt-2"> <!-- Place button on right side -->
-                            <a href="#" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
+                            <div class="description" style="max-height: 2.6em; overflow: hidden;">
+                                <h6 class="card-text text-left">
+                                    <b><?php echo $row['property_title'] ?></b>
+                                </h6>
+                            </div>
+                            <div>
+                                <div style=" display:flex; justify-content: space-between;">
+                                    <span style="color: #072448;"><i class="fas fa-parking mr-1"></i> <?php echo $row['parking'] ?></span>
+                                    <span style="color: #072448;"><i class="fas fa-layer-group mr-1"></i> <?php echo $row['floor'] ?> floor</span>
+                                    <span style="color: #072448;"><i class="fas fa-ruler-combined mr-1"></i> <?php echo $row['area'] ?> sq.ft</span>
+                                </div>
+                            </div>
+                            <!-- card end -->
+
+                            <!-- button start-->
+                            <div class="d-flex justify-content-end mt-2 position-relative">
+                                <a href="p-detail.php?id=<?php echo $row['id'] ?>" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
+                            </div>
+                            <!-- button end -->
                         </div>
                     </div>
                 </div>
-            </div>
+
+            <?php
+            }
+            ?>
         </div>
     </div>
     <!--View  Property end-->

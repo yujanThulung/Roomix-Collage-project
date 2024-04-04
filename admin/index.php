@@ -20,6 +20,14 @@ require '../includes/dbConnect.php'; ?>
 
 <body style="margin-top:-1.5rem">
 
+<?php 
+$query = "SELECT * FROM register";
+$query_run = mysqli_query($conn, $query);
+
+if($query_run) {
+  $row = mysqli_fetch_array($query_run);
+}
+?>
   <nav>
     <div class="right">
       <div class="top">
@@ -34,7 +42,7 @@ require '../includes/dbConnect.php'; ?>
         <div class="profile">
           <div class="info">
             <p><b><?php echo $_SESSION["user"] ?></b></p>
-            <p>Admin</p>
+            <p><?php echo $_SESSION["userType"]?></p>
             <small class="text-muted"></small>
           </div>
           <div class="profile-photo">
@@ -70,6 +78,10 @@ require '../includes/dbConnect.php'; ?>
           <i class="fa-solid fa-house-flag"></i>
           <h3>My Properties</h3>
         </a>
+        <a href="rentRequest.php">
+        <i class="fa-solid fa-arrow-alt-circle-up"></i>
+          <h3>Rent Request</h3>
+        </a>
         <a href="soldProperties.php">
           <i class="fa-solid fa-house-circle-check"></i>
           <h3>Sold Properties</h3>
@@ -78,12 +90,7 @@ require '../includes/dbConnect.php'; ?>
           <i class="fa-solid fa-user-tie"></i>
           <h3>User Detail</h3>
         </a>
-        <!--
-        </a>  for individual user give this feature  but for now it if for admin-->
-        <a href="addProperties.php">
-          <i class="fa-solid fa-plus"></i>
-          <h3>Add Properties</h3>
-        </a>
+        <p><?php echo $_SESSION["userType"] ?></p>
 
         <!-- logout section here  -->
         <a href="../control/logout.php" name="submit">
@@ -138,7 +145,7 @@ require '../includes/dbConnect.php'; ?>
 
         <!--------Property start------->
         <div class="property">
-        <span class="material-symbols-outlined">location_city</span>
+          <span class="material-symbols-outlined">location_city</span>
           <div class="middle">
 
             <div class="left">
@@ -205,10 +212,10 @@ require '../includes/dbConnect.php'; ?>
 
 
       <!-- end insights -->
-</div>
+  </div>
 
-    </main>
-    <!------------------
+  </main>
+  <!------------------
          end main
         ------------------->
 
@@ -222,5 +229,6 @@ require '../includes/dbConnect.php'; ?>
   <script src="script.js" defer></script>
   <?php include('../includes/footer.php'); ?>
 </body>
-<?php mysqli_close($conn);?>
+<?php mysqli_close($conn); ?>
+
 </html>

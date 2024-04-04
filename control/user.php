@@ -8,18 +8,20 @@ if (isset($_POST['register_btn'])) {
     $phone = $_POST['phone'];
     $password = $_POST['password'];
     $c_password = $_POST['c-password'];
+    $userType = $_POST['userType'];
 
     // Checking if password and confirm password match
     if ($password === $c_password) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Insert data into the database
-        $query = "INSERT INTO register (fname, lname, email, phone, password) VALUES ('$fname', '$lname', '$email', '$phone', '$hashed_password')";
+        $query = "INSERT INTO register (fname, lname, email, phone, password,userType) VALUES ('$fname', '$lname', '$email', '$phone', '$hashed_password','$userType')";
         $insert = mysqli_query($conn, $query);
 
         // Checking if the query was successful
         if ($insert) {
             $_SESSION['email'] = $email;
+            $_SESSION['userType'] = $userType;
             $_SESSION['status'] = "Registered Successfully!";
             $_SESSION['status_code'] = "success";
             header("Location: ../client/index.php");
@@ -67,33 +69,41 @@ if (isset($_POST['register_update_btn'])) {
 }
 
 
-//DELETE
-if(isset($_POST['register_delete_btn'])){
-    $delete_id = $_POST['delete_id'];
 
-    $reg_del_query = "DELETE FROM register WHERE id ='$delete_id' ";
-    $reg_del_query_run =  mysqli_query($conn,$reg_del_query);
 
-    if($reg_del_query_run){
-        $_SESSION['status']="User Deleted Successfully!";
-        $_SESSION['status_code'] ="danger";
-        header("Location: ../admin/my.php");
-        exit;
-    }else{
-        $_SESSION['status'] = "Data not Updated!";
-        $_SESSION['status_code'] = "error";
-        header("Location: ../admin/userDetail.php?id=$delete_id");
-        exit;
-    }
-}
+
+// //For login 
+// if (isset($_POST['login_btn'])) {
+//     $email_login = $_POST['email'];
+//     $password_login = $_POST['password'];
+
+//     $query_login = "SELECT * FROM register WHERE email='$email_login'";
+//     $query_login_result = mysqli_query($conn, $query_login);
+
+//     if ($row = mysqli_fetch_assoc($query_login_result)) {
+//         if ($row['password'] == $password_login) {
+//             $_SESSION['username'] = $email_login;
+//             header('Location: ../admin/index.php');
+//             exit;
+//         } else {
+//             $_SESSION['invalid'] = 'Email id / Password is Invalid';
+//             header('Location: ../client/login.php');
+//             exit;
+//         }
+//     } else {
+//         $_SESSION['invalid'] = 'Email id / Password is Invalid';
+//         header('Location: ../client/login.php');
+//         exit;
+//     }
+// }
+
 
 
 //FOR LOGIN
-if(isset($_POST['login'])){
+if (isset($_POST['login'])) {
     $username = $_POST['email'];
     $password = $_POST['password'];
-    $role_as = $_POST['role_as'];
-    
+
     // Prepare SQL statement
     $query = "SELECT * FROM register WHERE email = ? LIMIT 1";
     $stmt = mysqli_prepare($conn, $query);
@@ -106,16 +116,31 @@ if(isset($_POST['login'])){
     $result = mysqli_stmt_get_result($stmt);
 
     // Check if user exists
-    if(mysqli_num_rows($result) == 1) {
+    if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         $hashed_password_from_db = $row['password'];
 
         // Verify the provided password against the hashed password from the database
-        if(password_verify($password, $hashed_password_from_db)) {
+        $userType = $row['userType']; // storing userType variable  to use it later in session
+        $id = $row['id']; // storing userId variable to use it later in
+
+        if (password_verify($password, $hashed_password_from_db)) {
             // Passwords match, login successful
+
             $_SESSION["user"] = $username;
-            header("location: ../admin/index.php");
-            exit; 
+            $_SESSION[ "userType"]= $userType;
+            $_SESSION[ "id" ]= $id;
+
+            if ($userType == "admin") {
+                header("location: ../admin/index.php");
+                exit; // Exit to prevent further execution
+            }elseif($userType == "Landlord"){
+                header("location: ../landlordAdmin\index.php");
+                exit;
+            }elseif($userType = "Tenant"){
+                header("location: ../userAdmin\index.php");
+                exit;
+            }
         } else {
             // Passwords don't match
             $_SESSION['status'] = "Incorrect email or password.";
@@ -131,9 +156,3 @@ if(isset($_POST['login'])){
         exit;
     }
 }
-
-
-?>
-<?php mysqli_close($conn);?>
-
-

@@ -143,10 +143,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-//For card property detail
-document.querySelectorAll(".card").forEach(function (card) {
-    card.addEventListener("click", function () {
-        window.location.href = "p-detail.php";
-    });
-});
+
+
+// this code is for redirecting to another page onlick on card  work on this letter
+
+// //For card property detail
+// document.querySelectorAll(".card").forEach(function (card) {
+//     card.addEventListener("click", function () {
+//         const id = card.getAttribute("data-id");
+//         window.location.href = "p-detail.php" + id;
+//     });
+// });
 

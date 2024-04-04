@@ -16,7 +16,7 @@ include '../includes/dbConnect.php';?>
 
 <body>
     <div id="form-container-l">
-        <form action="../includes/user.php" method ="POST" class="n-form" id="logIn"><a href="javascript:history.back()"><i class="fas fa-times" id="cross"></i></a>
+        <form action="../control/user.php" method ="POST" class="n-form" id="logIn"><a href="javascript:history.back()"><i class="fas fa-times" id="cross"></i></a>
             <h2>Log in</h2>
             <div class="form-label">
                 <label for="email">Email</label>
@@ -31,7 +31,8 @@ include '../includes/dbConnect.php';?>
                 <button type="submit" name="login" >Login</button>
             </div>
 
-            <div class="option-field">
+            <div class="option-field" style="justify-content: center;">
+            <label for="password">I don't have an account ! </label>
                 <a href="registration.php">Create Account</a>
             </div>
         </form>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-include '../includes/dbConnect.php';?> 
+<?php
+include '../includes/dbConnect.php'; ?>
 
 
 <head>
@@ -13,8 +13,34 @@ include '../includes/dbConnect.php';?>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        .form-label {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        select {
+            width: 100%;
+            padding: 6px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background: transparent;
+            color: #555;
+        }
+
+        /* Style the options */
+        option {
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,7 +49,10 @@ include '../includes/dbConnect.php';?>
 
     <div id="form-box">
         <div id="form-container-r">
-            <form action="../includes/user.php" method="POST" class="n-form" id="register"><a href="javascript:history.back()"><i class="fas fa-times" id="cross"></i></a>
+            <form action="../control/user.php" method="POST" class="n-form" id="register" style="top:10px;">
+                <a href="javascript:history.back()">
+                    <i class="fas fa-times" id="cross"></i>
+                </a>
                 <h2>Register</h2>
                 <div class="input-group">
                     <div class="form-label">
@@ -39,22 +68,42 @@ include '../includes/dbConnect.php';?>
                         </div>
                     </div>
                 </div>
+
+
                 <div class="form-label">
-                    <label for="email">Email</label>
-                    <input type="email" id="r-email" name="email" placeholder="Enter your email" required>
-                </div> 
+                    <div class="form-name">
+                        <div class="name b-name">
+                            <label for="email">Email</label>
+                            <input type="email" id="r-email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="name b-name">
+                            <label for="phone">Phone</label>
+                            <input type="tel" name="phone" placeholder="Enter your phone number" required>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-label">
-                    <label for="phone">Phone</label>
-                    <input type="tel" name="phone" placeholder="Enter your phone number" required>
-                </div> 
+                    <label for="userType">Register as</label>
+                    <select name="userType" required>
+                        <option value="Landlord">Landlord</option>
+                        <option value="Tenant">Tenant</option>
+                    </select>
+                </div>
+
                 <div class="form-label">
                     <label for="password">Password</label>
                     <input type="password" id="r-password" name="password" placeholder="Password" required>
+
                 </div>
                 <div class="form-label">
                     <label for="c-password">Confirm password</label>
                     <input type="password" id="c-password" name="c-password" placeholder="Confirm password" required>
+
                 </div>
+
+
+
 
 
                 <!-- Move checklist here -->
@@ -68,7 +117,10 @@ include '../includes/dbConnect.php';?>
                     </ul>
                 </section>
 
-                <div class="form-btn">
+
+
+
+                <div class="form-btn" style="margin-top:28px;">
                     <button onclick="validateForm()" name="register_btn">Register</button>
                 </div>
                 <div class="option-field">
@@ -81,7 +133,7 @@ include '../includes/dbConnect.php';?>
 
     </div>
     <script src="script.js" defer></script>
-    <?php include('../includes/footer.php');?>
+    <?php include('../includes/footer.php'); ?>
 </body>
 
 </html>

@@ -72,8 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Convert uploadedImages array to comma-separated string
     $imagesString = implode(",", $uploadedImages);// how?
 
+
+    //getting single id by session
+    $id = $_SESSION['id'];
+
     // Insert data into the database
-    $query = "INSERT INTO property (property_title, description, property_type, kitchen, bedroom, living_room, floor, parking, area, total_price, location, expiry_date, media) VALUES ('$property_title', '$description', '$property_type', $kitchen, $bedroom, $living_room, $floor, $parking, $area, $total_price, '$location', '$expiry_date', '$imagesString')";
+    $query = "INSERT INTO property (property_title, description, property_type, kitchen, bedroom, living_room, floor, parking, area, total_price, location, expiry_date,user_id, media) VALUES ('$property_title', '$description', '$property_type', $kitchen, $bedroom, $living_room, $floor, $parking, $area, $total_price, '$location', '$expiry_date', '$id','$imagesString')";
 
     if (mysqli_query($conn, $query)) {
             $_SESSION['status'] = "Property Added Successfully!";

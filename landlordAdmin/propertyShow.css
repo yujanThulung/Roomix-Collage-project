@@ -1,0 +1,126 @@
+/* styles.css */
+body {
+    background-color: #f7fafc;
+    padding: 1rem 1rem;
+}
+
+.container {
+    max-width: 56rem;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 2rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 0rem;
+}
+.grid .label{
+    margin-top: 1.5rem;
+}
+.grid p{
+    margin:.2rem;
+}
+
+@media (min-width: 640px) {
+    .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.label {
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+
+.id {
+    color: #718096;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+    h1 {
+        font-size: 3rem;
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+}
+
+.gallery-section {
+    grid-column: 1 / -1;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+.gallery-item {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    background-color: rgb(230, 39, 39);
+    color: #ffffff;
+    font-weight: 700;
+    padding: 1rem  2rem;
+    border-radius: .5rem;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: rgb(212, 3, 3);
+}
+
+
+.fullscreen-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.fullscreen-image:hover {
+    opacity: 0.9;
+}
+
+
+#image{
+    
+}
