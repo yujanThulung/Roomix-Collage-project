@@ -28,10 +28,9 @@ require '../includes/dbConnect.php'; ?>
         <a href="index.php" class="active"><img src="image/logo.png" alt="logo"></a>
         <div class="navigation">
             <ul>
-                <li><a href="login.php" class="">Buy</a></li>
+                <li><a href="login.php" class="">Rent</a></li>
                 <li><a href="login.php">Sell</a></li>
             </ul>
-
             <ul>
                 <li><a href="index.php" class="active">Home</a></li>
                 <li><a href="aboutUs.php">About us</a></li>
@@ -156,11 +155,12 @@ require '../includes/dbConnect.php'; ?>
 
 
                         <div class="button-container">
-                            <a href="../admin/myRequest.php?id=<?php echo $row['id']; ?>">
-                                <button class="btn btn-primary me-4">
-                                    Rent Request
-                                </button>
+                        <a href=" ../client/login.php?id=<?php echo $row['id']; ?>">
+                            <button class="btn btn-primary me-4">
+                                Rent Request
+                            </button>
                             </a>
+
                             <a href="javascript: window.history.back()">
                                 <button class="btn btn-danger me-4">
                                     Back

@@ -16,19 +16,17 @@ include '../includes/dbConnect.php';?>
 
 <body>
 
-    <!-- Navigation -->
-    <nav>
+   <!-- Navigation -->
+   <nav style="justify-content: center;">
         <a href="index.php"><img src="image/logo.png" alt="logo"></a>
         <div class="navigation">
             <ul>
-                <li><a href="properties.php">Buy</a></li>
-                <li><a href="#">Sell</a></li>
+                <li><a href="login.php" class="">Rent</a></li>
+                <li><a href="login.php">Sell</a></li>
             </ul>
-
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="aboutUs.php">About us</a></li>
-                <li><a href="properties.php">Properties</a></li>
                 <li><a href="contact.php" class="active">Contact</a></li>
             </ul>
 
@@ -40,7 +38,6 @@ include '../includes/dbConnect.php';?>
             <i id="menu-close" class="fas fa-times"></i><!--this is use to make resposive bar-->
         </div>
     </nav>
-
 
 
     <!--Form-->

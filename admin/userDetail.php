@@ -208,7 +208,7 @@ require '../includes/loginSession.php'; ?>
 
             <div class="search-sort">
                 <form action="" method="POST">
-                    <input type="text" id="searchInput" name="search" placeholder="Search...">
+                    <input type="text" id="searchInput" name="search" placeholder="Search by email...">
                     <select id="sortSelect" name="sort_alphabet">
                         <option value="">Sort by...</option>
                         <option value="asc">A-Z</option>
@@ -246,7 +246,7 @@ require '../includes/loginSession.php'; ?>
             }
 
             // Build the SQL query
-            $register_query = "SELECT * FROM register";
+            $register_query = "SELECT * FROM user";
 
             // Check if search query is provided
             if (isset($_POST['search']) && !empty(trim($_POST['search']))) {

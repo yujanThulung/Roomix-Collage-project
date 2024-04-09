@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" style="height: 0;">
 
-<?php 
-include '../includes/dbConnect.php';?> 
+<?php
+include '../includes/dbConnect.php'; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -10,25 +10,22 @@ include '../includes/dbConnect.php';?>
     <title>RooMix</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
     <!-- Navigation -->
-    <nav>
-        <a href="index.php" class="active"><img src="image/logo.png" alt="logo"></a>
+    <nav style="justify-content: center;">
+        <a href="index.php"><img src="image/logo.png" alt="logo"></a>
         <div class="navigation">
             <ul>
-                <li><a href="properties.php">Buy</a></li>
-                <li><a href="#">Sell</a></li>
+                <li><a href="login.php" class="">Rent</a></li>
+                <li><a href="login.php">Sell</a></li>
             </ul>
-
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="aboutUs.php" class="active">About us</a></li>
-                <li><a href="properties.php">Properties</a></li>
                 <li><a href="contact.php">Contact</a></li>
             </ul>
 
@@ -228,7 +225,7 @@ include '../includes/dbConnect.php';?>
     </footer>
 </body>
 
-<script src="script.js"defer></script>
-    <?php include('../includes/footer.php');?>
+<script src="script.js" defer></script>
+<?php include('../includes/footer.php'); ?>
 
 </html>

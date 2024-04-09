@@ -21,7 +21,7 @@ require '../includes/dbConnect.php'; ?>
 <body style="margin-top:-1.5rem">
 
 <?php 
-$query = "SELECT * FROM register";
+$query = "SELECT * FROM user";
 $query_run = mysqli_query($conn, $query);
 
 if($query_run) {
@@ -90,7 +90,10 @@ if($query_run) {
           <i class="fa-solid fa-user-tie"></i>
           <h3>User Detail</h3>
         </a>
-        <p><?php echo $_SESSION["userType"] ?></p>
+        <a href="addProperties.php">
+          <i class="fa-solid fa-plus"></i>
+          <h3>Add Properties</h3>
+        </a>
 
         <!-- logout section here  -->
         <a href="../control/logout.php" name="submit">
@@ -129,7 +132,7 @@ if($query_run) {
             <div class="left">
               <h3>User</h3>
               <?php
-              $count_user = "SELECT * FROM register";
+              $count_user = "SELECT * FROM user";
               $result_user = mysqli_query($conn, $count_user);
               $total_user = mysqli_num_rows($result_user);
               if ($total_user) {
@@ -218,10 +221,6 @@ if($query_run) {
   <!------------------
          end main
         ------------------->
-
-
-
-
   </div>
 
 

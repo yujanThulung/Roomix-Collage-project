@@ -75,7 +75,7 @@ if (isset($_POST['register_update_btn'])) {
 //     $email_login = $_POST['email'];
 //     $password_login = $_POST['password'];
 
-//     $query_login = "SELECT * FROM register WHERE email='$email_login'";
+//     $query_login = "SELECT * FROM user WHERE email='$email_login'";
 //     $query_login_result = mysqli_query($conn, $query_login);
 
 //     if ($row = mysqli_fetch_assoc($query_login_result)) {
@@ -103,7 +103,7 @@ if(isset($_POST['login'])){
     $password = $_POST['password'];
 
     // Prepare SQL statement
-    $query = "SELECT * FROM register WHERE email = ? LIMIT 1";
+    $query = "SELECT * FROM user WHERE email = ? LIMIT 1";
     $stmt = mysqli_prepare($conn, $query);
 
     // Bind parameters and execute query

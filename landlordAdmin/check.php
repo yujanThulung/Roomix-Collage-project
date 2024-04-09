@@ -3,7 +3,7 @@ require '../includes/dbConnect.php';?>
 <?php require('../includes/loginSession.php');?>
 
 <?php
-$query =  "SELECT * FROM register";
+$query =  "SELECT * FROM user";
 $data = mysqli_query($conn, $query);
 
 $tUser = mysqli_num_rows($data);

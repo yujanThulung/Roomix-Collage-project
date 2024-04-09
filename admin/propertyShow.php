@@ -103,7 +103,6 @@ if (!$result) {
                         <p class="label" style="margin-top:1.5rem">Description</p>
                         <p style="margin-top:.2rem"><?php echo $row['description'] ?></p>
                     </div>
-
                     
                     <div class="gallery-section">
                         <h2>Gallery</h2>

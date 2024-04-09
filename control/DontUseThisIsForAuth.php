@@ -4,7 +4,7 @@ if(isset($_POST['login'])){
     $password = $_POST['password'];
 
     // Prepare SQL statement
-    $query = "SELECT * FROM register WHERE email = ? LIMIT 1";
+    $query = "SELECT * FROM user WHERE email = ? LIMIT 1";
     $stmt = mysqli_prepare($conn, $query);
 
     // Bind parameters and execute query

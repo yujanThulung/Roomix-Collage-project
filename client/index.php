@@ -12,9 +12,9 @@ include '../includes/dbConnect.php'; ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="searchStyle.css">
     <style>
         span {
             color: #072448;
@@ -44,7 +44,7 @@ include '../includes/dbConnect.php'; ?>
         }
 
         .card {
-            animation: fadeInUp 0.5s ease-out;
+            animation: fadeInUp 1s ease-out;
             transition: transform 0.3s ease;
         }
 
@@ -63,7 +63,64 @@ include '../includes/dbConnect.php'; ?>
                 transform: translateY(0);
             }
         }
+
+
+
+        form {
+            width: 60%;
+            max-width: 60%;
+            color: black;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            height: 15%;
+            justify-content: space-evenly;
+            gap: 5px;
+            margin: 5vh 0;
+            padding: 3vh 2vw;
+            background-color: var(--c-primary);
+            border-radius: 10vh;
+            border: none;
+            color: var(--c-light);
+        }
+
+        #search-input,
+        #category-filter,
+        #search-btn {
+            padding: 1.5vh;
+            border: 0.01rem solid var(--c-secondary);
+            border-radius: 10vh;
+            width: 25%;
+            background-color: transparent;
+            color: var(--c-light);
+        }
+
+        #search-input {
+            width: 48%;
+        }
+
+        #search-input::placeholder {
+            color: var(--c-light);
+        }
+
+        #search-btn {
+            cursor: pointer;
+            font-size: var(--btn-font);
+            font-weight: 600;
+            background-color: var(--c-btn);
+            width: 8vw;
+            margin-left: 1vh;
+        }
+
+        #search-btn:hover {
+            background-color: var(--c-dark);
+            color: var(--c-light);
+            font-size: 20px;
+            transition: 0.2s ease;
+            box-sizing: border-box;
+        }
     </style>
+
 </head>
 
 <body>
@@ -71,17 +128,15 @@ include '../includes/dbConnect.php'; ?>
 
     <!-- Navigation -->
     <nav style="justify-content: center;">
-        <a href="index.php" class="active"><img src="image/logo.png" alt="logo"></a>
+        <a href="index.php"><img src="image/logo.png" alt="logo"></a>
         <div class="navigation">
             <ul>
-                <li><a href="login.php" class="">Buy</a></li>
+                <li><a href="login.php" class="">Rent</a></li>
                 <li><a href="login.php">Sell</a></li>
             </ul>
-
             <ul>
                 <li><a href="index.php" class="active">Home</a></li>
                 <li><a href="aboutUs.php">About us</a></li>
-                <li><a href="properties.php">Properties</a></li>
                 <li><a href="contact.php">Contact</a></li>
             </ul>
 
@@ -96,50 +151,28 @@ include '../includes/dbConnect.php'; ?>
 
     <!-- Home  -->
     <section id="home" class="tagLine">
-            <h2><b>Explore, Compare, and Discover Your Perfect Space with RooMix </b></h2>
-            <p>We find, you delight. Effortless rentals, connecting seekers with landlords. Your perfect home, our
-                commitment.</p>
-        
+        <h2><b>Explore, Compare, and Discover Your Perfect Space with RooMix </b></h2>
+        <p>We find, you delight. Effortless rentals, connecting seekers with landlords. Your perfect home, our
+            commitment.</p>
 
-        <div id="search-container">
-            <input type="text" id="search-input" placeholder="Search...">
 
-            <!-- Filter options for location -->
-            <select id="location-filter">
-                <option value="all">&#x1F30E; All Locations</option>
-                <option value="kalanki">Kalanki</option>
-                <option value="chabel">Chabel</option>
-                <option value="kirtipur">Kirtipur</option>
-                <option value="location4">Location 4</option>
-                <option value="location5">Location 5</option>
-                <option value="location6">Location 6</option>
-                <option value="location7">Location 7</option>
-                <option value="location8">Location 8</option>
-                <option value="location9">Location 9</option>
-            </select>
 
-            <!-- Filter options for cost -->
-            <select id="cost-filter">
-                <option value="all">&#x1F4B3; All Costs</option>
-                <option value="4500-7000">Rs. 4500 - Rs. 7000</option>
-                <option value="7001-10000">Rs. 7001 - Rs. 10000</option>
-                <option value="10001-13000">Rs. 10001 - Rs. 13000</option>
-                <option value="13001-16000">Rs. 13001 - Rs. 16000</option>
-                <option value="16001-19000">Rs. 16001 - Rs. 19000</option>
-                <option value="19001-20000">Rs. 19001 - Rs. 20000</option>
-            </select>
+
+        <form action="properties.php" method="GET">
+            <!-- Search input for location -->
+            <input type="text" id="search-input" name="search" placeholder="Search by location..." />
 
             <!-- Filter options for category -->
-            <select id="category-filter">
+            <select id="category-filter" name="category">
                 <option value="all">&#x1F3E0; All Categories</option>
                 <option value="room">Room</option>
                 <option value="flat">Flat</option>
-                <option value="house">House</option>
-                <option value="office">Office</option>
             </select>
 
-            <button id="search-btn" onclick="search()">Search</button>
-        </div>
+            <button id="search-btn" type="submit">Search</button>
+        </form>
+
+
 
 
     </section>
@@ -273,7 +306,7 @@ include '../includes/dbConnect.php'; ?>
     <?php
 
     $card_count = 8;
-    $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1 ORDER BY added_date ASC LIMIT $card_count";
+    $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1 ORDER BY RAND() LIMIT $card_count";
 
     // execute query
     $query_run = mysqli_query($conn, $filtered_property_query);

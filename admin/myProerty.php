@@ -35,7 +35,7 @@ require '../includes/dbConnect.php'; ?>
         <div class="profile">
           <div class="info">
             <p><b><?php echo $_SESSION["user"] ?></b></p>
-            <p><?php echo $_SESSION[ "userType"]?></p>
+            <p><?php echo $_SESSION["userType"] ?></p>
             <small class="text-muted"></small>
           </div>
           <div class="profile-photo">
@@ -72,7 +72,7 @@ require '../includes/dbConnect.php'; ?>
           <h3>My Properties</h3>
         </a>
         <a href="rentRequest.php">
-        <i class="fa-solid fa-arrow-alt-circle-up"></i>
+          <i class="fa-solid fa-arrow-alt-circle-up"></i>
           <h3>Rent Request</h3>
         </a>
         <a href="soldProperties.php">
@@ -227,8 +227,12 @@ require '../includes/dbConnect.php'; ?>
                 <td><?php echo $row['added_date']; ?></td>
                 <td>
                   <div class="action-icons">
-                    <a href="editProperty.php?id=<?php echo $row['id'] ?>" class="custom-link" style="background-color: #ffcc00;"><i class="fas fa-edit text-white"></i></a>
-                    <a href="propertyShow.php?id=<?php echo $row['id'] ?>" class="custom-link" style="background-color: rgb(37, 37, 252);"><i class="fas fa-eye text-white"></i></a>
+                    <a href="editProperty.php?id=<?php echo $row['id'] ?>" class="custom-link" style="background-color: #ffcc00;">
+                      <i class="fas fa-edit text-white"></i>
+                    </a>
+                    <a href="propertyShow.php?id=<?php echo $row['id'] ?>" class="custom-link" style="background-color: rgb(37, 37, 252);">
+                      <i class="fas fa-eye text-white"></i>
+                    </a>
 
                     <!-- <form action="../control/soldProperty.php" method="POST">
                       <input type="hidden" name="sold_id" value="<?php echo $row['id'] ?>" />
@@ -253,37 +257,37 @@ require '../includes/dbConnect.php'; ?>
 
 
       <!-- Pagination -->
-<div class="pagination">
-    <?php
-    // Calculate total number of records
-    $total_records_query = "SELECT COUNT(*) AS total FROM  property WHERE  sold_status= 1";
-    $total_records_result = mysqli_query($conn, $total_records_query);
-    $total_records = mysqli_fetch_assoc($total_records_result)['total'];
+      <div class="pagination">
+        <?php
+        // Calculate total number of records
+        $total_records_query = "SELECT COUNT(*) AS total FROM  property WHERE  sold_status= 1";
+        $total_records_result = mysqli_query($conn, $total_records_query);
+        $total_records = mysqli_fetch_assoc($total_records_result)['total'];
 
-    // Calculate total number of pages
-    $total_pages = ceil($total_records / $records_per_page);
+        // Calculate total number of pages
+        $total_pages = ceil($total_records / $records_per_page);
 
-    // Display "Previous" button
-    if ($page > 1) {
-        echo "<a href='myProerty.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
-    }
+        // Display "Previous" button
+        if ($page > 1) {
+          echo "<a href='myProerty.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
+        }
 
-    // Display pagination links
-    for ($i = 1; $i <= $total_pages; $i++) {
-        echo "<a " . ($i == $page ? "class='active'" : "") . " href='myProerty.php?page=$i'>$i</a>";
-    }
+        // Display pagination links
+        for ($i = 1; $i <= $total_pages; $i++) {
+          echo "<a " . ($i == $page ? "class='active'" : "") . " href='myProerty.php?page=$i'>$i</a>";
+        }
 
-    // Display "Next" button
-    if ($page < $total_pages) {
-        echo "<a href='myProerty.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
-    }
+        // Display "Next" button
+        if ($page < $total_pages) {
+          echo "<a href='myProerty.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
+        }
 
-    // Display "Last" button
-    echo "<a href='myProerty.php?page=$total_pages'>Last &raquo;&raquo;</a>";
-    ?>
-</div>
+        // Display "Last" button
+        echo "<a href='myProerty.php?page=$total_pages'>Last &raquo;&raquo;</a>";
+        ?>
+      </div>
 
-</div>
+  </div>
 
   </div>
 

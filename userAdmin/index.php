@@ -74,26 +74,19 @@ require '../includes/dbConnect.php'; ?>
         <i class="fa-solid fa-arrow-alt-circle-up"></i>
           <h3>Rent Request</h3>
         </a>
-        <a href="soldProperties.php">
-          <i class="fa-solid fa-house-circle-check"></i>
-          <h3>Sold Properties</h3>
-        </a>
+        
         <a href="userDetail.php">
           <i class="fa-solid fa-user-tie"></i>
           <h3>User Detail</h3>
         </a>
-        <!--
-        </a>  for individual user give this feature  but for now it if for admin-->
-        <a href="addProperties.php">
-          <i class="fa-solid fa-plus"></i>
-          <h3>Add Properties</h3>
-        </a>
+        
 
         <!-- logout section here  -->
-        <a href="../control/logout.php" name="submit">
+        <a href="../clientAfterLogin/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>logout</h3>
+          <h3>Back to  Home</h3>
         </a>
+        
 
 
 
@@ -116,95 +109,7 @@ require '../includes/dbConnect.php'; ?>
            </div> -->
       <!-- If some want to  add a date they can do it from here. for future -->
 
-      <div class="insights">
-
-        <!-- start user -->
-        <div class="user">
-          <span class="material-symbols-sharp">person</span>
-          <div class="middle">
-
-            <div class="left">
-              <h3>User</h3>
-              <?php
-              $count_user = "SELECT * FROM register";
-              $result_user = mysqli_query($conn, $count_user);
-              $total_user = mysqli_num_rows($result_user);
-              if ($total_user) {
-                echo '<h1>' . $total_user . '</h1>';
-              } else {
-                echo '<h1>User Not Found!</h1>';
-              }
-              ?>
-            </div>
-          </div>
-        </div>
-
-
-        <!--------Property start------->
-        <div class="property">
-          <span class="material-symbols-outlined">location_city</span>
-          <div class="middle">
-
-            <div class="left">
-              <h3>Listed property</h3>
-              <?php
-              $count_property = "SELECT * FROM property";
-              $count_property = mysqli_query($conn, $count_property);
-              $total_property = mysqli_num_rows($count_property); ?>
-              <h1><?php echo $total_property ?></h1>
-            </div>
-          </div>
-        </div>
-        <!--------Property end------->
-
-        <!-------Flat start----->
-        <div class="flat">
-          <span class="material-symbols-outlined">apartment</span>
-          <div class="middle">
-            <div class="left">
-              <?php
-              $count_property = "SELECT * FROM property WHERE property_type = 'Flat'";
-              $count_property = mysqli_query($conn, $count_property);
-              $total_property = mysqli_num_rows($count_property); ?>
-              <h3>Flat</h3>
-              <h1><?php echo $total_property ?></h1>
-            </div>
-          </div>
-        </div>
-        <!--Flat end-->
-
-        <!-------Room start----->
-        <div class="room">
-          <span class="material-symbols-outlined">bedroom_parent</span>
-          <div class="middle">
-            <div class="left">
-              <?php
-              $count_property = "SELECT * FROM property WHERE property_type = 'Room'";
-              $count_property = mysqli_query($conn, $count_property);
-              $total_property = mysqli_num_rows($count_property); ?>
-              <h3>Room</h3>
-              <h1><?php echo $total_property ?></h1>
-            </div>
-          </div>
-        </div>
-        <!--Room end-->
-
-        <!-------Room start----->
-        <div class="sold">
-          <span class="material-symbols-outlined">in_home_mode</span>
-          <div class="middle">
-            <div class="left">
-              <?php
-              $count_property = "SELECT * FROM property WHERE sold_status = 0";
-              $count_property = mysqli_query($conn, $count_property);
-              $total_property = mysqli_num_rows($count_property); ?>
-              <h3>Sold Out</h3>
-              <h1><?php echo $total_property ?></h1>
-            </div>
-          </div>
-        </div>
-        <!-------Room end----->
-      </div>
+   
       <!-------Featured start----->
 
 

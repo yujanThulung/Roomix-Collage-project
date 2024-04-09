@@ -14,6 +14,16 @@ if (isset($_POST['register_btn'])) {
     if ($password === $c_password) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
+            // Check if email already exists
+    $query = "SELECT * FROM user WHERE email='$email'";
+    $result = mysqli_query($conn, $query);
+    if(mysqli_num_rows($result) > 0) {
+        $_SESSION['status'] = "Email already exists";
+        $_SESSION['status_code'] = "error";
+        header("Location: ../client/registration.php");
+        exit();
+    }
+
         // Insert data into the database
         $query = "INSERT INTO register (fname, lname, email, phone, password,userType) VALUES ('$fname', '$lname', '$email', '$phone', '$hashed_password','$userType')";
         $insert = mysqli_query($conn, $query);
@@ -77,7 +87,7 @@ if (isset($_POST['register_update_btn'])) {
 //     $email_login = $_POST['email'];
 //     $password_login = $_POST['password'];
 
-//     $query_login = "SELECT * FROM register WHERE email='$email_login'";
+//     $query_login = "SELECT * FROM user WHERE email='$email_login'";
 //     $query_login_result = mysqli_query($conn, $query_login);
 
 //     if ($row = mysqli_fetch_assoc($query_login_result)) {
@@ -105,7 +115,7 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
 
     // Prepare SQL statement
-    $query = "SELECT * FROM register WHERE email = ? LIMIT 1";
+    $query = "SELECT * FROM user WHERE email = ? LIMIT 1";
     $stmt = mysqli_prepare($conn, $query);
 
     // Bind parameters and execute query
@@ -138,7 +148,7 @@ if (isset($_POST['login'])) {
                 header("location: ../landlordAdmin\index.php");
                 exit;
             }elseif($userType = "Tenant"){
-                header("location: ../userAdmin\index.php");
+                header("location: ..\clientAfterLogin\index.php");
                 exit;
             }
         } else {

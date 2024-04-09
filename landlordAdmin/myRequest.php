@@ -35,7 +35,7 @@ require '../includes/dbConnect.php'; ?>
         <div class="profile">
           <div class="info">
             <p><b><?php echo $_SESSION["user"] ?></b></p>
-            <p><?php echo $_SESSION[ "userType"]?></p>
+            <p><?php echo $_SESSION["userType"] ?></p>
             <small class="text-muted"></small>
           </div>
           <div class="profile-photo">
@@ -72,18 +72,14 @@ require '../includes/dbConnect.php'; ?>
           <h3>My Properties</h3>
         </a>
         <a href="rentRequest.php" class="active">
-        <i class="fa-solid fa-arrow-alt-circle-up"></i>
-          <h3>Rent Request</h3>
-        </a>
-        <a href="rentRequest.php">
-        <i class="fas fa-list-alt"></i>
+          <i class="fa-solid fa-arrow-alt-circle-up"></i>
           <h3>My Request</h3>
         </a>
         <a href="soldProperties.php">
           <i class="fa-solid fa-house-circle-check"></i>
           <h3>Sold Properties</h3>
         </a>
-        
+
         <a href="userDetail.php">
           <i class="fa-solid fa-user-tie"></i>
           <h3>My Detail</h3>
@@ -99,9 +95,6 @@ require '../includes/dbConnect.php'; ?>
           <i class="fa-solid fa-right-from-bracket"></i>
           <h3>logout</h3>
         </a>
-
-
-
       </div>
 
     </aside class="asidebar">
@@ -259,37 +252,37 @@ require '../includes/dbConnect.php'; ?>
 
 
       <!-- Pagination -->
-<div class="pagination">
-    <?php
-    // Calculate total number of records
-    $total_records_query = "SELECT COUNT(*) AS total FROM  property WHERE  sold_status= 1";
-    $total_records_result = mysqli_query($conn, $total_records_query);
-    $total_records = mysqli_fetch_assoc($total_records_result)['total'];
+      <div class="pagination">
+        <?php
+        // Calculate total number of records
+        $total_records_query = "SELECT COUNT(*) AS total FROM  property WHERE  sold_status= 1";
+        $total_records_result = mysqli_query($conn, $total_records_query);
+        $total_records = mysqli_fetch_assoc($total_records_result)['total'];
 
-    // Calculate total number of pages
-    $total_pages = ceil($total_records / $records_per_page);
+        // Calculate total number of pages
+        $total_pages = ceil($total_records / $records_per_page);
 
-    // Display "Previous" button
-    if ($page > 1) {
-        echo "<a href='myProerty.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
-    }
+        // Display "Previous" button
+        if ($page > 1) {
+          echo "<a href='myProerty.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
+        }
 
-    // Display pagination links
-    for ($i = 1; $i <= $total_pages; $i++) {
-        echo "<a " . ($i == $page ? "class='active'" : "") . " href='myProerty.php?page=$i'>$i</a>";
-    }
+        // Display pagination links
+        for ($i = 1; $i <= $total_pages; $i++) {
+          echo "<a " . ($i == $page ? "class='active'" : "") . " href='myProerty.php?page=$i'>$i</a>";
+        }
 
-    // Display "Next" button
-    if ($page < $total_pages) {
-        echo "<a href='myProerty.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
-    }
+        // Display "Next" button
+        if ($page < $total_pages) {
+          echo "<a href='myProerty.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
+        }
 
-    // Display "Last" button
-    echo "<a href='myProerty.php?page=$total_pages'>Last &raquo;&raquo;</a>";
-    ?>
-</div>
+        // Display "Last" button
+        echo "<a href='myProerty.php?page=$total_pages'>Last &raquo;&raquo;</a>";
+        ?>
+      </div>
 
-</div>
+  </div>
 
   </div>
 

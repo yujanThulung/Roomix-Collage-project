@@ -62,7 +62,7 @@ require '../includes/dbConnect.php'; ?>
         <div class="card">
             <div class="card-body">
                 <h2 class="mb-4">Description</h2>
-                <form action="../control/property.php" method="POST" enctype="multipart/form-data" required multiple>
+                <form action="../control/landlordAddProperty.php" method="POST" enctype="multipart/form-data" required multiple>
                     <div class="mb-3">
                         <label for="name" class="form-label">Property Title *</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Enter your property title" required>
@@ -180,10 +180,6 @@ require '../includes/dbConnect.php'; ?>
                             <label for="location" class="form-label">Location *</label>
                             <input type="text" name="location" id="location" class="form-control" placeholder="Enter Location (City, State)" required>
                         </div>
-                        <div class="col-md-6">
-                            <label for="expiryDate" class="form-label">Expiry Date</label>
-                            <input type="date" name="expiryDate" id="expiryDate" class="form-control" required>
-                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -251,5 +247,6 @@ require '../includes/dbConnect.php'; ?>
         });
     </script>
 </body>
-<?php mysqli_close($conn);?>
+<?php mysqli_close($conn); ?>
+
 </html>

@@ -7,7 +7,7 @@ require '../includes/dbConnect.php';?>
 
 <?php 
 $id = $_GET['id'];
-$register_query =  "SELECT * FROM register  WHERE id='$id' "; //to get the data through the id
+$register_query =  "SELECT * FROM user  WHERE id='$id' "; //to get the data through the id
 $result = mysqli_query($conn, $register_query); //to store the data which is came from id
 ?>
 
@@ -93,10 +93,7 @@ $result = mysqli_query($conn, $register_query); //to store the data which is cam
         <i class="fa-solid fa-arrow-alt-circle-up"></i>
           <h3>Rent Request</h3>
         </a>
-        <a href="soldProperties.php">
-          <i class="fa-solid fa-house-circle-check"></i>
-          <h3>Sold Properties</h3>
-        </a><a href="userDetail.php">
+        <a href="userDetail.php">
           <i class="fa-solid fa-user-tie"></i>
           <h3>User Detail</h3>
         </a>

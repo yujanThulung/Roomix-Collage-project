@@ -7,7 +7,7 @@ require '../includes/dbConnect.php';?>
 
 <?php 
 $id = $_GET['id'];
-$register_query =  "SELECT * FROM register  WHERE id='$id' "; //to get the data through the id
+$register_query =  "SELECT * FROM user  WHERE id='$id' "; //to get the data through the id
 $result = mysqli_query($conn, $register_query); //to store the data which is came from id
 ?>
 

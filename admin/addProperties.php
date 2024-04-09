@@ -180,10 +180,7 @@ require '../includes/dbConnect.php'; ?>
                             <label for="location" class="form-label">Location *</label>
                             <input type="text" name="location" id="location" class="form-control" placeholder="Enter Location (City, State)" required>
                         </div>
-                        <div class="col-md-6">
-                            <label for="expiryDate" class="form-label">Expiry Date</label>
-                            <input type="date" name="expiryDate" id="expiryDate" class="form-control" required>
-                        </div>
+                        
                     </div>
 
                     <div class="mb-3">

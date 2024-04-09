@@ -246,7 +246,7 @@ require '../includes/loginSession.php'; ?>
             }
 
             // Build the SQL query
-            $register_query = "SELECT * FROM register WHERE id = {$_SESSION['id']}";
+            $register_query = "SELECT * FROM user WHERE id = {$_SESSION['id']}";
 
             // Check if search query is provided
             if (isset($_POST['search']) && !empty(trim($_POST['search']))) {
