@@ -108,14 +108,12 @@ $result = mysqli_query($conn, $register_query); //to store the data which is cam
           <i class="fa-solid fa-plus"></i>
           <h3>Add Properties</h3>
         </a>
-        <!-- logout section here  -->
-        <a href="../control/logout.php" name= "submit">
+
+         <!-- Back to home page section here  -->
+         <a href="../clientAfterLogin/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>logout</h3>
+          <h3>Back to  Home</h3>
         </a>
-
-
-
       </div>
 
     </aside>

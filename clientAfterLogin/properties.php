@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <?php
-include '../includes/dbConnect.php'; ?>
+require '../includes/dbConnect.php'; ?>
+<?php require('../includes/loginSession.php'); ?>
 
 <head>
     <meta charset="UTF-8">

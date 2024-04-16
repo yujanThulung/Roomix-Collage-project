@@ -70,7 +70,7 @@ require '../includes/loginSession.php'; ?>
                 </a>
                 <a href="myProerty.php">
                     <i class="fa-solid fa-house-flag"></i>
-                    <h3>My Properties</h3>
+                    <h3>Accepted Properties</h3>
                 </a>
                 <a href="rentRequest.php">
                     <i class="fa-solid fa-arrow-alt-circle-up"></i>

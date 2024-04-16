@@ -18,104 +18,6 @@ require '../includes/loginSession.php'; ?>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="search&pagination.css">
-    <!-- <style>
-        .custom-link {
-            display: inline-block;
-            padding: 5px 2px;
-            /* Adjust padding as needed */
-            border-radius: 5px;
-            /* Adjust border radius as needed */
-        }
-
-        .custom-link i {
-            color: white;
-            transition: color 0.3s ease;
-        }
-
-        .custom-link:hover i {
-            transform: scale(1.2);
-            /* Scale the icon on hover */
-            transition: transform 0.3s ease;
-            /* Add smooth transition */
-        }
-
-        .delete-icon {
-            background-color: red;
-            cursor: pointer;
-            padding: 5px 26px;
-        }
-
-        .search-sort {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            margin-bottom: 20px;
-            /* Adjust margin as needed */
-        }
-
-        #searchInput {
-            padding: 8px;
-            margin-right: 10px;
-            /* Adjust margin as needed */
-            border: 1px solid #7380ec;
-            border-radius: 5px;
-        }
-
-        #sortSelect {
-            padding: 8px;
-            border: 1px solid #7380ec;
-            border-radius: 5px;
-        }
-
-        #sortSelect:hover {
-            background-color: #ccc;
-        }
-
-        #applyButton {
-            padding: 8px 16px;
-            background-color: #7380ec;
-            /* Button background color */
-            color: white;
-            /* Button text color */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #applyButton:hover {
-            background-color: #0056b3;
-            /* Button background color on hover */
-        }
-
-
-        .pagination {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .pagination a {
-            color: #7380ec;
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #7380ec;
-            border-radius: 5px;
-            margin: 0 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .pagination a:hover {
-            background-color: #7380ec;
-            color: white;
-        }
-
-        .pagination .active {
-            background-color: #7380ec;
-            color: white;
-            pointer-events: none;
-        }
-    </style> -->
 </head>
 
 
@@ -194,10 +96,10 @@ require '../includes/loginSession.php'; ?>
                     <i class="fa-solid fa-plus"></i>
                     <h3>Add Properties</h3>
                 </a>
-                <!-- logout section here  -->
-                <a href="../control/logout.php" name="submit">
+                <!-- Back to home page section here  -->
+                <a href="../clientAfterLogin/index.php" name="submit">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    <h3>logout</h3>
+                    <h3>Back to Home</h3>
                 </a>
             </div>
         </aside>

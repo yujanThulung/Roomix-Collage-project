@@ -69,12 +69,12 @@ require '../includes/dbConnect.php'; ?>
         </a>
         <a href="myProerty.php">
           <i class="fa-solid fa-house-flag"></i>
-          <h3>My Properties</h3>
+          <h3>Listed Properties</h3>
         </a>
-        <a href="rentRequest.php">
+        <!-- <a href="rentRequest.php">
         <i class="fa-solid fa-arrow-alt-circle-up"></i>
           <h3>Rent Request</h3>
-        </a>
+        </a> -->
         <a href="soldProperties.php" class="active">
           <i class="fa-solid fa-house-circle-check"></i>
           <h3>Sold Properties</h3>
@@ -108,7 +108,7 @@ require '../includes/dbConnect.php'; ?>
       --------------- -->
 
     <main>
-      <h1 class="dashboard-heading">My Properties</h1>
+      <h1 class="dashboard-heading">Sold Properties</h1>
 
       <div class="search-sort">
         <form action="" method="POST">

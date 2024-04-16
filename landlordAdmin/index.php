@@ -89,10 +89,10 @@ require '../includes/dbConnect.php'; ?>
         </a>
         
 
-        <!-- logout section here  -->
-        <a href="../control/logout.php" name="submit">
+        <!-- Back to home page section here  -->
+        <a href="../clientAfterLogin/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>logout</h3>
+          <h3>Back to  Home</h3>
         </a>
 
 
@@ -130,7 +130,7 @@ require '../includes/dbConnect.php'; ?>
             <div class="left">
               <h3>Listed property</h3>
               <?php
-              $count_property = "SELECT * FROM property WHERE user_id = {$_SESSION['id']}";
+              $count_property = "SELECT * FROM property WHERE user_id = {$_SESSION['landlord_id']}";
               $count_property = mysqli_query($conn, $count_property);
               $total_property = mysqli_num_rows($count_property); ?>
               <h1><?php echo $total_property ?></h1>
@@ -145,7 +145,7 @@ require '../includes/dbConnect.php'; ?>
           <div class="middle">
             <div class="left">
               <?php
-              $count_property = "SELECT * FROM property WHERE property_type = 'Flat' AND user_id = {$_SESSION['id']}";
+              $count_property = "SELECT * FROM property WHERE property_type = 'Flat' AND user_id = {$_SESSION['landlord_id']}";
               $count_property = mysqli_query($conn, $count_property);
               $total_property = mysqli_num_rows($count_property); ?>
               <h3>Flat</h3>
@@ -161,7 +161,7 @@ require '../includes/dbConnect.php'; ?>
           <div class="middle">
             <div class="left">
               <?php
-              $count_property = "SELECT * FROM property WHERE property_type = 'Room' AND user_id = {$_SESSION['id']}";
+              $count_property = "SELECT * FROM property WHERE property_type = 'Room' AND user_id = {$_SESSION['landlord_id']}";
               $count_property = mysqli_query($conn, $count_property);
               $total_property = mysqli_num_rows($count_property); ?>
               <h3>Room</h3>
@@ -171,13 +171,30 @@ require '../includes/dbConnect.php'; ?>
         </div>
         <!--Room end-->
 
+        <!--------Requested Property start------->
+        <div class="request">
+        <span class="material-symbols-outlined">wifi_home</span>
+          <div class="middle">
+
+            <div class="left">
+              <h3>Requested Property</h3>
+              <?php
+              $count_property = "SELECT * FROM rent_requests WHERE user_id = {$_SESSION['landlord_id']} AND sold_status = 2";
+              $count_property = mysqli_query($conn, $count_property);
+              $total_property = mysqli_num_rows($count_property); ?>
+              <h1><?php echo $total_property ?></h1>
+            </div>
+          </div>
+        </div>
+        <!--------Requested Property end------->
+
         <!-------Room start----->
         <div class="sold">
           <span class="material-symbols-outlined">in_home_mode</span>
           <div class="middle">
             <div class="left">
               <?php
-              $count_property = "SELECT * FROM property WHERE sold_status = 0 AND user_id = {$_SESSION['id']}";
+              $count_property = "SELECT * FROM property WHERE sold_status = 0 AND user_id = {$_SESSION['landlord_id']}";
               $count_property = mysqli_query($conn, $count_property);
               $total_property = mysqli_num_rows($count_property); ?>
               <h3>Sold Out</h3>

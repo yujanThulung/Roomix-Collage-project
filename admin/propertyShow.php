@@ -94,10 +94,6 @@ if (!$result) {
                             <p class="label">Posted On</p>
                             <p><?php echo $row['added_date'] ?></p>
                         </div>
-                        <div>
-                            <p class="label">Expire On</p>
-                            <p><?php echo $row['expiry_date'] ?></p>
-                        </div>
                     </div>
                     <div>
                         <p class="label" style="margin-top:1.5rem">Description</p>
@@ -135,7 +131,7 @@ if (!$result) {
                 </div>
 
                 <div class="button-container">
-                    <a href="myProerty.php"><button>Back</button></a>
+                    <a href="rentRequest.php"><button>Back</button></a>
                 </div>
             </div>
             </div>

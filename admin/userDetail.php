@@ -18,104 +18,6 @@ require '../includes/loginSession.php'; ?>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="search&pagination.css">
-    <!-- <style>
-        .custom-link {
-            display: inline-block;
-            padding: 5px 2px;
-            /* Adjust padding as needed */
-            border-radius: 5px;
-            /* Adjust border radius as needed */
-        }
-
-        .custom-link i {
-            color: white;
-            transition: color 0.3s ease;
-        }
-
-        .custom-link:hover i {
-            transform: scale(1.2);
-            /* Scale the icon on hover */
-            transition: transform 0.3s ease;
-            /* Add smooth transition */
-        }
-
-        .delete-icon {
-            background-color: red;
-            cursor: pointer;
-            padding: 5px 26px;
-        }
-
-        .search-sort {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            margin-bottom: 20px;
-            /* Adjust margin as needed */
-        }
-
-        #searchInput {
-            padding: 8px;
-            margin-right: 10px;
-            /* Adjust margin as needed */
-            border: 1px solid #7380ec;
-            border-radius: 5px;
-        }
-
-        #sortSelect {
-            padding: 8px;
-            border: 1px solid #7380ec;
-            border-radius: 5px;
-        }
-
-        #sortSelect:hover {
-            background-color: #ccc;
-        }
-
-        #applyButton {
-            padding: 8px 16px;
-            background-color: #7380ec;
-            /* Button background color */
-            color: white;
-            /* Button text color */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #applyButton:hover {
-            background-color: #0056b3;
-            /* Button background color on hover */
-        }
-
-
-        .pagination {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .pagination a {
-            color: #7380ec;
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #7380ec;
-            border-radius: 5px;
-            margin: 0 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .pagination a:hover {
-            background-color: #7380ec;
-            color: white;
-        }
-
-        .pagination .active {
-            background-color: #7380ec;
-            color: white;
-            pointer-events: none;
-        }
-    </style> -->
 </head>
 
 
@@ -168,12 +70,12 @@ require '../includes/loginSession.php'; ?>
                 </a>
                 <a href="myProerty.php">
                     <i class="fa-solid fa-house-flag"></i>
-                    <h3>My Properties</h3>
+                    <h3>Listed Properties</h3>
                 </a>
-                <a href="rentRequest.php">
+                <!-- <a href="rentRequest.php">
                     <i class="fa-solid fa-arrow-alt-circle-up"></i>
                     <h3>Rent Request</h3>
-                </a>
+                </a> -->
                 <a href="soldProperties.php">
                     <i class="fa-solid fa-house-circle-check"></i>
                     <h3>Sold Properties</h3>
@@ -308,7 +210,7 @@ require '../includes/loginSession.php'; ?>
             <div class="pagination">
                 <?php
                 // Calculate total number of records
-                $total_records_query = "SELECT COUNT(*) AS total FROM register";
+                $total_records_query = "SELECT COUNT(*) AS total FROM user";
                 $total_records_result = mysqli_query($conn, $total_records_query);
                 $total_records = mysqli_fetch_assoc($total_records_result)['total'];
 

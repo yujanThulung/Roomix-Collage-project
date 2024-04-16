@@ -80,35 +80,6 @@ if (isset($_POST['register_update_btn'])) {
 
 
 
-
-
-// //For login 
-// if (isset($_POST['login_btn'])) {
-//     $email_login = $_POST['email'];
-//     $password_login = $_POST['password'];
-
-//     $query_login = "SELECT * FROM user WHERE email='$email_login'";
-//     $query_login_result = mysqli_query($conn, $query_login);
-
-//     if ($row = mysqli_fetch_assoc($query_login_result)) {
-//         if ($row['password'] == $password_login) {
-//             $_SESSION['username'] = $email_login;
-//             header('Location: ../admin/index.php');
-//             exit;
-//         } else {
-//             $_SESSION['invalid'] = 'Email id / Password is Invalid';
-//             header('Location: ../client/login.php');
-//             exit;
-//         }
-//     } else {
-//         $_SESSION['invalid'] = 'Email id / Password is Invalid';
-//         header('Location: ../client/login.php');
-//         exit;
-//     }
-// }
-
-
-
 //FOR LOGIN
 if (isset($_POST['login'])) {
     $username = $_POST['email'];
@@ -145,9 +116,11 @@ if (isset($_POST['login'])) {
                 header("location: ../admin/index.php");
                 exit; // Exit to prevent further execution
             }elseif($userType == "Landlord"){
+                $_SESSION[ "landlord_id" ]= $id;
                 header("location: ../landlordAdmin\index.php");
                 exit;
             }elseif($userType = "Tenant"){
+                $_SESSION[ "tenant_id" ]= $id;
                 header("location: ..\clientAfterLogin\index.php");
                 exit;
             }

@@ -46,7 +46,7 @@ $property_result = mysqli_query($conn, $property_query);
                 <div class="list-group list-group-flush">
                     <a href="index.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="addProperty.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-plus-circle me-2"></i>Add Properties</a>
-                    <a href="mProperties.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-flag me-2"></i>My Properties</a>
+                    <a href="mProperties.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-flag me-2"></i>Listed Properties</a>
                     <a href="rentRequest.php">
                         <i class="fa-solid fa-arrow-alt-circle-up"></i>
                         <h3>Rent Request</h3>
@@ -136,25 +136,6 @@ $property_result = mysqli_query($conn, $property_query);
 
                             </div>
 
-                            <!-- <div class="mb-3">
-                                <!-- <label class="form-label">Property *</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="room" value="room">
-                                <label class="form-check-label" for="room">Room</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="flat" value="flat" checked>
-                                <label class="form-check-label" for="flat">Flat</label>
-                            </div> -->
-
-
-                            <!-- This is for future -->
-                            <!-- <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="house" value="house" checked>
-                                <label class="form-check-label" for="house">House</label>
-                            </div>
-                            </div> -->
-
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="kitchen" class="form-label">Kitchen</label>
@@ -199,10 +180,6 @@ $property_result = mysqli_query($conn, $property_query);
                                 <div class="col-md-6">
                                     <label for="location" class="form-label">Location *</label>
                                     <input type="text" name="location" id="location" class="form-control" value="<?php echo $row['location']; ?>" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="expiryDate" class="form-label"></label>
-                                    <input type="date" name="expiryDate" id="expiryDate" class="form-control" value="<?php echo $row['expiry_date']; ?>" required>
                                 </div>
                             </div>
 

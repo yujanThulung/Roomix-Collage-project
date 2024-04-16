@@ -1,50 +1,74 @@
 <?php
-require '../includes/dbConnect.php'; ?>
-<?php require('../includes/loginSession.php'); ?>
+require ('../includes/dbConnect.php');?>
+<?('../includes/loginSession.php');?>
 
 <?php
-// Check if 'id' is received
-if(isset($_POST['id'], $_POST['user_id'])) {
-    $id = $_POST['id'];
-    $request_id = $_POST['request_id'];
-    $user_id = $_POST['user_id'];
-    echo $user_id; 
-}else{
-    echo "data not found";
-}
-?>
 
-<?php
-//sold update
+//Request property 
 if (isset($_POST['property_request_btn'])) {
-    $sold_id = $_POST['request_id'];
-    $sold_update_query = "SELECT * FROM property WHERE user_id='$user_id' AND id = '$property_id'";
-    $sold_update_result = mysqli_query($conn, $sold_update_query);
+    $request_id = $_POST['request_id'];
+    $user_id = $_SESSION["id"];
 
-    echo $sold_update_result;
+    $landlord_id = "SELECT * FROM property WHERE  id='$request_id'";
+    $query = mysqli_query($conn, $landlord_id);
+    $landlord_id = mysqli_fetch_assoc($query)['user_id'];
+    echo $landlord_id;
 
-    $row = mysqli_fetch_assoc($sold_update_result);
-    $current_status = $row['sold_status'];
+    // Check if the user has already requested the property
+    $check_query = "SELECT * FROM rent_requests WHERE user_id='$user_id' AND property_id='$request_id'";
+    $check_result = mysqli_query($conn, $check_query);
 
-    $update_status = "UPDATE property SET sold_status = 2 WHERE id = $sold_id AND sold_status = $current_status"; //set sold status to true if it is currently
-    $update_status_run = mysqli_query($conn, $update_status);
-
-    if ($update_status_run) {
-        $_SESSION['status'] = "Property marked as sold successfully!";
-        $_SESSION['status_code'] = "success";
-        //header("Location: ../userAdmin\index.php");
+    if (mysqli_num_rows($check_result) > 0) {
+        $_SESSION['status'] = "You have already requested this property!";
+        $_SESSION['status_code'] = "error";
+        echo "<script>window.history.back();</script>";
         exit;
     } else {
-        $_SESSION['status'] = "Error updating property status!";
+        // Proceed with the request
+        $request_query = "INSERT INTO rent_requests(user_id, property_id,landlord_id) VALUES ('$user_id', '$request_id',$landlord_id)";
+        $request_query_run = mysqli_query($conn, $request_query);
+
+        if ($request_query_run) {
+            $_SESSION['status'] = "Property Requested Successfully!";
+            $_SESSION['status_code'] = "success";
+            header( "Location:../clientAfterLogin\index.php" );
+            exit;
+        } else {
+            $_SESSION['status'] = "Property Request Failed!";
+            $_SESSION['status_code'] = "error";
+            echo "<script>window.history.back();</script>";
+            exit;
+        }
+    }
+}
+
+
+$request_id = $_GET['id'];
+echo $request_id;
+if(isset($_POST['property_cancel_btn'])){
+    $delete_id = $_POST['delete_id'];
+    $pro_delete_query="DELETE FROM rent_requests WHERE id='$delete_id' ";
+    $delete_query_run = mysqli_query($conn, $pro_delete_query);
+
+    if ($delete_query_run) {
+        $_SESSION['status']="Your Property Cancel Successfully!";
+        $_SESSION['status_code'] ="warning";
+        echo "<script>window.history.back();</script>";
+        exit;
+    }else{
+        $_SESSION['status'] = "Your Property  not Canceled!";
         $_SESSION['status_code'] = "error";
-        //header("Location: ../userAdmin\index.php");
+        echo "<script>window.history.back();</script>";
         exit;
     }
-} else {
-    $_SESSION['status'] = "Error fetching current status!";
-    $_SESSION['status_code'] = "error";
-    //header("Location: ../userAdmin\index.php");
-    exit;
 }
-mysqli_close( $conn );
+
+
+
+
+
+include('../includes/footer.php');
+
+// Close database connection
+mysqli_close($conn);
 ?>

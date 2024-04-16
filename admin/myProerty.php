@@ -47,7 +47,6 @@ require '../includes/dbConnect.php'; ?>
   </nav>
   <div class="container">
     <aside>
-
       <div class="top">
         <a href="index.php">
           <div class="logo">
@@ -69,12 +68,12 @@ require '../includes/dbConnect.php'; ?>
         </a>
         <a href="myProerty.php" class="active">
           <i class="fa-solid fa-house-flag"></i>
-          <h3>My Properties</h3>
+          <h3>Listed Properties</h3>
         </a>
-        <a href="rentRequest.php">
+        <!-- <a href="rentRequest.php">
           <i class="fa-solid fa-arrow-alt-circle-up"></i>
           <h3>Rent Request</h3>
-        </a>
+        </a> -->
         <a href="soldProperties.php">
           <i class="fa-solid fa-house-circle-check"></i>
           <h3>Sold Properties</h3>
@@ -108,7 +107,7 @@ require '../includes/dbConnect.php'; ?>
       --------------- -->
 
     <main>
-      <h1 class="dashboard-heading">My Properties</h1>
+      <h1 class="dashboard-heading">Listed Properties</h1>
 
       <div class="search-sort">
         <form action="" method="POST">
@@ -266,7 +265,6 @@ require '../includes/dbConnect.php'; ?>
 
         // Calculate total number of pages
         $total_pages = ceil($total_records / $records_per_page);
-
         // Display "Previous" button
         if ($page > 1) {
           echo "<a href='myProerty.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";

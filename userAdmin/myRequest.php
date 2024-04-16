@@ -69,7 +69,7 @@ require '../includes/dbConnect.php'; ?>
         </a>
         <a href="myProerty.php">
           <i class="fa-solid fa-house-flag"></i>
-          <h3>My Properties</h3>
+          <h3>Accepted Properties</h3>
         </a>
         <a href="rentRequest.php" class="active">
           <i class="fa-solid fa-arrow-alt-circle-up"></i>
@@ -84,10 +84,10 @@ require '../includes/dbConnect.php'; ?>
           <h3>User Detail</h3>
         </a>
 
-        <!-- logout section here  -->
-        <a href="../control/logout.php" name="submit">
+         <!-- Back to home page section here  -->
+         <a href="../clientAfterLogin/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>logout</h3>
+          <h3>Back to  Home</h3>
         </a>
 
 
@@ -120,7 +120,8 @@ require '../includes/dbConnect.php'; ?>
         </form>
       </div>
 
-      <?php
+      <?php    
+
       // Retrieve records per page
       $records_per_page = 5;
 
@@ -230,7 +231,7 @@ require '../includes/dbConnect.php'; ?>
                       <i class="fas fa-eye text-white"></i>
                     </a>
 
-                    <form action="../control/deleteProperty.php" method="POST">
+                    <form action="../control/myRequest.php" method="POST">
                       <input type="hidden" name="delete_id" value="<?php echo $row['id'] ?>" />
                       <button type="submit" name="property_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button>
                     </form>

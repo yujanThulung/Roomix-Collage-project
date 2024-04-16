@@ -3,7 +3,9 @@
 
 <?php
 require '../includes/dbConnect.php'; ?>
-<?php require('../includes/loginSession.php'); ?>
+<?php require('../includes/loginSession.php');
+$user_id = $_SESSION['id'];
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -34,7 +36,7 @@ require '../includes/dbConnect.php'; ?>
         <div class="profile">
           <div class="info">
             <p><b><?php echo $_SESSION["user"] ?></b></p>
-            <p><?php echo $_SESSION[ "userType" ];?></p>
+            <p><?php echo $_SESSION["userType"]; ?></p>
             <small class="text-muted"></small>
           </div>
           <div class="profile-photo">
@@ -68,25 +70,25 @@ require '../includes/dbConnect.php'; ?>
         </a>
         <a href="myProerty.php">
           <i class="fa-solid fa-house-flag"></i>
-          <h3>My Properties</h3>
+          <h3>Accepted Properties</h3>
         </a>
         <a href="rentRequest.php">
-        <i class="fa-solid fa-arrow-alt-circle-up"></i>
+          <i class="fa-solid fa-arrow-alt-circle-up"></i>
           <h3>Rent Request</h3>
         </a>
-        
+
         <a href="userDetail.php">
           <i class="fa-solid fa-user-tie"></i>
           <h3>User Detail</h3>
         </a>
-        
 
-        <!-- logout section here  -->
+
+        <!-- Back to home page section here  -->
         <a href="../clientAfterLogin/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>Back to  Home</h3>
+          <h3>Back to Home</h3>
         </a>
-        
+
 
 
 
@@ -105,19 +107,53 @@ require '../includes/dbConnect.php'; ?>
       <h1 class="dashboard-heading">Dashbord</h1>
 
       <!-- <div class="date">
-             <input type="date" >
-           </div> -->
+       <input type="date" >
+     </div> -->
       <!-- If some want to  add a date they can do it from here. for future -->
 
-   
-      <!-------Featured start----->
+      <div class="insights">
+
+        <!-- start user -->
 
 
-      <!-- end insights -->
-  </div>
 
-  </main>
-  <!------------------
+        <!--------Requested Property start------->
+        <div class="request">
+        <span class="material-symbols-outlined">wifi_home</span>
+          <div class="middle">
+
+            <div class="left">
+              <h3>Requested Property</h3>
+              <?php
+              $count_property = "SELECT * FROM rent_requests WHERE user_id = {$_SESSION['id']} AND sold_status = 2";
+              $count_property = mysqli_query($conn, $count_property);
+              $total_property = mysqli_num_rows($count_property); ?>
+              <h1><?php echo $total_property ?></h1>
+            </div>
+          </div>
+        </div>
+        <!--------Requested Property end------->
+
+        <!--------Accepted Property Start------->
+        <div class="sold">
+        <span class="material-symbols-outlined">thumb_up</span>
+          <div class="middle">
+
+            <div class="left">
+              <h3>Accepted Property</h3>
+              <?php
+              $count_property = "SELECT * FROM rent_requests WHERE user_id = {$_SESSION['id']} AND sold_status = 0";
+              $count_property = mysqli_query($conn, $count_property);
+              $total_property = mysqli_num_rows($count_property); ?>
+              <h1><?php echo $total_property ?></h1>
+            </div>
+          </div>
+        </div>
+<!--------Accepted Property End------->
+
+
+    </main>
+    <!------------------
          end main
         ------------------->
 

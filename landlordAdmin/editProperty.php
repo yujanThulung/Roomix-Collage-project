@@ -39,7 +39,7 @@ $property_result = mysqli_query($conn, $property_query);
                 <div class="d-flex align-items-center px-4 pb-6">
                     <img class="rounded-circle" src="/img/yujan.jpg" alt="photo" width="56" height="56">
                     <div class="ms-3">
-                        <h3 class="fw-bold"><?php echo $_SESSION[ "userType"]?></h3>
+                        <h3 class="fw-bold"><?php echo $_SESSION["userType"] ?></h3>
                         <p class="text-muted mb-0">User</p>
                     </div>
                 </div>
@@ -54,10 +54,10 @@ $property_result = mysqli_query($conn, $property_query);
                     <a href="soldProperties.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-circle-check me-2"></i>Sold Properties</a>
                     <a href="editProfile.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-user-pen me-2"></i>Edit Profile</a>
                     <a href="notification.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-bell me-2"></i>Notification</a>
-                    <!-- logout section here  -->
-                    <a href="../control/logout.php" name="submit">
+                    <!-- Back to home page section here  -->
+                    <a href="../clientAfterLogin/index.php" name="submit">
                         <i class="fa-solid fa-right-from-bracket"></i>
-                        <h3>logout</h3>
+                        <h3>Back to Home</h3>
                     </a>
                 </div>
             </div>
@@ -199,10 +199,6 @@ $property_result = mysqli_query($conn, $property_query);
                                 <div class="col-md-6">
                                     <label for="location" class="form-label">Location *</label>
                                     <input type="text" name="location" id="location" class="form-control" value="<?php echo $row['location']; ?>" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="expiryDate" class="form-label"></label>
-                                    <input type="date" name="expiryDate" id="expiryDate" class="form-control" value="<?php echo $row['expiry_date']; ?>" required>
                                 </div>
                             </div>
 

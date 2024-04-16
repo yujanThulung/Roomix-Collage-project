@@ -85,10 +85,10 @@ require '../includes/loginSession.php';
           <i class="fa-solid fa-plus"></i>
           <h3>Add Properties</h3>
         </a>
-        <!-- logout section here  -->
-        <a href="../control/logout.php" name="submit">
+         <!-- Back to home page section here  -->
+         <a href="../clientAfterLogin/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>logout</h3>
+          <h3>Back to  Home</h3>
         </a>
       </div>
     </aside>
@@ -145,7 +145,7 @@ require '../includes/loginSession.php';
       }
 
       // Construct filtered property query here
-      $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1 AND user_id = " . $_SESSION['id']; //Here i add condition to filter properties based on logged-in user's user_id 
+      $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1 AND user_id = " . $_SESSION['landlord_id']; //Here i add condition to filter properties based on logged-in user's user_id 
 
       // Check if sorting option is selected
       if (isset($_POST['sort_alphabet'])) {
@@ -251,7 +251,7 @@ require '../includes/loginSession.php';
       <div class="pagination">
         <?php
         // Calculate total number of records
-        $total_records_query = "SELECT COUNT(*) AS total FROM property WHERE sold_status=1 AND user_id = {$_SESSION['id']}";
+        $total_records_query = "SELECT COUNT(*) AS total FROM property WHERE sold_status=1 AND user_id = {$_SESSION['landlord_id']}";
         $total_records_result = mysqli_query($conn, $total_records_query);
         $total_records = mysqli_fetch_assoc($total_records_result)['total'];
 
@@ -260,21 +260,21 @@ require '../includes/loginSession.php';
 
         // Display "Previous" button
         if ($page > 1) {
-          echo "<a href='myProperty.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
+          echo "<a href='myProerty.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
         }
 
         // Display pagination links
         for ($i = 1; $i <= $total_pages; $i++) {
-          echo "<a " . ($i == $page ? "class='active'" : "") . " href='myProperty.php?page=$i'>$i</a>";
+          echo "<a " . ($i == $page ? "class='active'" : "") . " href='myProerty.php?page=$i'>$i</a>";
         }
 
         // Display "Next" button
         if ($page < $total_pages) {
-          echo "<a href='myProperty.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
+          echo "<a href='myProerty.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
         }
 
         // Display "Last" button
-        echo "<a href='myProperty.php?page=$total_pages'>Last &raquo;&raquo;</a>";
+        echo "<a href='myProerty.php?page=$total_pages'>Last &raquo;&raquo;</a>";
         ?>
       </div>
     </main>

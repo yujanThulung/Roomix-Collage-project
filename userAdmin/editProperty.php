@@ -51,13 +51,19 @@ $property_result = mysqli_query($conn, $property_query);
                         <i class="fa-solid fa-arrow-alt-circle-up"></i>
                         <h3>Rent Request</h3>
                     </a>
-                    <a href="soldProperties.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-circle-check me-2"></i>Sold Properties</a>
-                    <a href="editProfile.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-user-pen me-2"></i>Edit Profile</a>
-                    <a href="notification.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-bell me-2"></i>Notification</a>
-                    <!-- logout section here  -->
-                    <a href="../control/logout.php" name="submit">
+                    <a href="soldProperties.php" class="list-group-item list-group-item-action bg-transparent text-white">
+                        <i class="fas fa-house-circle-check me-2"></i>Sold Properties
+                    </a>
+                    <a href="editProfile.php" class="list-group-item list-group-item-action bg-transparent text-white">
+                        <i class="fas fa-user-pen me-2"></i>Edit Profile
+                    </a>
+                    <a href="notification.html" class="list-group-item list-group-item-action bg-transparent text-white">
+                        <i class="fas fa-bell me-2"></i>Notification
+                    </a>
+                    <!-- Back to home page section here  -->
+                    <a href="../clientAfterLogin/index.php" name="submit">
                         <i class="fa-solid fa-right-from-bracket"></i>
-                        <h3>logout</h3>
+                        <h3>Back to Home</h3>
                     </a>
                 </div>
             </div>

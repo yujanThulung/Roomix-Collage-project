@@ -40,7 +40,7 @@ require '../includes/dbConnect.php'; ?>
                 <div class="list-group list-group-flush">
                     <a href="index.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="addProperty.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-plus-circle me-2"></i>Add Properties</a>
-                    <a href="mProperties.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-flag me-2"></i>My Properties</a>
+                    <a href="mProperties.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-flag me-2"></i>Listed Properties</a>
                     <a href="soldProperties.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-circle-check me-2"></i>Sold Properties</a>
                     <a href="editProfile.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-user-pen me-2"></i>Edit Profile</a>
                     <a href="notification.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-bell me-2"></i>Notification</a>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <?php
 require '../includes/dbConnect.php'; ?>
+<?php require('../includes/loginSession.php'); ?>
 
 <head>
     <meta charset="UTF-8">
@@ -122,9 +122,10 @@ require '../includes/dbConnect.php'; ?>
                                 <p class="label">Posted On</p>
                                 <p><?php echo $row['added_date']; ?></p>
                             </div>
+
                             <div>
-                                <p class="label">Expire On</p>
-                                <p><?php echo $row['expiry_date']; ?></p>
+                                <p class="label">Description</p>
+                                <p><?php echo $row['description']; ?></p>
                             </div>
 
 
@@ -165,8 +166,7 @@ require '../includes/dbConnect.php'; ?>
                         <div class="button-container">
                             <form action="../control/rentRequest.php" method="POST" style="padding: 0;
     width: 148px;">
-                                <input type="hidden" name="request_id" value="<?php echo $row['id'] ?>" />
-                                <input type="hidden" name="request_id" value="<?php echo $row['id'] ?>" />
+                                <input type="hidden" name="request_id" value="<?php echo $id; ?>" />
                                 <button class="btn btn-primary me-4" name="property_request_btn">
                                     Rent Request
                                 </button>

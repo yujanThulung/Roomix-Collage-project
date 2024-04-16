@@ -76,12 +76,12 @@ if($query_run) {
         </a>
         <a href="myProerty.php">
           <i class="fa-solid fa-house-flag"></i>
-          <h3>My Properties</h3>
+          <h3>Listed Properties</h3>
         </a>
-        <a href="rentRequest.php">
+        <!-- <a href="rentRequest.php">
         <i class="fa-solid fa-arrow-alt-circle-up"></i>
           <h3>Rent Request</h3>
-        </a>
+        </a> -->
         <a href="soldProperties.php">
           <i class="fa-solid fa-house-circle-check"></i>
           <h3>Sold Properties</h3>
@@ -195,7 +195,24 @@ if($query_run) {
         </div>
         <!--Room end-->
 
-        <!-------Room start----->
+        <!--------Requested Property start------->
+        <!-- <div class="request">
+        <span class="material-symbols-outlined">wifi_home</span>
+          <div class="middle">
+
+            <div class="left">
+              <h3>Requested Property</h3>
+              <?php
+              $count_property = "SELECT * FROM rent_requests WHERE sold_status = 2";
+              $count_property = mysqli_query($conn, $count_property);
+              $total_property = mysqli_num_rows($count_property); ?>
+              <h1><?php echo $total_property ?></h1>
+            </div>
+          </div>
+        </div> -->
+        <!--------Requested Property end------->
+
+        <!-------Sold start----->
         <div class="sold">
           <span class="material-symbols-outlined">in_home_mode</span>
           <div class="middle">
@@ -209,7 +226,7 @@ if($query_run) {
             </div>
           </div>
         </div>
-        <!-------Room end----->
+        <!-------Sold end----->
       </div>
       <!-------Featured start----->
 

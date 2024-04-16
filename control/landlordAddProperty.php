@@ -53,7 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $area = isset($_POST['area']) ? $_POST['area'] : 0;
     $total_price = isset($_POST['price']) ? $_POST['price'] : 0;
     $location = isset($_POST['location']) ? $_POST['location'] : '';
-    $expiry_date = isset($_POST['expiryDate']) ? $_POST['expiryDate'] : '';
 
     // Sanitize the data to prevent SQL injection
     $property_title = mysqli_real_escape_string($conn, $property_title);
@@ -67,7 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $area = (float)mysqli_real_escape_string($conn, $area);
     $total_price = (float)mysqli_real_escape_string($conn, $total_price);
     $location = mysqli_real_escape_string($conn, $location);
-    $expiry_date = mysqli_real_escape_string($conn, $expiry_date);
 
     // Convert uploadedImages array to comma-separated string
     $imagesString = implode(",", $uploadedImages);// how?
@@ -77,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_SESSION['id'];
 
     // Insert data into the database
-    $query = "INSERT INTO property (property_title, description, property_type, kitchen, bedroom, living_room, floor, parking, area, total_price, location, expiry_date,user_id, media) VALUES ('$property_title', '$description', '$property_type', $kitchen, $bedroom, $living_room, $floor, $parking, $area, $total_price, '$location', '$expiry_date', '$id','$imagesString')";
+    $query = "INSERT INTO property (property_title, description, property_type, kitchen, bedroom, living_room, floor, parking, area, total_price, location,user_id, media) VALUES ('$property_title', '$description', '$property_type', $kitchen, $bedroom, $living_room, $floor, $parking, $area, $total_price, '$location', '$id','$imagesString')";
 
     if (mysqli_query($conn, $query)) {
             $_SESSION['status'] = "Property Added Successfully!";
