@@ -90,10 +90,10 @@ if($query_run) {
           <i class="fa-solid fa-user-tie"></i>
           <h3>User Detail</h3>
         </a>
-        <a href="addProperties.php">
+        <!-- <a href="addProperties.php">
           <i class="fa-solid fa-plus"></i>
           <h3>Add Properties</h3>
-        </a>
+        </a> -->
 
         <!-- logout section here  -->
         <a href="../control/logout.php" name="submit">

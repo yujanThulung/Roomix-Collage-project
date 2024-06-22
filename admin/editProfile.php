@@ -104,10 +104,10 @@ $result = mysqli_query($conn, $register_query); //to store the data which is cam
           <i class="fa-solid fa-user-pen"></i></i>
           <h3>Edit Profile</h3>
         </a>
-        <a href="addProperties.php">
+        <!-- <a href="addProperties.php">
           <i class="fa-solid fa-plus"></i>
           <h3>Add Properties</h3>
-        </a>
+        </a> -->
         <!-- logout section here  -->
         <a href="../control/logout.php" name= "submit">
           <i class="fa-solid fa-right-from-bracket"></i>

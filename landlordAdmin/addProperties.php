@@ -40,15 +40,14 @@ require '../includes/dbConnect.php'; ?>
                 <div class="list-group list-group-flush">
                     <a href="index.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="addProperty.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-plus-circle me-2"></i>Add Properties</a>
-                    <a href="mProperties.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-flag me-2"></i>My Properties</a>
+                    <a href="mProperties.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-flag me-2"></i>Listed Properties</a>
                     <a href="soldProperties.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-circle-check me-2"></i>Sold Properties</a>
                     <a href="editProfile.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-user-pen me-2"></i>Edit Profile</a>
                     <a href="notification.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-bell me-2"></i>Notification</a>
-                 
-                    <!-- Back to home page section here  -->
-                    <a href="../clientAfterLogin/index.php" name="submit">
+                    <!-- logout section here  -->
+                    <a href="../control/logout.php" name="submit">
                         <i class="fa-solid fa-right-from-bracket"></i>
-                        <h3>Back to Home</h3>
+                        <h3>logout</h3>
                     </a>
                 </div>
             </div>
@@ -63,7 +62,7 @@ require '../includes/dbConnect.php'; ?>
         <div class="card">
             <div class="card-body">
                 <h2 class="mb-4">Description</h2>
-                <form action="../control/landlordAddProperty.php" method="POST" enctype="multipart/form-data" required multiple>
+                <form action="../control/property.php" method="POST" enctype="multipart/form-data" required multiple>
                     <div class="mb-3">
                         <label for="name" class="form-label">Property Title *</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Enter your property title" required>
@@ -98,15 +97,6 @@ require '../includes/dbConnect.php'; ?>
                     </div>
 
 
-                    <!-- This is for future -->
-                    <!-- <div class="mb-3">
-                            <label class="form-label">Category *</label>
-                            <select class="form-select" aria-label="Select category">
-                                <option selected>Select Category</option>
-                                <option value="rent">Rent</option>
-                                <option value="sell">Sell</option>
-                            </select>
-                        </div> -->
                     <div class="mb-3">
                         <label class="form-label">Property Type *</label>
                         <select class="form-select" aria-label="Select property type" name="property_type">
@@ -117,70 +107,51 @@ require '../includes/dbConnect.php'; ?>
 
                     </div>
 
-                    <div class="mb-3">
-                        <!-- <label class="form-label">Property *</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="room" value="room">
-                                <label class="form-check-label" for="room">Room</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="flat" value="flat" checked>
-                                <label class="form-check-label" for="flat">Flat</label>
-                            </div> -->
-
-
-                        <!-- This is for future -->
-                        <!-- <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="house" value="house" checked>
-                                <label class="form-check-label" for="house">House</label>
-                            </div> -->
-                    </div>
-
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="kitchen" class="form-label">Kitchen</label>
-                            <input type="number" name="kitchen" id="kitchen" class="form-control" placeholder="Enter Number Of Kitchen">
+                            <input type="number" name="kitchen" id="kitchen" class="form-control" placeholder="Enter Number Of Kitchen" min="0">
                         </div>
                         <div class="col-md-6">
                             <label for="bedrooms" class="form-label">Bed Rooms</label>
-                            <input type="number" name="bedrooms" id="bedrooms" class="form-control" placeholder="Enter Number Of Bed Rooms">
+                            <input type="number" name="bedrooms" id="bedrooms" class="form-control" placeholder="Enter Number Of Bed Rooms" min="0">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="livingroom" class="form-label">Living Room</label>
-                            <input type="number" name="livingroom" id="livingroom" class="form-control" placeholder="Enter Number Of Living Room">
+                            <input type="number" name="livingroom" id="livingroom" class="form-control" placeholder="Enter Number Of Living Room" min="0">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="floor" class="form-label">Floor</label>
-                            <input type="number" name="floor" id="floor" class="form-control" placeholder="Enter Floor Number">
+                            <input type="number" name="floor" id="floor" class="form-control" placeholder="Enter Floor Number" min="0">
                         </div>
                         <div class="col-md-6">
                             <label for="parking" class="form-label">Parking</label>
-                            <input type="number" name="parking" id="parking" class="form-control" placeholder="Enter Number Of Parking">
+                            <input type="number" name="parking" id="parking" class="form-control" placeholder="Enter Number Of Parking" min="0">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="area" class="form-label">Total Area *</label>
-                            <input type="text" name="area" id="area" class="form-control" placeholder="Enter Area in Sq. ft." required>
+                            <input type="number" name="area" id="area" class="form-control" min="0" step="0.01" placeholder="Enter Area in Sq. ft." required>
                         </div>
                         <div class="col-md-6">
                             <label for="price" class="form-label">Total Price *</label>
-                            <input type="text" name="price" id="price" class="form-control" placeholder="Enter Total Price" required>
+                            <input type="number" name="price" id="price" class="form-control" min="0" step="0.01" placeholder="Enter Total Price" required>
                         </div>
                     </div>
-
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="location" class="form-label">Location *</label>
                             <input type="text" name="location" id="location" class="form-control" placeholder="Enter Location (City, State)" required>
                         </div>
+
                     </div>
 
                     <div class="mb-3">

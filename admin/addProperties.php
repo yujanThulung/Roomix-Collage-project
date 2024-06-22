@@ -97,15 +97,6 @@ require '../includes/dbConnect.php'; ?>
                     </div>
 
 
-                    <!-- This is for future -->
-                    <!-- <div class="mb-3">
-                            <label class="form-label">Category *</label>
-                            <select class="form-select" aria-label="Select category">
-                                <option selected>Select Category</option>
-                                <option value="rent">Rent</option>
-                                <option value="sell">Sell</option>
-                            </select>
-                        </div> -->
                     <div class="mb-3">
                         <label class="form-label">Property Type *</label>
                         <select class="form-select" aria-label="Select property type" name="property_type">
@@ -116,71 +107,51 @@ require '../includes/dbConnect.php'; ?>
 
                     </div>
 
-                    <div class="mb-3">
-                        <!-- <label class="form-label">Property *</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="room" value="room">
-                                <label class="form-check-label" for="room">Room</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="flat" value="flat" checked>
-                                <label class="form-check-label" for="flat">Flat</label>
-                            </div> -->
-
-
-                        <!-- This is for future -->
-                        <!-- <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="house" value="house" checked>
-                                <label class="form-check-label" for="house">House</label>
-                            </div> -->
-                    </div>
-
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="kitchen" class="form-label">Kitchen</label>
-                            <input type="number" name="kitchen" id="kitchen" class="form-control" placeholder="Enter Number Of Kitchen">
+                            <input type="number" name="kitchen" id="kitchen" class="form-control" placeholder="Enter Number Of Kitchen" min="0">
                         </div>
                         <div class="col-md-6">
                             <label for="bedrooms" class="form-label">Bed Rooms</label>
-                            <input type="number" name="bedrooms" id="bedrooms" class="form-control" placeholder="Enter Number Of Bed Rooms">
+                            <input type="number" name="bedrooms" id="bedrooms" class="form-control" placeholder="Enter Number Of Bed Rooms" min="0">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="livingroom" class="form-label">Living Room</label>
-                            <input type="number" name="livingroom" id="livingroom" class="form-control" placeholder="Enter Number Of Living Room">
+                            <input type="number" name="livingroom" id="livingroom" class="form-control" placeholder="Enter Number Of Living Room" min="0">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="floor" class="form-label">Floor</label>
-                            <input type="number" name="floor" id="floor" class="form-control" placeholder="Enter Floor Number">
+                            <input type="number" name="floor" id="floor" class="form-control" placeholder="Enter Floor Number" min="0">
                         </div>
                         <div class="col-md-6">
                             <label for="parking" class="form-label">Parking</label>
-                            <input type="number" name="parking" id="parking" class="form-control" placeholder="Enter Number Of Parking">
+                            <input type="number" name="parking" id="parking" class="form-control" placeholder="Enter Number Of Parking" min="0">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="area" class="form-label">Total Area *</label>
-                            <input type="text" name="area" id="area" class="form-control" placeholder="Enter Area in Sq. ft." required>
+                            <input type="number" name="area" id="area" class="form-control" min="0" step="0.01" placeholder="Enter Area in Sq. ft." required>
                         </div>
                         <div class="col-md-6">
                             <label for="price" class="form-label">Total Price *</label>
-                            <input type="text" name="price" id="price" class="form-control" placeholder="Enter Total Price" required>
+                            <input type="number" name="price" id="price" class="form-control" min="0" step="0.01" placeholder="Enter Total Price" required>
                         </div>
                     </div>
-
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="location" class="form-label">Location *</label>
                             <input type="text" name="location" id="location" class="form-control" placeholder="Enter Location (City, State)" required>
                         </div>
-                        
+
                     </div>
 
                     <div class="mb-3">
@@ -205,8 +176,6 @@ require '../includes/dbConnect.php'; ?>
             </div>
             </form>
         </div>
-
-
         <!----------write a code above this for  responsive design---------->
     </main>
     </div>
@@ -214,6 +183,9 @@ require '../includes/dbConnect.php'; ?>
 
     <!-- Additional scripts and links -->
     <script src="src/script.js"></script>
+
+
+
     <script src="src/imageAdd.js"></script>
     <script src="src/alert.js"></script>
     <script>
@@ -247,6 +219,16 @@ require '../includes/dbConnect.php'; ?>
             history.back();
         });
     </script>
+    <script>
+        const kitchen = parseInt(Document.getElementById("kitchen").value);
+        const bedRoom = parseInt(Document.getElementById("bedroom").value);
+        const livingRoom = parseInt(Document.getElementById("livingroom").value);
+        const floor = parseInt(Document.getElementById("floor").value);
+        const parking = parseInt(Document.getElementById("parking").value);
+        const area = parseFloat(Document.getElementById("area").value);
+        const price = parseFloat(Document.getElementById("price").value);
+    </script>
 </body>
-<?php mysqli_close($conn);?>
+<?php mysqli_close($conn); ?>
+
 </html>

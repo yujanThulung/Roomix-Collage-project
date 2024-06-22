@@ -101,10 +101,6 @@ $result = mysqli_query($conn, $register_query); //to store the data which is cam
           <i class="fa-solid fa-user-pen"></i></i>
           <h3>Edit Profile</h3>
         </a>
-        <a href="addProperties.php">
-          <i class="fa-solid fa-plus"></i>
-          <h3>Add Properties</h3>
-        </a>
          <!-- Back to home page section here  -->
          <a href="../clientAfterLogin/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
@@ -137,7 +133,7 @@ if(mysqli_num_rows($result) > 0){
 
   <div id="form-box">
     <div id="form-container-r">
-      <form action="../includes/user.php" method = "POST" class="n-form" id="register">
+      <form action="../includes/tenantUser.php" method = "POST" class="n-form" id="register">
 
       <!--to send the id of edit-->
       <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">

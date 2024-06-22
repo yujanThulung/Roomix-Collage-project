@@ -132,6 +132,7 @@ require '../includes/dbConnect.php'; ?>
 
 
 
+
                             <div class="gallery-section">
                                 <h2>Gallery</h2>
                                 <div class="gallery">
@@ -164,19 +165,17 @@ require '../includes/dbConnect.php'; ?>
 
 
                         <div class="button-container">
-                            <form action="../control/rentRequest.php" method="POST" style="padding: 0;
-    width: 148px;">
+                            <form action="../control/rentRequest.php" method="POST" style="padding: 0; width: 148px; margin-right: 10px;">
                                 <input type="hidden" name="request_id" value="<?php echo $id; ?>" />
-                                <button class="btn btn-primary me-4" name="property_request_btn">
-                                    Rent Request
-                                </button>
+                                <input type="submit" class="btn btn-primary me-4 ml-5" name="property_request_btn" value="Rent Request">
                             </form>
-                            <a href="javascript: window.history.back()">
-                                    <button class="btn btn-danger me-4">
-                                        Back
-                                    </button>
-                                </a>
+                            <a href="javascript: window.history.back()" style="margin-right: 10px;">
+                                <button class="btn btn-danger me-4">
+                                    Back
+                                </button>
+                            </a>
                         </div>
+
                     </div>
                 </div>
         <?php

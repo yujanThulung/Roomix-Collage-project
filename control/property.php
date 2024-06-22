@@ -75,19 +75,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //getting single id by session
     $id = $_SESSION['id'];
-
-    // Insert data into the database
-    $query = "INSERT INTO property (property_title, description, property_type, kitchen, bedroom, living_room, floor, parking, area, total_price, location, expiry_date,user_id, media) VALUES ('$property_title', '$description', '$property_type', $kitchen, $bedroom, $living_room, $floor, $parking, $area, $total_price, '$location', '$expiry_date', '$id','$imagesString')";
-
+    $query = "INSERT INTO property (property_title, description, property_type, kitchen, bedroom, living_room, floor, parking, area, total_price, location, user_id, media) VALUES ('$property_title', '$description', '$property_type', $kitchen, $bedroom, $living_room, $floor, $parking, $area, $total_price, '$location', '$id','$imagesString')";
     if (mysqli_query($conn, $query)) {
             $_SESSION['status'] = "Property Added Successfully!";
             $_SESSION['status_code'] = "success";
-            header("Location: ../admin/myProerty.php");
+            if ($_SESSION["userType"] = "Landlord") {
+                header("Location: ../landlordAdmin\myProerty.php");
+                exit;
+            }elseif ($_SESSION["userType"] = "Admin") {
+                header("Location: ../admin/myProerty.php");
+                exit;
+            }
             exit;
     } else {
             $_SESSION['status'] = "Property Not Added!";
             $_SESSION['status_code'] = "error";
-            header("Location: ../admin/addProperties.php");
+            if ($_SESSION["userType"] = "Landlord") {
+                header("Location: ../landlordAdmin\myProerty.php");
+                exit;
+            }elseif ($_SESSION["userType"] = "Admin") {
+                header("Location: ../admin/myProerty.php");
+                exit;
+            }
             exit;
     }
 }

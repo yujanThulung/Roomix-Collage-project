@@ -190,7 +190,7 @@ require '../includes/loginSession.php'; ?>
                                 <td><?php echo $reg_row['lname']; ?></td>
                                 <td><?php echo $reg_row['email']; ?></td>
                                 <td><?php echo $reg_row['phone']; ?></td>
-                                <td>Admin</td>
+                                <td><?php echo $_SESSION["userType"] ?></td>
                                 <td class="text-center">
                                     <a href="editProfile.php?id=<?php echo $reg_row['id']; ?>" class="custom-link edit-icon" style="background-color: #ffcc00;"><i class="fas fa-edit"></i></a>
                                 </td>

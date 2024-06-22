@@ -81,6 +81,7 @@ $property_result = mysqli_query($conn, $property_query);
                         <form action="../control\editProperty.php" method="POST" enctype="multipart/form-data" required multiple>
                             <!--to send the id of edit-->
                             <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
+                            <input type="hidden" name = "Admin" value="Landlord">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Property Title *</label>
                                 <input type="text" name="name" id="name" class="form-control" value="<?php echo $row['property_title']; ?>" required>

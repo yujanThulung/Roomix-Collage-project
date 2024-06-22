@@ -57,12 +57,12 @@ if (isset($_POST["edit_id"])) {
     if (mysqli_query($conn, $query)) {
         $_SESSION['status'] = "Property Detail Updated Successfully!";
         $_SESSION['status_code'] = "success";
-        header("Location: ../admin/myProerty.php");
+        header("Location: ../landlordAdmin/myProerty.php");
         exit;
     } else {
         $_SESSION['status'] = "Property Detail not Updated!";
         $_SESSION['status_code'] = "error";
-        header("Location: ../admin/myProerty.php?id=$id");
+        header("Location: ../landlordAdmin/myProerty.php?id=$id");
         exit;
     }
 }

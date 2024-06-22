@@ -113,7 +113,7 @@ require('../includes/loginSession.php');
       $offset = ($page - 1) * $records_per_page;
 
       // Get the user ID from session
-      $user_id = $_SESSION['landlord_id'];
+      $user_id = $_SESSION['id'];
 
       // Query to fetch rent requests with pagination
       $query = "SELECT * FROM rent_requests WHERE landlord_id = '$user_id' AND sold_status = 2 ORDER BY request_date DESC LIMIT $offset, $records_per_page";

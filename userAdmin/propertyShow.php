@@ -132,7 +132,7 @@ if (!$result) {
                 </div>
 
                 <div class="button-container">
-                    <a href="rentRequest.php"><button>Back</button></a>
+                    <button onclick="window.history.back();">Back</button>
                 </div>
             </div>
             </div>

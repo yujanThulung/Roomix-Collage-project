@@ -16,7 +16,7 @@ if(isset($_POST['property_sold_btn'])) {
     // Execute both queries
     if(mysqli_query($conn, $update_rent_status_query) && mysqli_query($conn, $update_property_status_query)) {
         // If updates are successful, set success message and redirect back to the properties page
-        $_SESSION['status'] = "Property status updated successfully!";
+        $_SESSION['status'] = "Property has been sold!";
         $_SESSION['status_code'] = "success";
         header("Location: ../landlordAdmin/soldProperties.php");
         exit;

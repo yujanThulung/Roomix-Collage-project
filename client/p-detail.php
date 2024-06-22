@@ -114,10 +114,10 @@ require '../includes/dbConnect.php'; ?>
                                 <p class="label">Posted On</p>
                                 <p><?php echo $row['added_date']; ?></p>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <p class="label">Expire On</p>
                                 <p><?php echo $row['expiry_date']; ?></p>
-                            </div>
+                            </div> -->
 
 
 

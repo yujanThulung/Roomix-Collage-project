@@ -145,14 +145,14 @@ require '../includes/loginSession.php';
       }
 
       // Construct filtered property query here
-      $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1 AND user_id = " . $_SESSION['landlord_id']; //Here i add condition to filter properties based on logged-in user's user_id 
+      $filtered_property_query = "SELECT * FROM property WHERE user_id = {$_SESSION['id']} AND sold_status = 1"; //Here i add condition to filter properties based on logged-in user's user_id 
 
       // Check if sorting option is selected
       if (isset($_POST['sort_alphabet'])) {
         $sort_option = $_POST['sort_alphabet'];
 
         // Here we reset $filtered_property_query
-        $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1";
+        $filtered_property_query = "SELECT * FROM property WHERE sold_status= 1  AND user_id = {$_SESSION['landlord_id']}";
 
         // Add sorting condition
         if ($sort_option == 'room') {
@@ -188,6 +188,7 @@ require '../includes/loginSession.php';
             $serial_number = ($page - 1) * $records_per_page + 1;
             while ($row = mysqli_fetch_assoc($query_run)) {
             ?>
+
 
               <tr>
                 <td><?php echo $serial_number++; ?></td>
@@ -251,7 +252,7 @@ require '../includes/loginSession.php';
       <div class="pagination">
         <?php
         // Calculate total number of records
-        $total_records_query = "SELECT COUNT(*) AS total FROM property WHERE sold_status=1 AND user_id = {$_SESSION['landlord_id']}";
+        $total_records_query = "SELECT COUNT(*) AS total FROM property WHERE sold_status=1 AND user_id = {$_SESSION['id']}";
         $total_records_result = mysqli_query($conn, $total_records_query);
         $total_records = mysqli_fetch_assoc($total_records_result)['total'];
 

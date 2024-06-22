@@ -70,10 +70,6 @@ require '../includes/dbConnect.php'; ?>
           <i class="fa-solid fa-house-flag"></i>
           <h3>Listed Properties</h3>
         </a>
-        <!-- <a href="rentRequest.php">
-          <i class="fa-solid fa-arrow-alt-circle-up"></i>
-          <h3>Rent Request</h3>
-        </a> -->
         <a href="soldProperties.php">
           <i class="fa-solid fa-house-circle-check"></i>
           <h3>Sold Properties</h3>
@@ -81,98 +77,82 @@ require '../includes/dbConnect.php'; ?>
           <i class="fa-solid fa-user-tie"></i>
           <h3>User Detail</h3>
         </a>
-
-        </a>
-        <a href="addProperties.php">
-          <i class="fa-solid fa-plus"></i>
-          <h3>Add Properties</h3>
-        </a>
-        <!-- logout section here  -->
         <a href="../control/logout.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
           <h3>logout</h3>
         </a>
-
-
-
       </div>
-
-    </aside class="asidebar">
-    <!-- --------------
-        aside class="asidebar" end 
-      -------------------- -->
-
-    <!-- --------------
-        start main part
-      --------------- -->
-
+    </aside>
     <main>
       <h1 class="dashboard-heading">Listed Properties</h1>
 
       <div class="search-sort">
-        <form action="" method="POST">
-          <input type="text" id="searchInput" name="search" placeholder="Search by location...">
-        </form>
-        <form action="" method="POST">
+        <form action="" method="GET">
+          <input type="text" id="searchInput" name="search" placeholder="Search by location..." value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
           <select id="sortSelect" name="sort_alphabet">
             <option value="">Sort by...</option>
-            <option value="room">Room</option>
-            <option value="flat">Flat</option>
+            <option value="room" <?php echo (isset($_GET['sort_alphabet']) && $_GET['sort_alphabet'] == 'room') ? 'selected' : ''; ?>>Room</option>
+            <option value="flat" <?php echo (isset($_GET['sort_alphabet']) && $_GET['sort_alphabet'] == 'flat') ? 'selected' : ''; ?>>Flat</option>
           </select>
-          <button type="submit" id="applyButton">Sort</button>
+          <button type="submit" id="applyButton">Apply</button>
         </form>
       </div>
 
       <?php
-      // Retrieve records per page
-      $records_per_page = 5;
+            // Retrieve records per page
+            $records_per_page = 5;
 
-      // Initialize page number
-      $page = 1;
+            // Initialize page number
+            $page = 1;
 
-      // Check if page number is set and numeric
-      if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-        $page = $_GET['page'];
-      }
+            // Check if page number is set and numeric
+            if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+                $page = $_GET['page'];
+            }
 
-      // Calculate offset
-      $offset = ($page - 1) * $records_per_page;
+            // Calculate offset
+            $offset = ($page - 1) * $records_per_page;
+            
+            // Initialize search and sort query
+            $search_query = '';
 
-      // here  initializing sorting order
-      $sort_order = 'DESC';
+            // Construct filtered property query here
+            $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1";
 
-      //here  initializing search query
-      $search_query = '';
+            // Check if location search query is provided
+            if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
+                $location_query = " AND location LIKE '%" . mysqli_real_escape_string($conn, trim($_GET['search'])) . "%'";
+                $search_query .= $location_query;
+            }
 
-      // Check if search query is provided
-      if (isset($_POST['search']) && !empty(trim($_POST['search']))) {
-        $search_query = "AND location LIKE '%" . mysqli_real_escape_string($conn, $_POST['search']) . "%'";
-      }
+            // Add combined search query to the main query
+            if (!empty($search_query)) {
+                $filtered_property_query .= $search_query;
+            }
 
-      // Construct filtered property query here
-      $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1";
+            // Check if sorting option is selected
+            if (isset($_GET['sort_alphabet']) && !empty($_GET['sort_alphabet'])) {
+                $sort_option = $_GET['sort_alphabet'];
 
-      // Check if sorting option is selected
-      if (isset($_POST['sort_alphabet'])) {
-        $sort_option = $_POST['sort_alphabet'];
+                // Add sorting condition
+                if ($sort_option == 'room') {
+                    $filtered_property_query .= " AND property_type = 'room'";
+                } elseif ($sort_option == 'flat') {
+                    $filtered_property_query .= " AND property_type = 'flat'";
+                }
+            }
 
-        // Here we reset $filtered_property_query
-        $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1";
+            // Construct final SQL query here
+            $property_query = $filtered_property_query . " ORDER BY added_date DESC LIMIT $offset, $records_per_page";
 
-        // Add sorting condition
-        if ($sort_option == 'room') {
-          $filtered_property_query .= " AND property_type = 'room'";
-        } elseif ($sort_option == 'flat') {
-          $filtered_property_query .= " AND property_type = 'flat'";
-        }
-      }
+            // Execute query
+            $query_run = mysqli_query($conn, $property_query);
 
-      // Constructing  final SQL query here
-      $property_query = $filtered_property_query . " $search_query ORDER BY added_date $sort_order LIMIT $offset, $records_per_page";
-
-      // Execute query
-      $query_run = mysqli_query($conn, $property_query);
-      ?>
+            // Check if there are no results
+            if (mysqli_num_rows($query_run) == 0) {
+                echo "<p>Result not found.</p>";
+            }
+            ?>
 
       <div class="p-table" style="margin-top:-0.5rem">
         <table>
@@ -233,11 +213,6 @@ require '../includes/dbConnect.php'; ?>
                       <i class="fas fa-eye text-white"></i>
                     </a>
 
-                    <!-- <form action="../control/soldProperty.php" method="POST">
-                      <input type="hidden" name="sold_id" value="<?php echo $row['id'] ?>" />
-                      <button type="submit" name="property_sold_btn" class="custom-link delete-icon" style="background-color: #5cb85c;"><i class="fas fa-house-circle-check text-white"></i></button>
-                    </form> -->
-
                     <form action="../control/deleteProperty.php" method="POST">
                       <input type="hidden" name="delete_id" value="<?php echo $row['id'] ?>" />
                       <button type="submit" name="property_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button>
@@ -254,12 +229,11 @@ require '../includes/dbConnect.php'; ?>
       </div>
       <!-----Table end----->
 
-
       <!-- Pagination -->
       <div class="pagination">
         <?php
         // Calculate total number of records
-        $total_records_query = "SELECT COUNT(*) AS total FROM  property WHERE  sold_status= 1";
+        $total_records_query = "SELECT COUNT(*) AS total FROM property WHERE sold_status = 1" . $search_query;
         $total_records_result = mysqli_query($conn, $total_records_query);
         $total_records = mysqli_fetch_assoc($total_records_result)['total'];
 
@@ -287,19 +261,9 @@ require '../includes/dbConnect.php'; ?>
 
   </div>
 
-  </div>
-
   </main>
-  <!------------------
-         end main
-        ------------------->
-
-
-
 
   </div>
-
-
 
   <script src="script.js" defer></script>
   <?php include('../includes/footer.php'); ?>

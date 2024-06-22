@@ -138,7 +138,7 @@ if(mysqli_num_rows($result) > 0){
 
   <div id="form-box">
     <div id="form-container-r">
-      <form action="../includes/user.php" method = "POST" class="n-form" id="register">
+      <form action="../includes/LandloardUser.php" method = "POST" class="n-form" id="register">
 
       <!--to send the id of edit-->
       <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">

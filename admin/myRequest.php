@@ -88,10 +88,10 @@ require '../includes/dbConnect.php'; ?>
         </a>
 
         </a>
-        <a href="addProperties.php">
+        <!-- <a href="addProperties.php">
           <i class="fa-solid fa-plus"></i>
           <h3>Add Properties</h3>
-        </a>
+        </a> -->
         <!-- logout section here  -->
         <a href="../control/logout.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>

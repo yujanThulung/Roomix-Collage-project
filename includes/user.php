@@ -14,7 +14,7 @@ if (isset($_POST['register_btn'])) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Insert data into the database
-        $query = "INSERT INTO register (fname, lname, email, phone, password) VALUES ('$fname', '$lname', '$email', '$phone', '$hashed_password')";
+        $query = "INSERT INTO user (fname, lname, email, phone, password) VALUES ('$fname', '$lname', '$email', '$phone', '$hashed_password')";
         $insert = mysqli_query($conn, $query);
 
         // Checking if the query was successful
@@ -49,7 +49,7 @@ if (isset($_POST['register_update_btn'])) {
     $phone = $_POST['phone'];
     $password = $_POST['password'];
 
-    $query_update = "UPDATE register SET fname ='$fname',lname ='$lname',email ='$email', phone ='$phone', email ='$email' WHERE id ='$update_id' ";
+    $query_update = "UPDATE user SET fname ='$fname',lname ='$lname',email ='$email', phone ='$phone', email ='$email' WHERE id ='$update_id' ";
     $query_update_run = mysqli_query($conn, $query_update);
 
     // Checking if the update query was successful

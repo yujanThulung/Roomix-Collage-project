@@ -192,8 +192,7 @@ require('../includes/loginSession.php');
         </div>
       <?php
       } else {
-        // Handle query execution failure
-        echo "Error: " . mysqli_error($conn);
+        echo "No data found";
       }
       ?>
 
