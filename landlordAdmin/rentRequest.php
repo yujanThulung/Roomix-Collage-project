@@ -90,9 +90,9 @@ require('../includes/loginSession.php');
 
 
         <!-- Back to home page section here  -->
-        <a href="../clientAfterLogin/index.php" name="submit">
+        <a href="../client/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>Back to Home</h3>
+          <h3>Log Out</h3>
         </a>
 
 
@@ -122,22 +122,23 @@ require('../includes/loginSession.php');
       if ($result && mysqli_num_rows($result) > 0) {
       ?>
         <div class="p-table" style="margin-top:-0.5rem">
-          <table>
-            <thead>
-              <tr>
-                <th>S.N.</th>
-                <th>ID</th>
-                <th>Image</th>
-                <th>Type</th>
-                <th>Location</th>
-                <th>Price</th>
-                <th>Requested Date</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $serial_number = ($page - 1) * $records_per_page + 1; // Initialize serial number
+        <table>
+          <thead>
+            <tr>
+              <th>S.N.</th>
+              <th>ID</th>
+              <th>Image</th>
+              <th>Type</th>
+              <th>Location</th>
+              <th>Price</th>
+              <th>Requested Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $serial_number = ($page - 1) * $records_per_page + 1; // Initialize serial number
+            if (mysqli_num_rows($result) > 0) {
               while ($property_data = mysqli_fetch_assoc($result)) {
                 $property_id = $property_data['property_id'];
                 $requested_date = $property_data['request_date'];
@@ -149,7 +150,7 @@ require('../includes/loginSession.php');
 
                 if ($property_result && mysqli_num_rows($property_result) > 0) {
                   $property_data = mysqli_fetch_assoc($property_result);
-              ?>
+            ?>
                   <tr>
                     <td><?php echo $serial_number++; ?></td>
                     <td><?php echo $property_data['id'] ?></td>
@@ -200,17 +201,19 @@ require('../includes/loginSession.php');
                     </td>
                   </tr>
                 <?php
-                } else {
-                ?>
-                  <tr>
-                    <td colspan="8">No properties found.</td>
-                  </tr>
-              <?php
                 }
               }
-              ?>
-            </tbody>
-          </table>
+            } else {
+                ?>
+                <tr>
+                  <td colspan="8">No properties found.</td>
+                </tr>
+            <?php
+            }
+            ?>
+          </tbody>
+</table>
+
         </div>
 
         <!-- Pagination -->

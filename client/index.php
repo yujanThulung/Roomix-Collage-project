@@ -181,7 +181,14 @@ include '../includes/dbConnect.php'; ?>
     <?php
 
     $card_count = 8;
-    $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1 ORDER BY added_date DESC LIMIT $card_count";
+    $filtered_property_query = "
+    SELECT property.*, facility.*
+    FROM property
+    LEFT JOIN facility ON property.id = facility.property_id
+    WHERE property.sold_status = 1
+    ORDER BY property.added_date DESC
+    LIMIT $card_count
+";
 
     // execute query
     $query_run = mysqli_query($conn, $filtered_property_query);
@@ -241,7 +248,7 @@ include '../includes/dbConnect.php'; ?>
 
                             <!-- button start-->
                             <div class="d-flex justify-content-end mt-2 position-relative">
-                                <a href="p-detail.php?id=<?php echo $row['id'] ?>" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
+                                <a href="p-detail.php?id=<?php echo $row['property_id'] ?>" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
                             </div>
                             <!-- button end -->
                         </div>
@@ -306,7 +313,11 @@ include '../includes/dbConnect.php'; ?>
     <?php
 
     $card_count = 8;
-    $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1 ORDER BY RAND() LIMIT $card_count";
+    $filtered_property_query = "
+    SELECT property.*, facility.*
+    FROM property
+    LEFT JOIN facility ON property.id = facility.property_id
+    WHERE property.sold_status = 1 ORDER BY RAND() LIMIT $card_count";
 
     // execute query
     $query_run = mysqli_query($conn, $filtered_property_query);
@@ -366,7 +377,7 @@ include '../includes/dbConnect.php'; ?>
 
                             <!-- button start-->
                             <div class="d-flex justify-content-end mt-2 position-relative">
-                                <a href="p-detail.php?id=<?php echo $row['id'] ?>" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
+                                <a href="p-detail.php?id=<?php echo $row['property_id'] ?>" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
                             </div>
                             <!-- button end -->
                         </div>

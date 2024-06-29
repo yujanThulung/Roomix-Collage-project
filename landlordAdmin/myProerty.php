@@ -86,9 +86,9 @@ require '../includes/loginSession.php';
           <h3>Add Properties</h3>
         </a>
          <!-- Back to home page section here  -->
-         <a href="../clientAfterLogin/index.php" name="submit">
+         <a href="../client/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>Back to  Home</h3>
+          <h3>Log Out</h3>
         </a>
       </div>
     </aside>
@@ -232,10 +232,10 @@ require '../includes/loginSession.php';
                       <button type="submit" name="property_sold_btn" class="custom-link delete-icon" style="background-color: #5cb85c;"><i class="fas fa-house-circle-check text-white"></i></button>
                     </form> -->
 
-                    <form action="../control/deleteProperty.php" method="POST">
-                      <input type="hidden" name="delete_id" value="<?php echo $row['id'] ?>" />
-                      <button type="submit" name="property_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button>
-                    </form>
+                    <input type="hidden" class="delete_property_id_value" value="<?php echo $row['id'] ?>">
+                    <button class="delete_property_btn_ajax custom-link delete-icon" style="padding: 5px 8px;">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -283,6 +283,7 @@ require '../includes/loginSession.php';
   </div>
 
   <script src="script.js" defer></script>
+  <script src="../admin/deleteAjax.js"></script>
   <?php include('../includes/footer.php'); ?>
 </body>
 <?php mysqli_close($conn); ?>

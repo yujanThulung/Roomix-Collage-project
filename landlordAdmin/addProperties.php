@@ -47,7 +47,7 @@ require '../includes/dbConnect.php'; ?>
                     <!-- logout section here  -->
                     <a href="../control/logout.php" name="submit">
                         <i class="fa-solid fa-right-from-bracket"></i>
-                        <h3>logout</h3>
+                        <h3>Logout</h3>
                     </a>
                 </div>
             </div>
@@ -56,7 +56,7 @@ require '../includes/dbConnect.php'; ?>
     <!-- MAIN CONTENT -->
     <main class="flex-grow-1 padding-custom bg-light">
         <!----------write a code below this for  responsive design---------->
-        <h1 class="mb-4">Add Property</h1>
+        <h1 class="mb-4" style="padding-top: 65px;">Add Property</h1>
         <hr>
         <!--From here-->
         <div class="card">
@@ -99,12 +99,11 @@ require '../includes/dbConnect.php'; ?>
 
                     <div class="mb-3">
                         <label class="form-label">Property Type *</label>
-                        <select class="form-select" aria-label="Select property type" name="property_type">
-                            <option selected>Select Property Type</option>
+                        <select class="form-select" aria-label="Select property type" name="property_type" required>
+                            <option selected disabled value="">Select Property Type</option>
                             <option value="room">Room</option>
                             <option value="flat">Flat</option>
                         </select>
-
                     </div>
 
                     <div class="row mb-3">

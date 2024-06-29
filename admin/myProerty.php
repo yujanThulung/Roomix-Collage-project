@@ -99,60 +99,60 @@ require '../includes/dbConnect.php'; ?>
       </div>
 
       <?php
-            // Retrieve records per page
-            $records_per_page = 5;
+      // Retrieve records per page
+      $records_per_page = 5;
 
-            // Initialize page number
-            $page = 1;
+      // Initialize page number
+      $page = 1;
 
-            // Check if page number is set and numeric
-            if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-                $page = $_GET['page'];
-            }
+      // Check if page number is set and numeric
+      if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+        $page = $_GET['page'];
+      }
 
-            // Calculate offset
-            $offset = ($page - 1) * $records_per_page;
-            
-            // Initialize search and sort query
-            $search_query = '';
+      // Calculate offset
+      $offset = ($page - 1) * $records_per_page;
 
-            // Construct filtered property query here
-            $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1";
+      // Initialize search and sort query
+      $search_query = '';
 
-            // Check if location search query is provided
-            if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
-                $location_query = " AND location LIKE '%" . mysqli_real_escape_string($conn, trim($_GET['search'])) . "%'";
-                $search_query .= $location_query;
-            }
+      // Construct filtered property query here
+      $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1";
 
-            // Add combined search query to the main query
-            if (!empty($search_query)) {
-                $filtered_property_query .= $search_query;
-            }
+      // Check if location search query is provided
+      if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
+        $location_query = " AND location LIKE '%" . mysqli_real_escape_string($conn, trim($_GET['search'])) . "%'";
+        $search_query .= $location_query;
+      }
 
-            // Check if sorting option is selected
-            if (isset($_GET['sort_alphabet']) && !empty($_GET['sort_alphabet'])) {
-                $sort_option = $_GET['sort_alphabet'];
+      // Add combined search query to the main query
+      if (!empty($search_query)) {
+        $filtered_property_query .= $search_query;
+      }
 
-                // Add sorting condition
-                if ($sort_option == 'room') {
-                    $filtered_property_query .= " AND property_type = 'room'";
-                } elseif ($sort_option == 'flat') {
-                    $filtered_property_query .= " AND property_type = 'flat'";
-                }
-            }
+      // Check if sorting option is selected
+      if (isset($_GET['sort_alphabet']) && !empty($_GET['sort_alphabet'])) {
+        $sort_option = $_GET['sort_alphabet'];
 
-            // Construct final SQL query here
-            $property_query = $filtered_property_query . " ORDER BY added_date DESC LIMIT $offset, $records_per_page";
+        // Add sorting condition
+        if ($sort_option == 'room') {
+          $filtered_property_query .= " AND property_type = 'room'";
+        } elseif ($sort_option == 'flat') {
+          $filtered_property_query .= " AND property_type = 'flat'";
+        }
+      }
 
-            // Execute query
-            $query_run = mysqli_query($conn, $property_query);
+      // Construct final SQL query here
+      $property_query = $filtered_property_query . " ORDER BY added_date DESC LIMIT $offset, $records_per_page";
 
-            // Check if there are no results
-            if (mysqli_num_rows($query_run) == 0) {
-                echo "<p>Result not found.</p>";
-            }
-            ?>
+      // Execute query
+      $query_run = mysqli_query($conn, $property_query);
+
+      // Check if there are no results
+      if (mysqli_num_rows($query_run) == 0) {
+        echo "<p>Result not found.</p>";
+      }
+      ?>
 
       <div class="p-table" style="margin-top:-0.5rem">
         <table>
@@ -212,15 +212,14 @@ require '../includes/dbConnect.php'; ?>
                     <a href="propertyShow.php?id=<?php echo $row['id'] ?>" class="custom-link" style="background-color: rgb(37, 37, 252);">
                       <i class="fas fa-eye text-white"></i>
                     </a>
-
-                    <form action="../control/deleteProperty.php" method="POST">
-                      <input type="hidden" name="delete_id" value="<?php echo $row['id'] ?>" />
-                      <button type="submit" name="property_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button>
-                    </form>
+                    <input type="hidden" class="delete_property_id_value" value="<?php echo $row['id'] ?>">
+                    <button class="delete_property_btn_ajax custom-link delete-icon" style="padding: 5px 8px;">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
                   </div>
                 </td>
-              </tr>
 
+              </tr>
             <?php }
             ?>
 
@@ -266,6 +265,7 @@ require '../includes/dbConnect.php'; ?>
   </div>
 
   <script src="script.js" defer></script>
+  <script src="deleteAjax.js"></script>
   <?php include('../includes/footer.php'); ?>
 </body>
 <?php mysqli_close($conn); ?>

@@ -148,7 +148,7 @@ require '../includes/loginSession.php'; ?>
             }
 
             // Build the SQL query
-            $register_query = "SELECT * FROM user";
+            $register_query = "SELECT * FROM user WHERE userType != 'admin'";
 
             // Check if search query is provided
             if (isset($_POST['search']) && !empty(trim($_POST['search']))) {
@@ -182,6 +182,7 @@ require '../includes/loginSession.php'; ?>
                         <?php
                         $serial_number = ($page - 1) * $records_per_page + 1; // Calculate serial number for the current page
                         while ($reg_row = mysqli_fetch_array($register_run)) {
+                            if($reg_row['userType']!=='admin'){
                         ?>
                             <tr>
                                 <td><?php echo $serial_number++; ?></td>
@@ -190,18 +191,22 @@ require '../includes/loginSession.php'; ?>
                                 <td><?php echo $reg_row['lname']; ?></td>
                                 <td><?php echo $reg_row['email']; ?></td>
                                 <td><?php echo $reg_row['phone']; ?></td>
-                                <td><?php echo $reg_row['userType']; ?></td>
+                                <td><?php echo $reg_row['userType'];?></td>
                                 <td class="text-center">
                                     <a href="editProfile.php?id=<?php echo $reg_row['id']; ?>" class="custom-link edit-icon" style="background-color: #ffcc00;"><i class="fas fa-edit"></i></a>
                                 </td>
-                                <td class="text-center">
-                                    <form action="../control/user.php" method="POST">
-                                        <input type="hidden" name="delete_id" value="<?php echo $reg_row['id'] ?>" />
-                                        <button type="submit" name="register_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
+                                <!-- <td class="text-center">
+                                    <!-- <td>
+                                    <input type="hidden" class="delete_id_value" value="<?php echo $reg_row['id'] ?>">
+                                    <a href="javascript:void(0)" name="register_delete_btn" class="custom-link delete-icon delete_btn_ajax"><i class="fas fa-trash-alt"></i></a>
+                                </td> -->
+                                <td>
+                                    <input type="hidden" class="delete_id_value" value="<?php echo $reg_row['id'] ?>">
+                                    <a href="javascript:void(0)" name="register_delete_btn" class="custom-link delete-icon delete_btn_ajax" style="padding: 5px 2px;"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
-                        <?php } ?>
+                        <?php } 
+                        }?>
                     </tbody>
                 </table>
             </div>

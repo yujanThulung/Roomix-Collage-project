@@ -88,7 +88,7 @@ require('../includes/loginSession.php');
     </aside>
 
     <main>
-      <h1 class="dashboard-heading">My Properties</h1>
+      <h1 class="dashboard-heading">Rent Requests</h1>
 
       <?php
       // Pagination variables

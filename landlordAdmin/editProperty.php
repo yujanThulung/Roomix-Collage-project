@@ -6,12 +6,16 @@ require '../includes/dbConnect.php'; ?>
 <?php require('../includes/loginSession.php'); ?>
 
 
-<?php $id = $_GET['id'];
-$property_query = "SELECT * FROM  property WHERE id = '$id'";
+<?php 
+
+$id = $_GET['id'];
+$property_query = "SELECT p.*, f.kitchen, f.bedroom, f.living_room, f.floor, f.parking, f.area 
+                    FROM property p 
+                    LEFT JOIN facility f ON p.id = f.property_id 
+                    WHERE p.id = '$id'";
 
 $property_result = mysqli_query($conn, $property_query);
 ?>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,14 +43,14 @@ $property_result = mysqli_query($conn, $property_query);
                 <div class="d-flex align-items-center px-4 pb-6">
                     <img class="rounded-circle" src="/img/yujan.jpg" alt="photo" width="56" height="56">
                     <div class="ms-3">
-                        <h3 class="fw-bold"><?php echo $_SESSION["userType"] ?></h3>
+                        <h3 class="fw-bold">Yujan Rai</h3>
                         <p class="text-muted mb-0">User</p>
                     </div>
                 </div>
                 <div class="list-group list-group-flush">
                     <a href="index.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="addProperty.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-plus-circle me-2"></i>Add Properties</a>
-                    <a href="mProperties.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-flag me-2"></i>My Properties</a>
+                    <a href="mProperties.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-flag me-2"></i>Listed Properties</a>
                     <a href="rentRequest.php">
                         <i class="fa-solid fa-arrow-alt-circle-up"></i>
                         <h3>Rent Request</h3>
@@ -54,10 +58,10 @@ $property_result = mysqli_query($conn, $property_query);
                     <a href="soldProperties.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-house-circle-check me-2"></i>Sold Properties</a>
                     <a href="editProfile.php" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-user-pen me-2"></i>Edit Profile</a>
                     <a href="notification.html" class="list-group-item list-group-item-action bg-transparent text-white"><i class="fas fa-bell me-2"></i>Notification</a>
-                    <!-- Back to home page section here  -->
-                    <a href="../clientAfterLogin/index.php" name="submit">
+                    <!-- logout section here  -->
+                    <a href="../control/logout.php" name="submit">
                         <i class="fa-solid fa-right-from-bracket"></i>
-                        <h3>Back to Home</h3>
+                        <h3>logout</h3>
                     </a>
                 </div>
             </div>
@@ -66,7 +70,7 @@ $property_result = mysqli_query($conn, $property_query);
     <!-- MAIN CONTENT -->
     <main class="flex-grow-1 padding-custom bg-light">
         <!----------write a code below this for  responsive design---------->
-        <h1 class="mb-4">Add Property</h1>
+        <h1 class="mb-4 pt-5">Edit Property</h1>
         <hr>
         <!--From here-->
 
@@ -78,10 +82,10 @@ $property_result = mysqli_query($conn, $property_query);
                 <div class="card">
                     <div class="card-body">
                         <h2 class="mb-4">Description</h2>
-                        <form action="../control\editPropertyLand.php" method="POST" enctype="multipart/form-data" required multiple>
+                        <form action="../control\editProperty.php" method="POST" enctype="multipart/form-data" required multiple>
                             <!--to send the id of edit-->
                             <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-                            <input type="hidden" name = "Landlord" value="Landlord">
+                            <input type="hidden" name = "Admin" value="Landlord">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Property Title *</label>
                                 <input type="text" name="name" id="name" class="form-control" value="<?php echo $row['property_title']; ?>" required>
@@ -136,25 +140,6 @@ $property_result = mysqli_query($conn, $property_query);
                                 </select>
 
                             </div>
-
-                            <!-- <div class="mb-3">
-                                <!-- <label class="form-label">Property *</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="room" value="room">
-                                <label class="form-check-label" for="room">Room</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="flat" value="flat" checked>
-                                <label class="form-check-label" for="flat">Flat</label>
-                            </div> -->
-
-
-                            <!-- This is for future -->
-                            <!-- <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="house" value="house" checked>
-                                <label class="form-check-label" for="house">House</label>
-                            </div>
-                            </div> -->
 
                             <div class="row mb-3">
                                 <div class="col-md-6">

@@ -7,14 +7,15 @@ require '../includes/dbConnect.php'; ?>
 
 <?php
 $id = $_GET['id'];
-$showPro_query = "SELECT * FROM property WHERE id = '$id'";
-$result = mysqli_query($conn, $showPro_query);
+$showPro_query = "SELECT p.*, f.kitchen, f.bedroom, f.living_room, f.floor, f.parking, f.area 
+                    FROM property p 
+                    LEFT JOIN facility f ON p.id = f.property_id 
+                    WHERE p.id = '$id'";
+    $result = mysqli_query($conn, $showPro_query);
 
 if (!$result) {
-    echo '<script>alert("data not fetch");</script>';
+    echo '<script>alert("data not fetched");</script>';
 }
-
-
 ?>
 
 <head>
@@ -27,6 +28,7 @@ if (!$result) {
         .label {
             margin: 0.2rem 0;
         }
+
         span {
             color: #072448;
         }
@@ -35,7 +37,7 @@ if (!$result) {
             color: #072448;
         }
     </style>
-    <title>propertyShow</title>
+    <title>Property Show</title>
 </head>
 
 <body>
@@ -126,14 +128,11 @@ if (!$result) {
                             ?>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="button-container">
-                    <button onclick="window.history.back();">Back</button
+                    <button onclick="window.history.back();">Back</button>
                 </div>
-            </div>
             </div>
     <?php
         }

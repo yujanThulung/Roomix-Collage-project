@@ -7,7 +7,10 @@ require '../includes/dbConnect.php'; ?>
 
 <?php
 $id = $_GET['id'];
-$showPro_query = "SELECT * FROM property WHERE id = '$id'";
+$showPro_query = "SELECT p.*, f.kitchen, f.bedroom, f.living_room, f.floor, f.parking, f.area 
+                    FROM property p 
+                    LEFT JOIN facility f ON p.id = f.property_id 
+                    WHERE p.id = '$id'";
 $result = mysqli_query($conn, $showPro_query);
 
 if (!$result) {

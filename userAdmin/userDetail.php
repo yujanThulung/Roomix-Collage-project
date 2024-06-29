@@ -86,7 +86,7 @@ require '../includes/loginSession.php'; ?>
                     <i class="fa-solid fa-user-pen"></i></i>
                     <h3>Edit Profile</h3>
                 </a> -->
-                
+
                 <!-- logout section here  -->
                 <a href="../control/logout.php" name="submit">
                     <i class="fa-solid fa-right-from-bracket"></i>
@@ -172,11 +172,15 @@ require '../includes/loginSession.php'; ?>
                                 <td class="text-center">
                                     <a href="editProfile.php?id=<?php echo $reg_row['id']; ?>" class="custom-link edit-icon" style="background-color: #ffcc00;"><i class="fas fa-edit"></i></a>
                                 </td>
-                                <td class="text-center">
-                                    <form action="../control/user.php" method="POST">
+                                <!-- <td class="text-center">
+                                    < action="../control/user.php" method="POST">
                                         <input type="hidden" name="delete_id" value="<?php echo $reg_row['id'] ?>" />
-                                        <button type="submit" name="register_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
+                                        <!-- <button type="submit"  name="register_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button> -->
+                                    
+
+                                <td>
+                                    <input type="hidden" class="delete_id_value" style="padding: 5px 2px;" value="<?php echo $reg_row['id'] ?>">
+                                    <a href="javascript:void(0)" name="register_delete_btn" class="custom-link delete-icon delete_btn_ajax"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>

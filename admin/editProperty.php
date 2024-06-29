@@ -6,8 +6,13 @@ require '../includes/dbConnect.php'; ?>
 <?php require('../includes/loginSession.php'); ?>
 
 
-<?php $id = $_GET['id'];
-$property_query = "SELECT * FROM  property WHERE id = '$id'";
+<?php 
+
+$id = $_GET['id'];
+$property_query = "SELECT p.*, f.kitchen, f.bedroom, f.living_room, f.floor, f.parking, f.area 
+                   FROM property p 
+                   LEFT JOIN facility f ON p.id = f.property_id 
+                   WHERE p.id = '$id'";
 
 $property_result = mysqli_query($conn, $property_query);
 ?>
@@ -66,7 +71,7 @@ $property_result = mysqli_query($conn, $property_query);
     <!-- MAIN CONTENT -->
     <main class="flex-grow-1 padding-custom bg-light">
         <!----------write a code below this for  responsive design---------->
-        <h1 class="mb-4">Add Property</h1>
+        <h1 class="mb-4 pt-5">Update Property</h1>
         <hr>
         <!--From here-->
 

@@ -30,9 +30,13 @@ include '../includes/dbConnect.php';?>
         <a href="index.php" class="active"><img src="image/logo.png" alt="logo"></a>
         <div class="navigation">
             <ul>
-                <li>
+            <li>
+                <?php if($_SESSION["userType"] === "Landlord"){ ?>
+                    <a href="../landlordAdmin\index.php">My Dashboard</a>
+                <?php } else { ?>
                     <a href="..\userAdmin\index.php">My Dashboard</a>
-                </li>
+                <?php } ?>
+            </li>
                 <li><a href="index.php" >Home</a></li>
                 <li><a href="aboutUs.php" class="active">About us</a></li>
                 <li><a href="contact.php">Contact</a></li>

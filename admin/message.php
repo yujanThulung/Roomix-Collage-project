@@ -70,11 +70,11 @@ require('../includes/loginSession.php');
           <i class="fa-solid fa-house-flag"></i>
           <h3>My Properties</h3>
         </a>
-        <a href="rentRequest.php">
+        <a href="rentRequest.php" class="active">
           <i class="fa-solid fa-arrow-alt-circle-up"></i>
           <h3>Rent Request</h3>
         </a>
-        <a href="soldProperties.php" class="active">
+        <a href="soldProperties.php">
           <i class="fa-solid fa-house-circle-check"></i>
           <h3>Sold Properties</h3>
         </a>
@@ -90,9 +90,9 @@ require('../includes/loginSession.php');
 
 
         <!-- Back to home page section here  -->
-        <a href="../client/index.php" name="submit">
+        <a href="../clientAfterLogin/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>Log Out</h3>
+          <h3>Back to Home</h3>
         </a>
 
 
@@ -102,70 +102,63 @@ require('../includes/loginSession.php');
     </aside>
 
     <main>
-      <h1 class="dashboard-heading">Sold Properties</h1>
-
-      <!-- <div class="search-sort">
-        <form action="" method="POST">
-          <input type="text" id="searchInput" name="search" placeholder="Search by location...">
-        </form>
-        <form action="" method="POST">
-          <select id="sortSelect" name="sort_alphabet">
-            <option value="">Sort by...</option>
-            <option value="room">Room</option>
-            <option value="flat">Flat</option>
-          </select>
-          <button type="submit" id="applyButton">Sort</button>
-        </form>
-      </div> -->
+      <h1 class="dashboard-heading">My Properties</h1>
 
       <?php
+      // Pagination variables
+      $records_per_page = 5;
+      $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+      // Calculate offset
+      $offset = ($page - 1) * $records_per_page;
+
       // Get the user ID from session
-      $user_id = $_SESSION['landlord_id'];
+      $user_id = $_SESSION['id'];
 
-      $property_id_query = "SELECT * FROM rent_requests WHERE landlord_id='$user_id' AND sold_status = 0";
-      $property_id_run = mysqli_query($conn, $property_id_query);
+      // Query to fetch rent requests with pagination
+      $query = "SELECT * FROM rent_requests WHERE landlord_id = '$user_id' AND sold_status = 2 ORDER BY request_date DESC LIMIT $offset, $records_per_page";
+      $result = mysqli_query($conn, $query);
 
-      if ($property_id_run) {
+      if ($result && mysqli_num_rows($result) > 0) {
       ?>
         <div class="p-table" style="margin-top:-0.5rem">
-          <table>
-            <thead>
-              <tr>
-                <th>S.N.</th>
-                <th>ID</th>
-                <th>Image</th>
-                <th>Type</th>
-                <th>Location</th>
-                <th>Price</th>
-                <th>Requested Date</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $serial_number = 1; // Initialize serial number
-              while ($property_data = mysqli_fetch_assoc($property_id_run)) {
+        <table>
+          <thead>
+            <tr>
+              <th>S.N.</th>
+              <th>ID</th>
+              <th>Email</th>
+              <th>User Type</th>
+              <th>Message</th>
+              <th>Requested Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $serial_number = ($page - 1) * $records_per_page + 1; // Initialize serial number
+            if (mysqli_num_rows($result) > 0) {
+              while ($property_data = mysqli_fetch_assoc($result)) {
                 $property_id = $property_data['property_id'];
                 $requested_date = $property_data['request_date'];
                 $request_id = $property_data['id'];
 
-
                 // Query to fetch property details based on property ID
-                $query = "SELECT * FROM property WHERE id = $property_id";
-                $result = mysqli_query($conn, $query);
+                $property_query = "SELECT * FROM property WHERE id = $property_id";
+                $property_result = mysqli_query($conn, $property_query);
 
-                if ($result && mysqli_num_rows($result) > 0) {
-                  $row = mysqli_fetch_assoc($result);
-              ?>
+                if ($property_result && mysqli_num_rows($property_result) > 0) {
+                  $property_data = mysqli_fetch_assoc($property_result);
+            ?>
                   <tr>
                     <td><?php echo $serial_number++; ?></td>
-                    <td><?php echo $row['id'] ?></td>
+                    <td><?php echo $property_data['id'] ?></td>
                     <td>
                       <?php
                       // Check if image URLs exist in the database
-                      if (!empty($row['media'])) {
+                      if (!empty($property_data['media'])) {
                         // Split the image URLs string into an array in this case it split after (,)
-                        $image_urls = explode(',', $row['media']);
+                        $image_urls = explode(',', $property_data['media']);
 
                         // Get the first image URL (trim to remove extra spaces)
                         $first_image = trim($image_urls[0]);
@@ -182,45 +175,82 @@ require('../includes/loginSession.php');
                       }
                       ?>
                     </td>
-                    <td><?php echo $row['property_type']; ?></td>
-                    <td><?php echo $row['location']; ?></td>
-                    <td>Rs.<?php echo $row['total_price']; ?></td>
+                    <td><?php echo $property_data['property_type']; ?></td>
+                    <td><?php echo $property_data['location']; ?></td>
+                    <td>Rs.<?php echo $property_data['total_price']; ?></td>
                     <td><?php echo $requested_date; ?></td>
                     <td>
                       <div class="action-icons">
-                        <a href="propertyShow.php?id=<?php echo $row['id'] ?>" class="custom-link" style="background-color: rgb(37, 37, 252);">
+                        <a href="propertyShow.php?id=<?php echo $property_data['id'] ?>" class="custom-link" style="background-color: rgb(37, 37, 252);">
                           <i class="fas fa-eye text-white"></i>
                         </a>
+
+                        <form action="../control/soldProperty.php" method="POST">
+                          <input type="hidden" name="sold_id" value="<?php echo $request_id; ?>" />
+                          <input type="hidden" name="property_id" value="<?php echo $property_id; ?>" />
+                          <button type="submit" name="property_sold_btn" class="custom-link delete-icon" style="background-color: #5cb85c;">
+                            <i class="fas fa-house-circle-check text-white"></i></button>
+                        </form>
+
                         <form action="../control/rentRequest.php" method="POST">
-                          <input type="hidden" name="delete_id" value="<?php echo  $property_data['id']; ?>" />
+                          <input type="hidden" name="delete_id" value="<?php echo $request_id; ?>" />
                           <button type="submit" name="property_cancel_btn" class="custom-link delete-icon"><i class="fas fa-times" style="height:25px; width:18px; padding-top:4px;"></i></button>
                         </form>
                       </div>
                     </td>
                   </tr>
                 <?php
-                } else {
-                ?>
-                  <tr>
-                    <td colspan="8">No properties found.</td>
-                  </tr>
-              <?php
                 }
               }
-              ?>
-            </tbody>
-          </table>
+            } else {
+                ?>
+                <tr>
+                  <td colspan="8">No properties found.</td>
+                </tr>
+            <?php
+            }
+            ?>
+          </tbody>
+</table>
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <?php
+          // Calculate total number of records
+          $total_records_query = "SELECT COUNT(*) AS total FROM rent_requests WHERE landlord_id = '$user_id' AND sold_status = 2";
+          $total_records_result = mysqli_query($conn, $total_records_query);
+          $total_records = mysqli_fetch_assoc($total_records_result)['total'];
+
+          // Calculate total number of pages
+          $total_pages = ceil($total_records / $records_per_page);
+
+          // Display "Previous" button
+          if ($page > 1) {
+            echo "<a href='rentRequest.php?page=" . ($page - 1) . "'>&laquo; Previous</a>";
+          }
+
+          // Display pagination links
+          for ($i = 1; $i <= $total_pages; $i++) {
+            echo "<a " . ($i == $page ? "class='active'" : "") . " href='rentRequest.php?page=$i'>$i</a>";
+          }
+
+          // Display "Next" button
+          if ($page < $total_pages) {
+            echo "<a href='rentRequest.php?page=" . ($page + 1) . "'>Next &raquo;</a>";
+          }
+
+          // Display "Last" button
+          echo "<a href='rentRequest.php?page=$total_pages'>Last &raquo;&raquo;</a>";
+          ?>
         </div>
       <?php
       } else {
-        // Handle query execution failure
-        echo "Error: " . mysqli_error($conn);
+       echo "Data no available";
       }
       ?>
-      </tbody>
-      </table>
-  </div>
-  </main>
+    </main>
   </div>
 
   <script src="script.js" defer></script>

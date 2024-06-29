@@ -97,9 +97,9 @@ require '../includes/loginSession.php'; ?>
                     <h3>Add Properties</h3>
                 </a>
                 <!-- Back to home page section here  -->
-                <a href="../clientAfterLogin/index.php" name="submit">
+                <a href="../client/index.php" name="submit">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    <h3>Back to Home</h3>
+                    <h3>Log Out</h3>
                 </a>
             </div>
         </aside>
@@ -194,11 +194,15 @@ require '../includes/loginSession.php'; ?>
                                 <td class="text-center">
                                     <a href="editProfile.php?id=<?php echo $reg_row['id']; ?>" class="custom-link edit-icon" style="background-color: #ffcc00;"><i class="fas fa-edit"></i></a>
                                 </td>
-                                <td class="text-center">
+                                <!-- <td class="text-center">
                                     <form action="../control/user.php" method="POST">
                                         <input type="hidden" name="delete_id" value="<?php echo $reg_row['id'] ?>" />
                                         <button type="submit" name="register_delete_btn" class="custom-link delete-icon"><i class="fas fa-trash-alt"></i></button>
                                     </form>
+                                </td> -->
+                                <td>
+                                    <input type="hidden" class="delete_id_value" style="padding: 4px 2px;" value="<?php echo $reg_row['id'] ?>">
+                                    <a href="javascript:void(0)" name="register_delete_btn" class="custom-link delete-icon delete_btn_ajax"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>

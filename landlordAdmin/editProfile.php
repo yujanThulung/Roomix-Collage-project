@@ -110,9 +110,9 @@ $result = mysqli_query($conn, $register_query); //to store the data which is cam
         </a>
 
          <!-- Back to home page section here  -->
-         <a href="../clientAfterLogin/index.php" name="submit">
+         <a href="../control/logout.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>Back to  Home</h3>
+          <h3>Log Out</h3>
         </a>
       </div>
 

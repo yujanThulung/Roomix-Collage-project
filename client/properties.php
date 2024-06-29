@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <?php
-include '../includes/dbConnect.php'; ?>
+require '../includes/dbConnect.php'; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -64,13 +63,21 @@ include '../includes/dbConnect.php'; ?>
                 transform: translateY(0);
             }
         }
+
+        .userData {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            text-align: right;
+            display: inline-block;
+        }
     </style>
 </head>
 
 <body style="padding-top: 0.25px;">
 
-    <!-- Navigation -->
-    <nav style="justify-content: center;align-items: center;">
+     <!-- Navigation -->
+     <nav style="justify-content: center;align-items: center;">
         <a href="index.php" class="active"><img src="image/logo.png" alt="logo"></a>
         <div class="navigation">
             <ul>
@@ -93,6 +100,7 @@ include '../includes/dbConnect.php'; ?>
         </div>
     </nav>
 
+
     <!-- properties -->
     <section id="properties" style="padding-top:2rem;">
         <h2><b>Find your dream home!</b></h2>
@@ -104,122 +112,133 @@ include '../includes/dbConnect.php'; ?>
             <h1>Your Search Result</h1>
             <p>Explore outstanding properties showcased in our newest and highlighted listings. Find the perfect home or investment opportunity that you've been searching for.</p>
             <?php
-            // Place your database connection code here
-            // ...
+                // Retrieve records per page
+                $records_per_page = 5;
 
-            // Retrieve records per page
-            $records_per_page = 5;
+                // Initialize page number
+                $page = 1;
 
-            // Initialize page number
-            $page = 1;
-
-            // Check if page number is set and numeric
-            if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-                $page = $_GET['page'];
-            }
-
-            // Calculate offset
-            $offset = ($page - 1) * $records_per_page;
-            // Initialize search query
-            $search_query = '';
-
-            // Construct filtered property query here
-            $filtered_property_query = "SELECT * FROM property WHERE sold_status = 1";
-
-            // Check if location search query is provided
-            if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
-                $location_query = " AND location LIKE '%" . mysqli_real_escape_string($conn, $_GET['search']) . "%'";
-                $search_query .= $location_query;
-            }
-
-            // Check if category search query is provided
-            if (isset($_GET['category']) && $_GET['category'] != 'all') {
-                $category_query = " AND property_type = '" . mysqli_real_escape_string($conn, $_GET['category']) . "'";
-                $search_query .= $category_query;
-            }
-
-            // Add combined search query to the main query
-            if (!empty($search_query)) {
-                $filtered_property_query .= $search_query;
-            }
-
-            // Check if sorting option is selected
-            if (isset($_POST['sort_alphabet'])) {
-                $sort_option = $_POST['sort_alphabet'];
-
-                // Add sorting condition
-                if ($sort_option == 'room') {
-                    $filtered_property_query .= " AND property_type = 'room'";
-                } elseif ($sort_option == 'flat') {
-                    $filtered_property_query .= " AND property_type = 'flat'";
+                // Check if page number is set and numeric
+                if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+                    $page = $_GET['page'];
                 }
-            }
 
-            // Construct final SQL query here
-            $property_query = $filtered_property_query . " ORDER BY added_date DESC LIMIT $offset, $records_per_page";
+                // Calculate offset
+                $offset = ($page - 1) * $records_per_page;
 
-            // Execute query
-            $query_run = mysqli_query($conn, $property_query);
+                // Initialize search query
+                $search_query = '';
 
-            // Check if there are no results
-            if (mysqli_num_rows($query_run) == 0) {
-                echo "<p>Result not found.</p>";
-            }
-            ?>
-            <!-- Display search results here -->
-            <div class="container my-5 mb-3">
-                <div class="row row-cols-1 row-cols-md-4 mt-2 g-4">
-                    <?php
-                    while ($row = mysqli_fetch_assoc($query_run)) {
-                        // Display property card
-                    ?>
-                        <div class="col mb-3">
-                            <div class="card h-100 rounded-5 position-relative">
-                                <!-- Card content -->
-                                <div class="image-container" style="height: 200px; overflow: hidden;">
-                                    <?php
-                                    if (!empty($row['media'])) {
-                                        $image_urls = explode(',', $row['media']);
-                                        // To get the first image only
-                                        $first_image = trim($image_urls[0]);
-                                    }
-                                    ?>
-                                    <img src="<?php echo $first_image; ?>" class="card-img-top rounded-top-5" style="background-position: center; background-size: cover;" alt="image">
-                                </div>
-                                <!-- for image end -->
-                                <span class="position-absolute top-0 end-0 mt-3 me-3 text-white py-1 px-2 rounded-pill" style="background-color: #072448;"><?php echo $row['property_type'] ?></span>
-                                <div class="card-body">
-                                    <div style=" display:flex; justify-content: space-between;">
-                                        <span style="color: #072448;"><i class="fas fa-map-marker-alt mr-1"></i> <?php echo $row['location'] ?></span>
-                                        <span style="color: #072448;"><i class="fas fa-money-bill-alt mr-1"></i> Rs.<?php echo $row['total_price'] ?></span>
+                // Construct filtered property query
+                $filtered_property_query = "SELECT p.*, f.parking AS facility_parking, f.floor AS facility_floor, f.area AS facility_area
+                                            FROM property p
+                                            LEFT JOIN facility f ON p.id = f.property_id
+                                            WHERE p.sold_status = 1";
+
+                $search_term = isset($_GET['search']) ? trim($_GET['search']) : '';
+                if (!empty($search_term)) {
+                    $location_query = " AND p.location LIKE '%" . mysqli_real_escape_string($conn, $search_term) . "%'";
+                    $search_query .= $location_query;
+                }
+                
+
+                // Check if category search query is provided
+                if (isset($_GET['category']) && $_GET['category'] != 'all') {
+                    $category_query = " AND p.property_type = '" . mysqli_real_escape_string($conn, $_GET['category']) . "'";
+                    $search_query .= $category_query;
+                }
+
+                // Add combined search query to the main query
+                if (!empty($search_query)) {
+                    $filtered_property_query .= $search_query;
+                }
+
+                // Check if sorting option is selected
+                $sort_option = 'added_date DESC'; // Default sort option
+
+                if (isset($_GET['sort_alphabet'])) {
+                    $sort_option = $_GET['sort_alphabet'];
+                    if ($sort_option == 'room') {
+                        $sort_option = 'p.property_type = "room"';
+                    } elseif ($sort_option == 'flat') {
+                        $sort_option = 'p.property_type = "flat"';
+                    } else {
+                        $sort_option = 'added_date DESC'; // Default sort
+                    }
+                }
+
+                // Construct final SQL query
+                $property_query = $filtered_property_query . " ORDER BY $sort_option LIMIT $offset, $records_per_page";
+
+                // Execute query
+                $query_run = mysqli_query($conn, $property_query);
+
+                // Check for SQL errors
+                if (!$query_run) {
+                    echo "Error: " . mysqli_error($conn);
+                }
+
+                // Check if there are no results
+                if (mysqli_num_rows($query_run) == 0) {
+                    echo "<p>Result not found.</p>";
+                }
+                ?>
+                <!-- Display search results here -->
+                <div class="container my-5 mb-3">
+                    <div class="row row-cols-1 row-cols-md-4 mt-2 g-4">
+                        <?php
+                        while ($row = mysqli_fetch_assoc($query_run)) {
+                            $parking = isset($row['facility_parking']) ? $row['facility_parking'] : 'Not Available';
+                            $floor = isset($row['facility_floor']) ? $row['facility_floor'] : 'Not Available';
+                            $area = isset($row['facility_area']) ? $row['facility_area'] : 'Not Available';
+                        ?>
+                            <div class="col mb-3">
+                                <div class="card h-100 rounded-5 position-relative">
+                                    <!-- Card content -->
+                                    <div class="image-container" style="height: 200px; overflow: hidden;">
+                                        <?php
+                                        if (!empty($row['media'])) {
+                                            $image_urls = explode(',', $row['media']);
+                                            $first_image = trim($image_urls[0]);
+                                        }
+                                        ?>
+                                        <img src="<?php echo $first_image; ?>" class="card-img-top rounded-top-5" style="background-position: center; background-size: cover;" alt="image">
                                     </div>
-                                    <div class="description text-left" style="max-height: 2.6em; overflow: hidden;">
-                                        <h6 class="card-text" style="    text-align: left;">
-                                            <b><?php echo $row['property_title'] ?></b>
-                                        </h6>
-                                    </div>
-                                    <div>
-                                        <div style=" display:flex; justify-content: space-between;">
-                                            <span style="color: #072448;"><i class="fas fa-parking mr-1"></i> <?php echo $row['parking'] ?></span>
-                                            <span style="color: #072448;"><i class="fas fa-layer-group mr-1"></i> <?php echo $row['floor'] ?> floor</span>
-                                            <span style="color: #072448;"><i class="fas fa-ruler-combined mr-1"></i> <?php echo $row['area'] ?> sq.ft</span>
+                                    <!-- for image end -->
+                                    <span class="position-absolute top-0 end-0 mt-3 me-3 text-white py-1 px-2 rounded-pill" style="background-color: #072448;"><?php echo $row['property_type'] ?></span>
+                                    <div class="card-body">
+                                        <div style="display:flex; justify-content: space-between;">
+                                            <span style="color: #072448;"><i class="fas fa-map-marker-alt mr-1"></i> <?php echo $row['location'] ?></span>
+                                            <span style="color: #072448;"><i class="fas fa-money-bill-alt mr-1"></i> Rs.<?php echo $row['total_price'] ?></span>
                                         </div>
+                                        <div class="description text-left" style="max-height: 2.6em; overflow: hidden;">
+                                            <h6 class="card-text text-left" style="text-align: left;">
+                                                <b><?php echo $row['property_title'] ?></b>
+                                            </h6>
+                                        </div>
+                                        <div>
+                                            <div style="display:flex; justify-content: space-between;">
+                                                <span style="color: #072448;"><i class="fas fa-parking mr-1"></i> <?php echo $parking ?></span>
+                                                <span style="color: #072448;"><i class="fas fa-layer-group mr-1"></i> <?php echo $floor ?> floor</span>
+                                                <span style="color: #072448;"><i class="fas fa-ruler-combined mr-1"></i> <?php echo $area ?> sq.ft</span>
+                                            </div>
+                                        </div>
+                                        <!-- card end -->
+                                        <!-- button start-->
+                                        <div class="d-flex justify-content-end mt-2 position-relative">
+                                            <a href="p-detail.php?id=<?php echo $row['id'] ?>" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
+                                        </div>
+                                        <!-- button end -->
                                     </div>
-                                    <!-- card end -->
-                                    <!-- button start-->
-                                    <div class="d-flex justify-content-end mt-2 position-relative">
-                                        <a href="p-detail.php?id=<?php echo $row['id'] ?>" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
-                                    </div>
-                                    <!-- button end -->
                                 </div>
                             </div>
-                        </div>
-                        <!-- card end -->
-                    <?php
-                    }
-                    ?>
+                            <!-- card end -->
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
-            </div>
+
         </div>
     </div>
     <!--Search  Property end-->

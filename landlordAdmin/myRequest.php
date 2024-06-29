@@ -91,9 +91,9 @@ require '../includes/dbConnect.php'; ?>
           <h3>Add Properties</h3>
         </a>
          <!-- Back to home page section here  -->
-         <a href="../clientAfterLogin/index.php" name="submit">
+         <a href="../client/index.php" name="submit">
           <i class="fa-solid fa-right-from-bracket"></i>
-          <h3>Back to  Home</h3>
+          <h3>Log Out</h3>
         </a>
       </div>
 
@@ -107,7 +107,7 @@ require '../includes/dbConnect.php'; ?>
       --------------- -->
 
     <main>
-      <h1 class="dashboard-heading">My Properties</h1>
+      <h1 class="dashboard-heading">My Requests</h1>
 
       <div class="search-sort">
         <form action="" method="POST">

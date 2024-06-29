@@ -30,8 +30,12 @@ include '../includes/dbConnect.php'; ?>
         <div class="navigation">
             <ul>
                 <li>
+                <?php if($_SESSION["userType"] === "Landlord"){ ?>
+                    <a href="../landlordAdmin\index.php">My Dashboard</a>
+                <?php } else { ?>
                     <a href="..\userAdmin\index.php">My Dashboard</a>
-                </li>
+                <?php } ?>
+            </li>
                 <li><a href="index.php" >Home</a></li>
                 <li><a href="aboutUs.php">About us</a></li>
                 <li><a href="contact.php" class="active">Contact</a></li>
@@ -78,7 +82,7 @@ include '../includes/dbConnect.php'; ?>
                 <div>
                     <i class="fas fa-envelope get get"></i>
                     <p>yujanrai07@gmail.com<br>
-                        yujanrai07@gmail.com</p>
+                        ronakmagar3@gmail.com</p>
                 </div>
                 <h3>Follow Us</h3>
                 <div class="pro-links">
@@ -91,23 +95,24 @@ include '../includes/dbConnect.php'; ?>
         </div>
 
 
-        <div class="form">
+        <form action="" method="POST" class="form">
             <h4>Let's Connect</h4>
             <p>We're happy to help! Share your question and we'll get back to you within 24 hours.</p>
-            <div class="form-row">
+            <!-- <div class="form-row">
                 <input type="text" placeholder="Your name">
                 <input type="text" placeholder="Email">
+            </div> -->
+            <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION["id"]?>"><br>
+            <div class="form-col">
+                <input type="text" name="subject" placeholder="Subject">
             </div>
             <div class="form-col">
-                <input type="text" placeholder="Subject">
+                <textarea name="message" id="message" cols="30" rows="8" placeholder="How can we help?"></textarea>
             </div>
             <div class="form-col">
-                <textarea name="" id="" cols="30" rows="8" placeholder="How can we help?"></textarea>
+                <button type="text"> Send Message</button>
             </div>
-            <div class="form-col">
-                <button> Send Message</button>
-            </div>
-        </div>
+        </form>
     </section>
     <!-- ..............Footer............. -->
 
