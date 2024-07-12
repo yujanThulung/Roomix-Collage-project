@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         checklistItems.uppercase.classList.toggle("success", /[A-Z]/.test(password));
         checklistItems.lowercase.classList.toggle("success", /[a-z]/.test(password));
         checklistItems.number.classList.toggle("success", /\d/.test(password));
-        checklistItems.symbol.classList.toggle("success", /[$@$!%*?&]/.test(password));
+        checklistItems.symbol.classList.toggle("success", /[!@#$%^&*()_+{}\[\]:;"'<>,.?~\\/-]/.test(password));
         checklistItems.length.classList.toggle("success", password.length >= 6);
     }
 
@@ -160,4 +160,3 @@ form1Btn.addEventListener('click', () =>{
 form1Close.addEventListener('click', () =>{
     registerForm.classList.remove('active');
 });
-

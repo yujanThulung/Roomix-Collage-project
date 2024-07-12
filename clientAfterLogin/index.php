@@ -254,7 +254,7 @@ require '../includes/dbConnect.php'; ?>
 
                             <!-- button start-->
                             <div class="d-flex justify-content-end mt-2 position-relative">
-                                <a href="p-detail.php?id=<?php echo $row['id'] ?>" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
+                                <a href="p-detail.php?id=<?php echo $row['property_id'] ?>" class="btn custom-btn-color rounded-5">More Details <i class="arrow fas fa-chevron-right"></i></a>
                             </div>
                             <!-- button end -->
                         </div>
